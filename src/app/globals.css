@@ -10,6 +10,7 @@
   --primary-color: rgba(254, 110, 99, 1);
   --secondary-color: rgba(135, 137, 138, 1);
   --neutral-color: rgb(13, 13, 13);
+  --thumb-color: "white"
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,9 +18,21 @@
   --main-bg: rgb(13, 13, 13);
   --primary-color: rgba(254, 110, 99, 1);
   --secondary-color: rgba(135, 137, 138, 1);
-  --neutral-color: rgba(255, 255, 255, 1)
+  --neutral-color: rgba(255, 255, 255, 1);
+  --thumb-color: "white"
   }
 }
 
+/***** Thumb Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  background-color: gainsboro;
+  height:26px;
+  width:26px;   
+  border-radius: 100%;
+  cursor: pointer;
 
 
+}

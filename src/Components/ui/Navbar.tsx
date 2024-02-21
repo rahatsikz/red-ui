@@ -14,7 +14,7 @@ const Navbar = () => {
     },
     {
       name: "FAQ",
-      path: "/docs",
+      path: "/faq",
     },
     {
       name: "Sign in",
@@ -91,7 +91,7 @@ const Navbar = () => {
           {/*      <!-- Actions --> */}
           <div className='ml-auto flex items-center justify-end px-6 lg:ml-0 lg:flex-1 lg:p-0'>
             <Link
-              href=''
+              href='/components'
               className='relative inline-flex items-center justify-center rounded-full text-lg text-primary'
             >
               <Button className='text-sm'>Create Component</Button>

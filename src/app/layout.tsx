@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/ui/Navbar";
+import { Toaster } from "react-hot-toast";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: { children: any }) {
     <html lang='en'>
       <body className={`${poppins.className}`}>
         <Navbar />
+        <Toaster />
         {children}
       </body>
     </html>

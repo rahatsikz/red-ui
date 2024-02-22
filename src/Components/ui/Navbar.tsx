@@ -14,11 +14,11 @@ const Navbar = () => {
     },
     {
       name: "FAQ",
-      path: "/docs",
+      path: "",
     },
     {
       name: "Sign in",
-      path: "/login",
+      path: "",
     },
   ];
 

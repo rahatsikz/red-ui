@@ -14,7 +14,7 @@ const ComponentPage = () => {
     },
     {
       name: "Input",
-      path: "",
+      path: "/components/input",
     },
     {
       name: "Textarea",
@@ -36,7 +36,7 @@ const ComponentPage = () => {
         <p className='text-2xl text-center border-b-2 w-fit mx-auto px-8 pb-1 border-primary'>
           Components List
         </p>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-8'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 px-4 lg:px-0'>
           {componentsArr.map((component) => (
             <Link
               className='text-xl text-center bg-red-50 p-8 rounded-lg hover:shadow-md'

@@ -42,8 +42,8 @@ const ButtonContent = () => {
     label: "gray-900",
     colorCode: "#111827",
     bg: "bg-gray-900",
-    text: "text-gray-200",
-    border: "border-gray-500",
+    text: "text-gray-900",
+    border: "border-gray-900",
   });
 
   const handleColorChange = (option: any) => {
@@ -54,8 +54,8 @@ const ButtonContent = () => {
     label: "gray-900",
     colorCode: "#111827",
     bg: "bg-gray-900",
-    text: "text-gray-200",
-    border: "border-gray-500",
+    text: "text-gray-900",
+    border: "border-gray-900",
   });
 
   const handleHoverColorChange = (option: any) => {
@@ -67,7 +67,7 @@ const ButtonContent = () => {
     colorCode: "#ec4899",
     label: "pink-500",
     bg: "bg-pink-500",
-    text: "text-pink-900",
+    text: "text-pink-500",
     border: "border-pink-500",
   });
 
@@ -79,7 +79,7 @@ const ButtonContent = () => {
     colorCode: "#ef4444",
     label: "red-500",
     bg: "bg-red-500",
-    text: "text-red-900",
+    text: "text-red-500",
     border: "border-red-500",
   });
 

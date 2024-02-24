@@ -38,7 +38,7 @@ const List = () => {
         Numerous different component provides all round abilty to build your UI
         from scratch
       </p>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-8'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 px-4 lg:px-0'>
         {componentsArr.map((component) => (
           <div
             className='text-xl text-center bg-red-50 p-8 rounded-xl hover:bg-gradient-to-l hover:from-red-100 to-red-50 transition-colors duration-1000 ease-in-out'

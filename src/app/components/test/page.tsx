@@ -9,7 +9,7 @@ const TestPage = () => {
         <div className='relative w-[60%]'>
           <label
             htmlFor='select club'
-            className='pointer-events-none absolute -top-2.5 bg-white left-4 px-2 text-sm text-slate-600 block pl-2'
+            className='pointer-events-none absolute -top-2.5 bg-white left-4 px-2 text-sm text-slate-500 block'
           >
             Select Club
           </label>
@@ -29,7 +29,7 @@ const TestPage = () => {
           <select
             id='select club'
             name='select club'
-            className='h-11 w-full appearance-none border-2 border-lime-500 focus:border-green-600 rounded-full bg-white px-4 text-sm text-slate-500 outline-none'
+            className='h-11 w-full appearance-none border-2 border-red-400 focus:border-pink-500 rounded-xl bg-white px-4 text-sm text-slate-500 outline-none'
           >
             <option value='1'>Option 1</option>
             <option value='2'>Option 2</option>

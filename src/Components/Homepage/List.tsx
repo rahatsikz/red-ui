@@ -13,7 +13,7 @@ const List = () => {
     },
     {
       name: "Input",
-      path: "",
+      path: "/components/input",
     },
     {
       name: "Textarea",

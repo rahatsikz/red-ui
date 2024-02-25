@@ -8,17 +8,17 @@ export const WidthOptions = [
    
     {
         label: 'Small',
-        value: 'sm',
+        value: '40%',
         class: 'w-[40%]'
     },
     {
         label: 'Medium',
-        value: 'md',
+        value: '60%',
         class: 'w-[60%]'
     },
     {
         label: 'Large',
-        value: 'lg',
+        value: '80%',
         class: 'w-[80%]'
     },
     {

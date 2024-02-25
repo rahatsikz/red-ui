@@ -19,11 +19,11 @@ const CopyToClipboardButton = ({ text }: any) => {
   };
 
   return (
-    <div className='!text-left flex items-center gap-12 py-8 px-8 lg:px-0 lg:py-0'>
-      <div className='ml-12'>{text}</div>
+    <div className='!text-left lg:flex grid items-center lg:h-40 h-64 overflow-y-auto gap-12 py-8 px-8 lg:px-0 lg:py-0'>
+      <div className='lg:ml-12 py-8'>{text}</div>
       <button
         onClick={copyToClipboard}
-        className='bg-primary text-white lg:h-28 h-8 px-4'
+        className='bg-primary text-white lg:h-full h-8 px-4'
       >
         Copy
       </button>

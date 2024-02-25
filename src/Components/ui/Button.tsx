@@ -31,7 +31,9 @@ const Button = ({
       onClick={onClick}
       type={type}
       disabled={loading}
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses} ${
+      className={`${baseClasses} focus:outline-none ${
+        variantClasses[variant]
+      } ${sizeClasses} ${
         (loading && "cursor-not-allowed opacity-60") || ""
       } flex items-center justify-center gap-1.5 rounded ${className}`}
     >

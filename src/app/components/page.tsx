@@ -26,7 +26,7 @@ const ComponentPage = () => {
     },
     {
       name: "Select",
-      path: "",
+      path: "/components/select",
     },
   ];
 

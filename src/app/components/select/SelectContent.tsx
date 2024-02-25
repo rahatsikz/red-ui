@@ -60,7 +60,7 @@ const SelectContent = () => {
   const [label, setLabel] = useState({
     label: "Label at Top",
     value: "top",
-    class: "absolute -top-7 pl-1",
+    class: "absolute -top-7 pl-2",
   });
 
   const LabelOptions = [
@@ -72,12 +72,12 @@ const SelectContent = () => {
     {
       label: "Label at Top",
       value: "top",
-      class: "absolute -top-7 pl-1",
+      class: "absolute -top-7 pl-2",
     },
     {
       label: "Label at Bottom",
       value: "bottom",
-      class: "absolute top-12 pl-1",
+      class: "absolute top-12 pl-2",
     },
     {
       label: "Absolute",

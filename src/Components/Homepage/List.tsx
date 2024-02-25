@@ -25,7 +25,7 @@ const List = () => {
     },
     {
       name: "Select",
-      path: "",
+      path: "/components/select",
     },
   ];
 

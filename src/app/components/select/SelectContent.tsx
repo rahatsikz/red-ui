@@ -259,7 +259,7 @@ const SelectContent = () => {
                 value={focusBorderColor}
               />
               <Select
-                label='Input Width'
+                label='Select Width'
                 options={WidthOptions}
                 onChange={handleWidthChange}
                 value={width}

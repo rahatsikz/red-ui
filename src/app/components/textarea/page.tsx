@@ -1,8 +1,8 @@
 import React from "react";
 import TextareaContent from "./TextareaContent";
 
-const page = () => {
+const TextareaPage = () => {
   return <TextareaContent />;
 };
 
-export default page;
+export default TextareaPage;

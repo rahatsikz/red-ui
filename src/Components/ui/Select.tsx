@@ -56,7 +56,7 @@ const Select = ({ options, onChange, value, label }: any) => {
       </label>
       <button
         onClick={handleOpen}
-        className='text-left w-full flex justify-between items-center border border-slate-200 rounded px-4 py-[9px] text-sm bg-white text-gray-700 focus:border-primary'
+        className='text-left outline-none w-full flex justify-between items-center border border-slate-200 rounded px-4 py-[9px] text-sm bg-white text-gray-700 focus:border-primary'
       >
         {value?.label || options[0].label}
         <svg

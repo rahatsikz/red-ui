@@ -17,7 +17,7 @@ const List = () => {
     },
     {
       name: "Textarea",
-      path: "",
+      path: "/components/textarea",
     },
     {
       name: "Card",

@@ -1,10 +1,10 @@
 export const WidthOptions = [
-    {
-        label: 'fit-content',
-        value: 'fit-content',
-        class: 'w-fit'
+    // {
+    //     label: 'fit-content',
+    //     value: 'fit-content',
+    //     class: 'w-fit'
         
-    },
+    // },
    
     {
         label: 'Small',

@@ -6,21 +6,35 @@ const TestPage = () => {
       <div className='w-1/3 bg-white mx-auto h-[60vh] py-8 px-12'>
         {/* test */}
 
-        <div className='flex  gap-1 relative'>
-          <textarea
-            name='Enter Desc'
-            id='Enter Desc'
-            placeholder='Enter Description'
-            className='w-[80%] border-2 border-sky-400 focus:border-blue-600 rounded-md px-[14px] py-[12px] resize-none bg-transparent focus:outline-none placeholder:text-sm'
-            rows={4}
-            required={true}
-          ></textarea>
+        <div className='relative w-[60%]'>
           <label
-            htmlFor='Enter Desc'
-            className='text-gray-400 text-sm  block absolute -top-2 bg-white left-4 px-2'
+            htmlFor='select club'
+            className='pointer-events-none absolute -top-2.5 bg-white left-4 px-2 text-sm text-slate-500 block'
           >
-            Enter Desc
+            Select Club
           </label>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='pointer-events-none absolute top-3 right-2 h-5 w-5 fill-slate-400 '
+            viewBox='0 0 20 20'
+            fill='currentColor'
+          >
+            <path
+              fillRule='evenodd'
+              d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+              clipRule='evenodd'
+            />
+          </svg>
+
+          <select
+            id='select club'
+            name='select club'
+            className='h-11 w-full appearance-none border-2 border-red-400 focus:border-pink-500 rounded-xl bg-white px-4 text-sm text-slate-500 outline-none'
+          >
+            <option value='1'>Option 1</option>
+            <option value='2'>Option 2</option>
+            <option value='3'>Option 3</option>
+          </select>
         </div>
       </div>
     </div>

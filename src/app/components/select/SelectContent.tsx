@@ -13,16 +13,6 @@ import React, { useState } from "react";
 const SelectContent = () => {
   const [classNames, setClassNames] = useState<any>("");
 
-  const [xPadding, setXPadding] = useState(10);
-  const [yPadding, setYPadding] = useState(4);
-
-  const handleXChange = (e: any) => {
-    setXPadding(parseInt(e.target.value));
-  };
-  const handleYChange = (e: any) => {
-    setYPadding(parseInt(e.target.value));
-  };
-
   const [radius, setRadius] = useState({
     label: "None",
     value: "0",
@@ -169,7 +159,7 @@ const SelectContent = () => {
         htmlFor="${labelText.toLowerCase()}"
         className="pointer-events-none ${label.class} ${fontSize.class} ${
       labelColor.text
-    } block pl-2" 
+    } block" 
         >
         ${labelText}
         </label>
@@ -269,7 +259,7 @@ const SelectContent = () => {
                 value={focusBorderColor}
               />
               <Select
-                label='Input Width'
+                label='Select Width'
                 options={WidthOptions}
                 onChange={handleWidthChange}
                 value={width}
@@ -296,7 +286,7 @@ const SelectContent = () => {
             <div className='relative' style={{ width: width.value }}>
               <label
                 htmlFor={labelText.toLowerCase()}
-                className={`pointer-events-none ${label.class} ${fontSize.class} block pl-2`}
+                className={`pointer-events-none ${label.class} ${fontSize.class} block`}
                 style={{
                   color: labelColor.colorCode,
                 }}

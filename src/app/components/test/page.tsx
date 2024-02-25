@@ -8,10 +8,10 @@ const TestPage = () => {
 
         <div className='relative w-[60%]'>
           <label
-            htmlFor='select club'
-            className='pointer-events-none absolute -top-2.5 bg-white left-4 px-2 text-sm text-slate-600 block pl-2'
+            htmlFor='select option'
+            className='pointer-events-none absolute -top-7 pl-1 text-sm text-gray-400 block'
           >
-            Select Club
+            Select Option
           </label>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -27,9 +27,9 @@ const TestPage = () => {
           </svg>
 
           <select
-            id='select club'
-            name='select club'
-            className='h-11 w-full appearance-none border-2 border-lime-500 focus:border-green-600 rounded-full bg-white px-4 text-sm text-slate-500 outline-none'
+            id='select option'
+            name='select option'
+            className='h-11 w-full appearance-none border-2 border-red-400 focus:border-green-500 rounded-none bg-white px-4 text-sm text-slate-500 outline-none'
           >
             <option value='1'>Option 1</option>
             <option value='2'>Option 2</option>

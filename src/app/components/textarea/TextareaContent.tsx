@@ -1,28 +1,53 @@
 "use client";
-
 import Button from "@/Components/ui/Button";
 import CopyToClipboardButton from "@/Components/ui/CopyToClipboard";
 import Input from "@/Components/ui/Input";
 import Select from "@/Components/ui/Select";
 import Slider from "@/Components/ui/Slide";
 import { BorderOptions } from "@/constant/Border";
-import { BorderRadiusOptions } from "@/constant/BorderRadius";
 import { colorOptions } from "@/constant/ColorData";
 import { FontSizeOption } from "@/constant/FontSize";
 import { WidthOptions } from "@/constant/Width";
 import React, { useState } from "react";
 
-const InputContent = () => {
+const BorderRadiusOptions = [
+  {
+    label: "None",
+    value: "0",
+    class: "rounded-none",
+  },
+  {
+    label: "Small",
+    value: "4px",
+    class: "rounded",
+  },
+  {
+    label: "Medium",
+    value: "6px",
+    class: "rounded-md",
+  },
+  {
+    label: "Large",
+    value: "12px",
+    class: "rounded-xl",
+  },
+];
+
+const TextareaContent = () => {
   const [classNames, setClassNames] = useState<any>("");
 
   const [xPadding, setXPadding] = useState(10);
   const [yPadding, setYPadding] = useState(4);
+  const [rows, setRows] = useState(6);
 
   const handleXChange = (e: any) => {
     setXPadding(parseInt(e.target.value));
   };
   const handleYChange = (e: any) => {
     setYPadding(parseInt(e.target.value));
+  };
+  const handleRows = (e: any) => {
+    setRows(parseInt(e.target.value));
   };
 
   const [radius, setRadius] = useState({
@@ -119,6 +144,7 @@ const InputContent = () => {
   const handleBorderColorChange = (option: any) => {
     setBorderColor(option);
   };
+
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => {
@@ -141,41 +167,13 @@ const InputContent = () => {
   };
 
   const [width, setWidth] = useState({
-    label: "Medium",
-    value: "60%",
-    class: "w-[60%]",
+    label: "Large",
+    value: "80%",
+    class: "w-[80%]",
   });
 
   const handleWidthChange = (option: any) => {
     setWidth(option);
-  };
-
-  const InputTypeOptions = [
-    {
-      label: "Text",
-      value: "text",
-    },
-    {
-      label: "Number",
-      value: "number",
-    },
-    {
-      label: "Email",
-      value: "email",
-    },
-    {
-      label: "Password",
-      value: "password",
-    },
-  ];
-
-  const [inputType, setInputType] = useState({
-    label: "Text",
-    value: "text",
-  });
-
-  const handleInputTypeChange = (option: any) => {
-    setInputType(option);
   };
 
   const RequiredOptions = [
@@ -198,41 +196,76 @@ const InputContent = () => {
     setRequired(option);
   };
 
+  const ResizeOptions = [
+    {
+      label: "No",
+      value: "none",
+      class: "resize-none",
+    },
+    {
+      label: "Both",
+      value: undefined,
+      class: "resize",
+    },
+    {
+      label: "X-Only",
+      value: "x-axis",
+      class: "resize-x",
+    },
+    {
+      label: "Y-Only",
+      value: "y-axis",
+      class: "resiz-y",
+    },
+  ];
+
+  const [resize, setResize] = useState({
+    label: "No",
+    value: "none",
+    class: "resize-none",
+  });
+
+  const handleResizeChange = (option: any) => {
+    setResize(option);
+  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(`<div className= "flex ${
+    setClassNames(`
+    <div className= "flex ${
       label.value === "top" || label.value === "bottom" ? label.class : ""
     } gap-1 relative">
-    <input
-    type="${inputType.value}"
-    name="${labelText}"
-    id="${labelText}"
-    placeholder="${placeholderText}"
-    className="${width.class} ${borderType.class} ${borderColor.border} focus:${
-      focusBorderColor.border
-    } px-[${xPadding}px] py-[${yPadding}px] ${
+      <textarea
+      name="${labelText}"
+      id="${labelText}"
+      placeholder="${placeholderText}"
+      className="${width.class} ${borderType.class} ${
+      borderColor.border
+    } focus:${focusBorderColor.border} ${
       radius.class
+    } px-[${xPadding}px] py-[${yPadding}px] ${
+      resize.class
     } bg-transparent focus:outline-none placeholder:text-sm"
-    required={${required.label === "Yes" ? true : false}}
-  />
-  <label
-  htmlFor="${labelText}"
-  className="${labelColor.text} ${fontSize.class} ${
+      rows={${rows}}
+      required={${required.value}}
+      ></textarea>
+      <label
+      htmlFor="${labelText}"
+      className="${labelColor.text} ${fontSize.class} ${
       label.value === "none" ? label.class : ""
     } block ${label.value === "absolute" ? label.class : "pl-2"}"
-  >
-    ${labelText}
-  </label>
-  </div>`);
+      >
+      ${labelText}
+      </label>
+    </div>`);
   };
-
   return (
     <section>
       <div className='lg:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
         <div className='lg:col-span-8 '>
           <form
-            className='xl:w-11/12 mx-auto px-4 mt-8'
+            className='xl:w-11/12 mx-auto  px-4 mt-8'
             onSubmit={handleSubmit}
           >
             <div className='grid lg:grid-cols-2 gap-8'>
@@ -278,6 +311,21 @@ const InputContent = () => {
                 label='Padding - Y'
                 max={18}
               />
+              <Slider
+                value={rows}
+                handleChange={handleRows}
+                label='Rows'
+                max={16}
+              />
+
+              <Input
+                name='placeholder'
+                label='Placeholder'
+                value={placeholderText}
+                type='text'
+                handleChange={handlePlaceholderChange}
+                defaultValue=''
+              />
 
               <Select
                 label='Border Radius'
@@ -297,6 +345,7 @@ const InputContent = () => {
                 onChange={handleBorderColorChange}
                 value={borderColor}
               />
+
               <Select
                 label='Border on Focus'
                 options={colorOptions}
@@ -305,30 +354,23 @@ const InputContent = () => {
               />
 
               <Select
-                label='Input Width'
+                label='Textarea Width'
                 options={WidthOptions}
                 onChange={handleWidthChange}
                 value={width}
               />
+
               <Select
-                label='Input Type'
-                options={InputTypeOptions}
-                onChange={handleInputTypeChange}
-                value={inputType}
-              />
-              <Select
-                label='Input Required'
+                label='Textarea Required'
                 options={RequiredOptions}
                 onChange={handleRequiredChange}
                 value={required}
               />
-              <Input
-                name='placeholder'
-                label='Placeholder'
-                value={placeholderText}
-                type='text'
-                handleChange={handlePlaceholderChange}
-                defaultValue=''
+              <Select
+                label='Resizeable'
+                options={ResizeOptions}
+                onChange={handleResizeChange}
+                value={resize}
               />
             </div>
             <div className='mt-8 flex justify-center'>
@@ -355,24 +397,23 @@ const InputContent = () => {
                 label.class
               } gap-1 relative`}
             >
-              <input
-                type={inputType.value}
+              <textarea
                 name={labelText}
                 id={labelText}
                 placeholder={placeholderText}
-                className={`${borderType.class} focus:border-[${focusBorderColor.colorCode}] bg-transparent focus:outline-none placeholder:text-sm`}
+                className={`${borderType.class} ${width.class} ${resize.class} border-black bg-transparent focus:outline-none placeholder:text-sm`}
                 style={{
                   padding: `${yPadding}px ${xPadding}px`,
                   borderRadius: `${radius.value}`,
                   borderColor: isFocused
                     ? focusBorderColor.colorCode
                     : borderColor.colorCode,
-                  width: `${width.value}`,
                 }}
+                rows={rows}
                 required={required.value}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-              />
+              ></textarea>
               <label
                 htmlFor={labelText}
                 style={{
@@ -393,4 +434,4 @@ const InputContent = () => {
   );
 };
 
-export default InputContent;
+export default TextareaContent;

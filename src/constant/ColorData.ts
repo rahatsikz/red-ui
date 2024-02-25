@@ -1,5 +1,85 @@
 export const colorOptions = [
     { 
+        value: "slate-50", 
+        colorCode: "#f8fafc", 
+        label: "Slate 50",
+        bg: "bg-slate-50",
+        text: "text-slate-50",
+        border: "border-slate-50"
+    },
+    { 
+        value: "slate-100", 
+        colorCode: "#f1f5f9", 
+        label: "Slate 100",
+        bg: "bg-slate-100",
+        text: "text-slate-100",
+        border: "border-slate-100"
+    },
+    { 
+        value: "slate-200", 
+        colorCode: "#e2e8f0", 
+        label: "Slate 200",
+        bg: "bg-slate-200",
+        text: "text-slate-200",
+        border: "border-slate-200"
+    },
+    { 
+        value: "slate-300", 
+        colorCode: "#cbd5e1", 
+        label: "Slate 300",
+        bg: "bg-slate-300",
+        text: "text-slate-300",
+        border: "border-slate-300"
+    },
+    { 
+        value: "slate-400", 
+        colorCode: "#94a3b8", 
+        label: "Slate 400",
+        bg: "bg-slate-400",
+        text: "text-slate-400",
+        border: "border-slate-400"
+    },
+    { 
+        value: "slate-500", 
+        colorCode: "#64748b", 
+        label: "Slate 500",
+        bg: "bg-slate-500",
+        text: "text-slate-500",
+        border: "border-slate-500"
+    },
+    { 
+        value: "slate-600", 
+        colorCode: "#475569", 
+        label: "Slate 600",
+        bg: "bg-slate-600",
+        text: "text-slate-600",
+        border: "border-slate-600"
+    },
+    { 
+        value: "slate-700", 
+        colorCode: "#334155", 
+        label: "Slate 700",
+        bg: "bg-slate-700",
+        text: "text-slate-700",
+        border: "border-slate-700"
+    },
+    { 
+        value: "slate-800", 
+        colorCode: "#1e293b", 
+        label: "Slate 800",
+        bg: "bg-slate-800",
+        text: "text-slate-800",
+        border: "border-slate-800"
+    },
+    { 
+        value: "slate-900", 
+        colorCode: "#0f172a", 
+        label: "Slate 900",
+        bg: "bg-slate-900",
+        text: "text-slate-900",
+        border: "border-slate-900"
+    },
+    { 
         value: "gray-50", 
         colorCode: "#f9fafb", 
         label: "gray-50",
@@ -958,5 +1038,165 @@ export const colorOptions = [
         bg: "bg-teal-900",
         text: "text-teal-900",
         border: "border-teal-900"
-    }
+    },
+    { 
+        value: "lime-50", 
+        colorCode: "#f7fee7", 
+        label: "Lime 50",
+        bg: "bg-lime-50",
+        text: "text-lime-50",
+        border: "border-lime-50"
+      },
+      { 
+        value: "lime-100", 
+        colorCode: "#ecfccb", 
+        label: "Lime 100",
+        bg: "bg-lime-100",
+        text: "text-lime-100",
+        border: "border-lime-100"
+      },
+      { 
+        value: "lime-200", 
+        colorCode: "#d9f99d", 
+        label: "Lime 200",
+        bg: "bg-lime-200",
+        text: "text-lime-200",
+        border: "border-lime-200"
+      },
+      { 
+        value: "lime-300", 
+        colorCode: "#bef264", 
+        label: "Lime 300",
+        bg: "bg-lime-300",
+        text: "text-lime-300",
+        border: "border-lime-300"
+      },
+      { 
+        value: "lime-400", 
+        colorCode: "#a3e635", 
+        label: "Lime 400",
+        bg: "bg-lime-400",
+        text: "text-lime-400",
+        border: "border-lime-400"
+      },
+      { 
+        value: "lime-500", 
+        colorCode: "#84cc16", 
+        label: "Lime 500",
+        bg: "bg-lime-500",
+        text: "text-lime-500",
+        border: "border-lime-500"
+      },
+      { 
+        value: "lime-600", 
+        colorCode: "#65a30d", 
+        label: "Lime 600",
+        bg: "bg-lime-600",
+        text: "text-lime-600",
+        border: "border-lime-600"
+      },
+      { 
+        value: "lime-700", 
+        colorCode: "#4d7c0f", 
+        label: "Lime 700",
+        bg: "bg-lime-700",
+        text: "text-lime-700",
+        border: "border-lime-700"
+      },
+      { 
+        value: "lime-800", 
+        colorCode: "#3f6212", 
+        label: "Lime 800",
+        bg: "bg-lime-800",
+        text: "text-lime-800",
+        border: "border-lime-800"
+      },
+      { 
+        value: "lime-900", 
+        colorCode: "#365314", 
+        label: "Lime 900",
+        bg: "bg-lime-900",
+        text: "text-lime-900",
+        border: "border-lime-900"
+      },
+      { 
+        value: "orange-50", 
+        colorCode: "#fff7ed", 
+        label: "Orange 50",
+        bg: "bg-orange-50",
+        text: "text-orange-50",
+        border: "border-orange-50"
+      },
+      { 
+        value: "orange-100", 
+        colorCode: "#ffedd5", 
+        label: "Orange 100",
+        bg: "bg-orange-100",
+        text: "text-orange-100",
+        border: "border-orange-100"
+      },
+      { 
+        value: "orange-200", 
+        colorCode: "#fed7aa", 
+        label: "Orange 200",
+        bg: "bg-orange-200",
+        text: "text-orange-200",
+        border: "border-orange-200"
+      },
+      { 
+        value: "orange-300", 
+        colorCode: "#fdba74", 
+        label: "Orange 300",
+        bg: "bg-orange-300",
+        text: "text-orange-300",
+        border: "border-orange-300"
+      },
+      { 
+        value: "orange-400", 
+        colorCode: "#fb923c", 
+        label: "Orange 400",
+        bg: "bg-orange-400",
+        text: "text-orange-400",
+        border: "border-orange-400"
+      },
+      { 
+        value: "orange-500", 
+        colorCode: "#ed8936", 
+        label: "Orange 500",
+        bg: "bg-orange-500",
+        text: "text-orange-500",
+        border: "border-orange-500"
+      },
+      { 
+        value: "orange-600", 
+        colorCode: "#dd6b20", 
+        label: "Orange 600",
+        bg: "bg-orange-600",
+        text: "text-orange-600",
+        border: "border-orange-600"
+      },
+      { 
+        value: "orange-700", 
+        colorCode: "#c05621", 
+        label: "Orange 700",
+        bg: "bg-orange-700",
+        text: "text-orange-700",
+        border: "border-orange-700"
+      },
+      { 
+        value: "orange-800", 
+        colorCode: "#9c4221", 
+        label: "Orange 800",
+        bg: "bg-orange-800",
+        text: "text-orange-800",
+        border: "border-orange-800"
+      },
+      { 
+        value: "orange-900", 
+        colorCode: "#7b341e", 
+        label: "Orange 900",
+        bg: "bg-orange-900",
+        text: "text-orange-900",
+        border: "border-orange-900"
+      }
 ];

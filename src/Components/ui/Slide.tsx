@@ -11,7 +11,7 @@ const Slider = ({ value, handleChange, min = 2, max = 32, label }: any) => {
         step={2}
         value={value}
         onChange={handleChange}
-        className='lg:w-full w-56  h-4 rounded-full bg-gradient-to-r from-red-200  to-[#FE6E63] appearance-none'
+        className='lg:w-full w-full  h-4 rounded-full bg-gradient-to-r from-red-200  to-[#FE6E63] appearance-none'
       />
       <span className='text-gray-600'>{value} </span>
     </div>

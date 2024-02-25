@@ -50,7 +50,7 @@ const Select = ({ options, onChange, value, label }: any) => {
   );
 
   return (
-    <div className='relative lg:w-full w-96 ' ref={selectRef}>
+    <div className='relative lg:w-full w-full ' ref={selectRef}>
       <label className='block text-gray-400 text-xs  mb-2 absolute -top-2 left-2 bg-white px-2'>
         {label}
       </label>

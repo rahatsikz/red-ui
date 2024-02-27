@@ -29,7 +29,7 @@ export const ComponentsArr = [
     },
     {
         name: "Checkbox",
-        path: "",
+        path: "/components/checkbox",
     },
     {
         name: "Toggle",

@@ -10,20 +10,18 @@ const TestPage = () => {
 
         <div className='relative flex flex-wrap items-center'>
           <input
-            className='peer h-4 w-4 cursor-pointer appearance-none rounded border-2 border-slate-500 bg-white transition-colors checked:border-green-500 checked:bg-green-500  focus:outline-none '
+            className='w-6 h-6 cursor-pointer appearance-none rounded border-2 peer focus:outline-none transition-colors border-gray-300 bg-white  checked:border-red-400 checked:bg-white'
             type='checkbox'
-            // checked={checked}
-            // onChange={() => setChecked(!checked)}
-            id='id-c01'
+            id='one'
           />
           <label
-            className='cursor-pointer pl-2 text-slate-500 '
-            htmlFor='id-c01'
+            className='cursor-pointer text-sm text-gray-400 pl-2'
+            htmlFor='one'
           >
-            Primary Checkbox
+            Accept Terms
           </label>
           <svg
-            className='pointer-events-none absolute left-0 top-1 h-4 w-4 -rotate-90 fill-white stroke-white opacity-0 transition-all duration-300 peer-checked:rotate-0 peer-checked:opacity-100 peer-disabled:cursor-not-allowed'
+            className='pointer-events-none w-6 h-6 absolute 0px left-0 -rotate-90  fill-red-400 stroke-red-400 opacity-0  peer-checked:rotate-0 peer-checked:opacity-100'
             viewBox='0 0 16 16'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'

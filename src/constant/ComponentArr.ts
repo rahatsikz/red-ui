@@ -15,13 +15,14 @@ export const ComponentsArr = [
       name: "Textarea",
       path: "/components/textarea",
     },
-    {
-      name: "Card",
-      path: "",
-    },
+   
     {
       name: "Select",
       path: "/components/select",
+    },
+    {
+      name: "Card",
+      path: "",
     },
     {
         name: "Radio Button",

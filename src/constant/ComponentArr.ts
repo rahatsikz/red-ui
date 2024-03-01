@@ -34,6 +34,6 @@ export const ComponentsArr = [
     },
     {
         name: "Toggle",
-        path: "",
+        path: "/components/toggle",
     },
   ];

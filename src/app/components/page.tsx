@@ -13,7 +13,7 @@ const ComponentPage = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 px-4 lg:px-0'>
           {ComponentsArr.map((component) => (
             <Link
-              className='text-xl text-center bg-red-50 p-8 rounded-lg hover:shadow-md'
+              className='h-28 text-xl text-center bg-red-50 p-8 rounded-lg hover:shadow-md'
               href={component.path}
               key={component.name}
             >

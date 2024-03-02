@@ -199,7 +199,7 @@ const CheckboxContent = () => {
                 defaultValue=''
               />
               <Select
-                label='label Color'
+                label='Label Color'
                 options={colorOptions}
                 onChange={handleLabelColorChange}
                 value={labelColor}

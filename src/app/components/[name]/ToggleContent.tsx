@@ -4,16 +4,15 @@ import Button from "@/Components/ui/Button";
 import CopyToClipboardButton from "@/Components/ui/CopyToClipboard";
 import Input from "@/Components/ui/Input";
 import Select from "@/Components/ui/Select";
-import Slider from "@/Components/ui/Slide";
 import { colorOptions } from "@/constant/ColorData";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const ToggleContent = () => {
   const [classNames, setClassNames] = useState<any>("");
 
   const [checked, setChecked] = useState(false);
 
-  const [checkColor, setCheckColor] = useState({
+  const [toggleColor, setToggleColor] = useState({
     value: "red-400",
     colorCode: "#f87171",
     label: "red-400",
@@ -22,61 +21,45 @@ const ToggleContent = () => {
     border: "border-red-400",
   });
 
-  const handleCheckColorChange = (option: any) => {
-    setCheckColor(option);
+  const handleToggleColorChange = (option: any) => {
+    setToggleColor(option);
   };
 
-  const checkboxOptions = [
+  // const [containerColor, setContainerColor] = useState({
+  //   value: "red-200",
+  //   colorCode: "#fecaca",
+  //   label: "red-200",
+  //   bg: "bg-red-200",
+  //   text: "text-red-200",
+  //   border: "border-red-200",
+  // });
+
+  // const handleContainerColorChange = (option: any) => {
+  //   setContainerColor(option);
+  // };
+
+  const SizeOptions = [
     {
-      label: "Primary",
-      value: "primary",
-      class: ` checked:${checkColor.border} checked:${checkColor.bg} `,
-      svg: `fill-white stroke-white`,
+      label: "Small",
+      value: 4,
+      class: "h-4 w-8 after:h-4 after:w-4",
     },
     {
-      label: "Outline",
-      value: "outline",
-      class: ` checked:${checkColor.border} checked:bg-white`,
-      svg: `fill-${checkColor.value} stroke-${checkColor.value}`,
+      label: "Medium",
+      value: 6,
+      class: "h-6 w-12 after:h-6 after:w-6",
+    },
+    {
+      label: "Large",
+      value: 8,
+      class: "h-8 w-16 after:h-8 after:w-8",
     },
   ];
 
-  const [checkboxTypes, setCheckboxTypes] = useState(checkboxOptions[0]);
-  const handleCheckChange = (option: any) => {
-    setCheckboxTypes(option);
-  };
+  const [size, setSize] = useState(SizeOptions[1]);
 
-  useEffect(() => {
-    const updatedCheckOptions = [
-      {
-        label: "Primary",
-        value: "primary",
-        class: ` checked:${checkColor.border} checked:${checkColor.bg} `,
-        svg: `fill-white stroke-white`,
-      },
-      {
-        label: "Outline",
-        value: "outline",
-        class: ` checked:${checkColor.border} checked:bg-white`,
-        svg: `fill-${checkColor.value} stroke-${checkColor.value}`,
-      },
-    ];
-
-    const currentOptionIndex = updatedCheckOptions.findIndex(
-      (option) => option.label === checkboxTypes.label
-    );
-
-    if (currentOptionIndex === -1) {
-      setCheckboxTypes(updatedCheckOptions[0]);
-    } else {
-      setCheckboxTypes(updatedCheckOptions[currentOptionIndex]);
-    }
-  }, [checkColor, checkboxTypes.label]);
-
-  const [size, setSize] = useState(6);
-
-  const handleSizeChange = (e: any) => {
-    setSize(parseInt(e.target.value));
+  const handleSizeChange = (option: any) => {
+    setSize(option);
   };
 
   const FontSizeOption = [
@@ -124,7 +107,23 @@ const ToggleContent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(``);
+    setClassNames(`
+    <div className='relative flex gap-4 items-center'>
+      <label className="${fontSize.class} ${labelColor.text}" htmlFor='toggle'>
+      ${label}
+      </label>
+      <input
+      type='checkbox'
+      id='toggle'
+      className='absolute w-full h-full peer appearance-none rounded-md cursor-pointer'
+      />
+      <span
+      className="flex items-center rounded-full duration-300 ease-in-out ${size.class} bg-gray-300 after:bg-white after:rounded-full after:shadow-md after:duration-300
+      peer-checked:${toggleColor.bg} peer-checked:after:translate-x-full"
+      ></span>
+  </div>  
+    
+    `);
   };
 
   return (
@@ -145,7 +144,7 @@ const ToggleContent = () => {
                 defaultValue=''
               />
               <Select
-                label='label Color'
+                label='Label Color'
                 options={colorOptions}
                 onChange={handleLabelColorChange}
                 value={labelColor}
@@ -158,26 +157,24 @@ const ToggleContent = () => {
                 value={fontSize}
               />
 
-              <Slider
+              <Select
+                label='Toggle Size'
+                options={SizeOptions}
+                onChange={handleSizeChange}
                 value={size}
-                handleChange={handleSizeChange}
-                label='Box Size'
-                max={10}
-                min={4}
               />
-
-              <Select
-                label='Checkbox Types'
-                options={checkboxOptions}
-                onChange={handleCheckChange}
-                value={checkboxTypes}
-              />
-
-              <Select
-                label='Check Color'
+              {/* <Select
+                label='Container Color'
                 options={colorOptions}
-                onChange={handleCheckColorChange}
-                value={checkColor}
+                onChange={handleContainerColorChange}
+                value={containerColor}
+              /> */}
+
+              <Select
+                label='Toggle Color'
+                options={colorOptions}
+                onChange={handleToggleColorChange}
+                value={toggleColor}
               />
             </div>
             <div className='mt-8 flex justify-center'>
@@ -199,23 +196,29 @@ const ToggleContent = () => {
         <div className='bg-red-50 lg:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
           <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'>
             {/*  */}
-            <div className='relative flex flex-wrap items-center'>
-              <input
-                className='peer relative h-6 w-12 cursor-pointer appearance-none rounded-full bg-slate-300 transition-colors after:absolute after:top-0 after:left-0 after:h-6 after:w-6 after:rounded-full after:bg-slate-500 after:transition-all checked:bg-green-200 checked:after:left-6 checked:after:bg-green-500 h '
-                type='checkbox'
-                value=''
-                id={label}
-              />
+
+            <div className='relative flex gap-4 items-center'>
               <label
-                className='cursor-pointer pl-2 text-slate-500'
-                htmlFor={label}
                 style={{
                   color: labelColor.colorCode,
                   fontSize: fontSize.value,
                 }}
+                htmlFor='toggle'
               >
                 {label}
               </label>
+              <input
+                type='checkbox'
+                id='toggle'
+                className='absolute w-full h-full peer appearance-none rounded-md cursor-pointer'
+                onChange={() => setChecked(!checked)}
+              />
+              <span
+                className={`flex items-center rounded-full duration-300 ease-in-out ${size.class} after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-full `}
+                style={{
+                  backgroundColor: checked ? toggleColor.colorCode : "#d1d5db",
+                }}
+              ></span>
             </div>
             {/*  */}
           </div>

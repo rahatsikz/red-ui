@@ -6,6 +6,7 @@ import SelectContent from "./SelectContent";
 import RadioContent from "./RadioContent";
 import CheckboxContent from "./CheckboxContent";
 import ToggleContent from "./ToggleContent";
+import CardContent from "./CardContent";
 
 const AllComponentPage = ({ params }: { params: { name: string } }) => {
   return (
@@ -17,6 +18,7 @@ const AllComponentPage = ({ params }: { params: { name: string } }) => {
       {params.name === "radio" && <RadioContent />}
       {params.name === "checkbox" && <CheckboxContent />}
       {params.name === "toggle" && <ToggleContent />}
+      {params.name === "card" && <CardContent />}
     </>
   );
 };

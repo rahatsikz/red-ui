@@ -4,7 +4,7 @@ export const ComponentsArr = [
       path: "/components/button",
     },
     {
-      name: "Navbar",
+      name: "Accordion",
       path: "",
     },
     {
@@ -22,7 +22,7 @@ export const ComponentsArr = [
     },
     {
       name: "Card",
-      path: "/components/card",
+      path: "",
     },
     {
         name: "Radio Button",

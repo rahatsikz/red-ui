@@ -18,7 +18,9 @@ const SignInPageContent = () => {
         </p>
         <div className='mt-4 -ml-8'>
           <button
-            // onClick={() => signIn("github")}
+            onClick={() =>
+              signIn("github", { callbackUrl: "http://localhost:3000" })
+            }
             className='w-fit text-base flex gap-4 tracking-widest rounded-md px-[30px] py-[10px] bg-[radial-gradient(circle,#f87171_0%,#ef4444_100%)] text-white'
           >
             <GitHubSVG />

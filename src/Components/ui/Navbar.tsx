@@ -3,9 +3,14 @@ import Logo from "@/assets/svg/Logo";
 import Link from "next/link";
 import React, { useState } from "react";
 import Button from "./Button";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const { data: session, status } = useSession();
+  // console.log("status", status);
+  // console.log("session", session);
 
   const routes = [
     {
@@ -19,6 +24,24 @@ const Navbar = () => {
     {
       name: "Sign in",
       path: "/signin",
+    },
+  ];
+  const LoggedInroutes = [
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "FAQ",
+      path: "/",
+    },
+    {
+      name: "Community",
+      path: "/",
+    },
+    {
+      name: "Log Out",
+      path: "",
     },
   ];
 
@@ -75,21 +98,39 @@ const Navbar = () => {
                 : "invisible opacity-0"
             }`}
           >
-            {routes.map((route, index) => (
-              <li key={index} role='none' className='flex items-stretch'>
-                <Link
-                  role='menuitem'
-                  aria-haspopup='false'
-                  className='flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary focus:text-red-600 focus:outline-none focus-visible:outline-none lg:px-8'
-                  href={route.path}
-                >
-                  <span> {route.name} </span>
-                </Link>
-              </li>
-            ))}
+            {!session?.user?.image &&
+              routes.map((route, index) => (
+                <li key={index} role='none' className='flex items-stretch'>
+                  <Link
+                    role='menuitem'
+                    aria-haspopup='false'
+                    className='flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary focus:text-red-600 focus:outline-none focus-visible:outline-none lg:px-8'
+                    href={route.path}
+                  >
+                    <span> {route.name} </span>
+                  </Link>
+                </li>
+              ))}
+            {session?.user?.image &&
+              LoggedInroutes.map((route, index) => (
+                <li key={index} role='none' className='flex items-stretch'>
+                  <Link
+                    role='menuitem'
+                    aria-haspopup='false'
+                    className='flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary focus:text-red-600 focus:outline-none focus-visible:outline-none lg:px-8'
+                    href={route.path}
+                  >
+                    {route.path ? (
+                      <span> {route.name} </span>
+                    ) : (
+                      <span onClick={() => signOut()}> {route.name} </span>
+                    )}
+                  </Link>
+                </li>
+              ))}
           </ul>
           {/*      <!-- Actions --> */}
-          <div className='ml-auto flex items-center justify-end px-6 lg:ml-0 lg:flex-1 lg:p-0'>
+          <div className='ml-auto flex items-center gap-4 justify-end px-6 lg:ml-0 lg:flex-1 lg:p-0'>
             <Link
               href='/components'
               className='relative inline-flex items-center justify-center rounded-full text-lg text-primary'

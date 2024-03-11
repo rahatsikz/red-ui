@@ -2,6 +2,7 @@
 
 import Button from "@/Components/ui/Button";
 import CopyToClipboardButton from "@/Components/ui/CopyToClipboard";
+import ImageInput from "@/Components/ui/ImageInput";
 import Input from "@/Components/ui/Input";
 import Select from "@/Components/ui/Select";
 import { colorOptions } from "@/constant/ColorData";
@@ -10,17 +11,28 @@ import React, { useState } from "react";
 const CardContent = () => {
   const [classNames, setClassNames] = useState<any>("");
 
-  const [toggleColor, setToggleColor] = useState({
-    value: "red-400",
-    colorCode: "#f87171",
-    label: "red-400",
-    bg: "bg-red-400",
-    text: "text-red-400",
-    border: "border-red-400",
-  });
+  const [imgUpload, setImgUpload] = useState<any>(null);
 
-  const handleToggleColorChange = (option: any) => {
-    setToggleColor(option);
+  const imgbbApi = process.env.NEXT_PUBLIC_IMGBB_Key;
+  const handleImgUpload = (value: any) => {
+    setImgUpload(value);
+    // console.log(value);
+    // console.log(imgbbApi, "apikey");
+    const formdata = new FormData();
+    formdata.append("image", value);
+    console.log(formdata);
+
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbbApi}`, {
+      method: "POST",
+      body: formdata,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          console.log(data.data.url);
+        }
+      });
   };
 
   // const [containerColor, setContainerColor] = useState({
@@ -54,52 +66,44 @@ const CardContent = () => {
     },
   ];
 
-  const [size, setSize] = useState(SizeOptions[1]);
+  const [title, setTitle] = useState("This is Title");
 
-  const handleSizeChange = (option: any) => {
-    setSize(option);
+  const handleTitleChange = (value: any) => {
+    setTitle(value);
+  };
+  const [subTitle, setSubTitle] = useState("Sub-title");
+
+  const handleSubTitleChange = (value: any) => {
+    setSubTitle(value);
   };
 
-  const FontSizeOption = [
+  const dummyDesc =
+    "Introducing our sleek and versatile card component, designed to elevate your user interface with minimal effort. Crafted for seamless integration into any project, our cards offer unparalleled flexibility and style.";
+
+  const [desc, setDesc] = useState(dummyDesc);
+
+  const handleDescChange = (value: any) => {
+    setDesc(value);
+  };
+
+  const cardTypesArr = [
     {
-      label: "Small",
-      value: "14px",
-      class: "text-sm",
+      label: "Empty",
+      value: "empty",
     },
     {
-      label: "Base",
-      value: "16px",
-      class: "text-base",
+      label: "Title and text",
+      value: "textonly",
+    },
+    {
+      label: "Text With Image",
+      value: "textwithimage",
     },
   ];
 
-  const [fontSize, setFontSize] = useState({
-    label: "Small",
-    value: "14px",
-    class: "text-sm",
-  });
-
-  const handleFontSizeChange = (option: any) => {
-    setFontSize(option);
-  };
-
-  const [label, setLabel] = useState("Toggle me");
-
-  const handleLabelChange = (value: any) => {
-    setLabel(value);
-  };
-
-  const [labelColor, setLabelColor] = useState({
-    value: "gray-400",
-    colorCode: "#9ca3af",
-    label: "gray-400",
-    bg: "bg-gray-400",
-    text: "text-gray-400",
-    border: "border-gray-400",
-  });
-
-  const handleLabelColorChange = (option: any) => {
-    setLabelColor(option);
+  const [cardType, setCardType] = useState(cardTypesArr[0]);
+  const handleCardTypeChange = (option: any) => {
+    setCardType(option);
   };
 
   const handleSubmit = (e: any) => {
@@ -117,15 +121,52 @@ const CardContent = () => {
             onSubmit={handleSubmit}
           >
             <div className='grid lg:grid-cols-2 gap-8'>
-              {/* <Input
-                name='label'
-                label='Label'
-                value={label}
-                type='text'
-                handleChange={handleLabelChange}
-                defaultValue=''
-              />
               <Select
+                label='Card Type'
+                options={cardTypesArr}
+                onChange={handleCardTypeChange}
+                value={cardType}
+              />
+              {cardType.label !== "Empty" && (
+                <>
+                  <Input
+                    name='title'
+                    label='Card Title'
+                    value={title}
+                    type='text'
+                    handleChange={handleTitleChange}
+                    defaultValue=''
+                  />
+                  <Input
+                    name='subtitle'
+                    label='Card sub Title'
+                    value={subTitle}
+                    type='text'
+                    handleChange={handleSubTitleChange}
+                    defaultValue=''
+                  />
+                  <Input
+                    name='desc'
+                    label='Description'
+                    value={desc}
+                    type='text'
+                    handleChange={handleDescChange}
+                    defaultValue=''
+                  />
+                </>
+              )}
+              {cardType.value === "textwithimage" && (
+                <>
+                  <ImageInput
+                    label='Image Upload'
+                    name='image'
+                    handleChange={handleImgUpload}
+                    value={imgUpload}
+                  />
+                </>
+              )}
+
+              {/* <Select
                 label='Label Color'
                 options={colorOptions}
                 onChange={handleLabelColorChange}
@@ -145,12 +186,6 @@ const CardContent = () => {
                 onChange={handleSizeChange}
                 value={size}
               /> */}
-              {/* <Select
-              label='Container Color'
-              options={colorOptions}
-              onChange={handleContainerColorChange}
-              value={containerColor}
-            /> */}
 
               {/* <Select
                 label='Toggle Color'
@@ -178,8 +213,18 @@ const CardContent = () => {
         <div className='bg-red-50 lg:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
           {/* <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'> */}
           {/*  */}
-          <div className='overflow-hidden bg-white rounded shadow-md text-slate-500 shadow-slate-200'>
-            <div className='p-6'></div>
+          <div className='overflow-hidden min-w-80 min-h-52 bg-white rounded shadow-md'>
+            <div className='p-6'>
+              {cardType.label !== "Empty" && (
+                <>
+                  <h2 className='text-xl text-slate-800'>{title}</h2>
+                  <p className='text-slate-500 text-xs tracking-wider'>
+                    {subTitle}
+                  </p>
+                  <p className='text-slate-500 mt-4 text-sm'>{desc}</p>
+                </>
+              )}
+            </div>
           </div>
           {/*  */}
           {/* </div> */}

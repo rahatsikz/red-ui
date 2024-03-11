@@ -22,7 +22,7 @@ export const ComponentsArr = [
     },
     {
       name: "Card",
-      path: "",
+      path: "/components/card",
     },
     {
         name: "Radio Button",

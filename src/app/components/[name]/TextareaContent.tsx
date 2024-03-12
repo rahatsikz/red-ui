@@ -262,8 +262,8 @@ const TextareaContent = () => {
   };
   return (
     <section>
-      <div className='lg:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
-        <div className='lg:col-span-8 '>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+        <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto  px-4 mt-8'
             onSubmit={handleSubmit}
@@ -389,7 +389,7 @@ const TextareaContent = () => {
             </div>
           </div>
         </div>
-        <div className='bg-red-50 lg:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
+        <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
           <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'>
             <div
               className={`flex ${

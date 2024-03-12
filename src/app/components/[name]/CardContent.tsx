@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Button from "@/Components/ui/Button";
@@ -6,16 +7,19 @@ import ImageInput from "@/Components/ui/ImageInput";
 import Input from "@/Components/ui/Input";
 import Select from "@/Components/ui/Select";
 import { colorOptions } from "@/constant/ColorData";
+import { WidthOptions } from "@/constant/Width";
 import React, { useState } from "react";
 
 const CardContent = () => {
   const [classNames, setClassNames] = useState<any>("");
 
-  const [imgUpload, setImgUpload] = useState<any>(null);
+  const [imgUpload, setImgUpload] = useState<any>(
+    "https://i.ibb.co/Jkct5BL/430610643-822176203269811-5837933321810083409-n.jpg"
+  );
 
   const imgbbApi = process.env.NEXT_PUBLIC_IMGBB_Key;
   const handleImgUpload = (value: any) => {
-    setImgUpload(value);
+    // setImgUpload(value);
     // console.log(value);
     // console.log(imgbbApi, "apikey");
     const formdata = new FormData();
@@ -31,40 +35,10 @@ const CardContent = () => {
         console.log(data);
         if (data.success) {
           console.log(data.data.url);
+          setImgUpload(data.data.url);
         }
       });
   };
-
-  // const [containerColor, setContainerColor] = useState({
-  //   value: "red-200",
-  //   colorCode: "#fecaca",
-  //   label: "red-200",
-  //   bg: "bg-red-200",
-  //   text: "text-red-200",
-  //   border: "border-red-200",
-  // });
-
-  // const handleContainerColorChange = (option: any) => {
-  //   setContainerColor(option);
-  // };
-
-  const SizeOptions = [
-    {
-      label: "Small",
-      value: 4,
-      class: "h-4 w-8 after:h-4 after:w-4",
-    },
-    {
-      label: "Medium",
-      value: 6,
-      class: "h-6 w-12 after:h-6 after:w-6",
-    },
-    {
-      label: "Large",
-      value: 8,
-      class: "h-8 w-16 after:h-8 after:w-8",
-    },
-  ];
 
   const [title, setTitle] = useState("This is Title");
 
@@ -106,16 +80,149 @@ const CardContent = () => {
     setCardType(option);
   };
 
+  const imageDirectionArr = [
+    {
+      label: "Left",
+      value: "left",
+      class: "grid-cols-2",
+    },
+    {
+      label: "Top",
+      value: "top",
+      class: "",
+    },
+  ];
+
+  const [imageDirectionValue, setImageDirectionValue] = useState(
+    imageDirectionArr[1]
+  );
+
+  const handleImageDirectionChange = (option: any) => {
+    setImageDirectionValue(option);
+  };
+
+  const borderRadiusArr = [
+    {
+      label: "None",
+      value: "0",
+      class: "rounded-none",
+    },
+    {
+      label: "Small",
+      value: "4px",
+      class: "rounded",
+    },
+    {
+      label: "Medium",
+      value: "6px",
+      class: "rounded-md",
+    },
+    {
+      label: "Large",
+      value: "12px",
+      class: "rounded-xl",
+    },
+  ];
+
+  const [borderRadiusValue, setBorderRadiusValue] = useState(
+    borderRadiusArr[1]
+  );
+
+  const handleBorderRadiusChange = (option: any) => {
+    setBorderRadiusValue(option);
+  };
+
+  const maxWidthOptions = [
+    {
+      label: "Small",
+      value: "60%",
+      class: "w-[60%]",
+    },
+    {
+      label: "Medium",
+      value: "70%",
+      class: "w-[70%]",
+    },
+    {
+      label: "Large",
+      value: "80%",
+      class: "w-[80%]",
+    },
+    {
+      label: "Full",
+      value: "100%",
+      class: "w-full",
+    },
+  ];
+
+  const [maxWidthValue, setMaxWidthValue] = useState(maxWidthOptions[0]);
+
+  const handleMaxWidthChange = (option: any) => {
+    setMaxWidthValue(option);
+  };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(`
-    `);
+    if (cardType.value === "textwithimage") {
+      setClassNames(`
+      <div className="overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
+        <div className="p-6">
+          <div className="grid gap-6 ${imageDirectionValue.class}">
+            <img
+                src="${imgUpload}"
+                alt="card image"
+                className="aspect-video w-full h-full object-cover ${borderRadiusValue.class}"
+            />
+            
+            <div className="w-full">
+              <h2 className="text-xl text-slate-800 font-semibold">
+                ${title}
+              </h2>
+              <p className="text-slate-500 text-xs tracking-wider mt-1">
+                ${subTitle}
+              </p>
+              <p className="text-slate-500 mt-4 text-sm line-clamp-5">
+                ${desc}
+              </p>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+      `);
+    } else if (cardType.value === "empty") {
+      setClassNames(`
+      <div className="overflow-hidden min-w-80 min-h-52 bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
+        <div className="p-6"></div>
+      </div>
+      `);
+    } else if (cardType.value === "textonly") {
+      setClassNames(`
+      <div className="overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
+          <div className="p-6">
+            <div className="grid gap-6">
+              <div className="w-full">
+                <h2 className="text-xl text-slate-800 font-semibold">
+                  ${title}
+                </h2>
+                <p className="text-slate-500 text-xs tracking-wider mt-1">
+                  ${subTitle}
+                </p>
+                <p className="text-slate-500 mt-4 text-sm line-clamp-5">
+                  ${desc}
+                </p>
+              </div>
+            </div>
+          </div>
+      </div>
+      `);
+    }
   };
   return (
     <section>
-      <div className='lg:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
-        <div className='lg:col-span-8 '>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+        <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto px-4 mt-8'
             onSubmit={handleSubmit}
@@ -126,6 +233,18 @@ const CardContent = () => {
                 options={cardTypesArr}
                 onChange={handleCardTypeChange}
                 value={cardType}
+              />
+              <Select
+                label='Card and Image Radius'
+                options={borderRadiusArr}
+                onChange={handleBorderRadiusChange}
+                value={borderRadiusValue}
+              />
+              <Select
+                label='Max Width'
+                options={maxWidthOptions}
+                onChange={handleMaxWidthChange}
+                value={maxWidthValue}
               />
               {cardType.label !== "Empty" && (
                 <>
@@ -162,6 +281,12 @@ const CardContent = () => {
                     name='image'
                     handleChange={handleImgUpload}
                     value={imgUpload}
+                  />
+                  <Select
+                    label='Image Placement'
+                    options={imageDirectionArr}
+                    onChange={handleImageDirectionChange}
+                    value={imageDirectionValue}
                   />
                 </>
               )}
@@ -210,24 +335,49 @@ const CardContent = () => {
             </div>
           </div>
         </div>
-        <div className='bg-red-50 lg:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
-          {/* <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'> */}
+        <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
           {/*  */}
-          <div className='overflow-hidden min-w-80 min-h-52 bg-white rounded shadow-md'>
+          <div
+            className={`overflow-hidden min-w-80 ${
+              cardType.value === "empty" ? "min-h-52" : "h-fit"
+            } bg-white shadow-md ${borderRadiusValue.class}`}
+            style={{ width: maxWidthValue.value }}
+          >
             <div className='p-6'>
-              {cardType.label !== "Empty" && (
-                <>
-                  <h2 className='text-xl text-slate-800'>{title}</h2>
-                  <p className='text-slate-500 text-xs tracking-wider'>
-                    {subTitle}
-                  </p>
-                  <p className='text-slate-500 mt-4 text-sm'>{desc}</p>
-                </>
+              {cardType.label !== "Empty" ? (
+                <div
+                  className={`grid gap-6 ${
+                    cardType.value === "textwithimage" &&
+                    imageDirectionValue.class
+                  } `}
+                >
+                  {cardType.value === "textwithimage" && (
+                    <img
+                      src={imgUpload}
+                      alt='card image'
+                      className={`aspect-video w-full h-full object-cover ${borderRadiusValue.class} `}
+                    />
+                  )}
+                  {cardType.label !== "Empty" && (
+                    <div className='w-full'>
+                      <h2 className='text-xl text-slate-800 font-semibold'>
+                        {title}
+                      </h2>
+                      <p className='text-slate-500 text-xs tracking-wider mt-1'>
+                        {subTitle}
+                      </p>
+                      <p className='text-slate-500 mt-4 text-sm line-clamp-5'>
+                        {desc}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                ""
               )}
             </div>
           </div>
           {/*  */}
-          {/* </div> */}
         </div>
       </div>
     </section>

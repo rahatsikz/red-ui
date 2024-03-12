@@ -247,8 +247,8 @@ const ButtonContent = () => {
 
   return (
     <section>
-      <div className='lg:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
-        <div className='lg:col-span-8 '>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+        <div className='xl:col-span-8 '>
           <form className='w-11/12 mx-auto px-4 mt-8' onSubmit={handleSubmit}>
             <div className='grid lg:grid-cols-2 gap-8'>
               <Input
@@ -375,7 +375,7 @@ const ButtonContent = () => {
             </div>
           </div>
         </div>
-        <div className='bg-red-50 lg:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
+        <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
           <button
             className='bg-[radial-gradient(circle, #fff, #000)]'
             style={{

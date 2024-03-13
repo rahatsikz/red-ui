@@ -6,8 +6,6 @@ import CopyToClipboardButton from "@/Components/ui/CopyToClipboard";
 import ImageInput from "@/Components/ui/ImageInput";
 import Input from "@/Components/ui/Input";
 import Select from "@/Components/ui/Select";
-import { colorOptions } from "@/constant/ColorData";
-import { WidthOptions } from "@/constant/Width";
 import React, { useState } from "react";
 
 const CardContent = () => {
@@ -290,34 +288,6 @@ const CardContent = () => {
                   />
                 </>
               )}
-
-              {/* <Select
-                label='Label Color'
-                options={colorOptions}
-                onChange={handleLabelColorChange}
-                value={labelColor}
-              />
-
-              <Select
-                label='Label Size'
-                options={FontSizeOption}
-                onChange={handleFontSizeChange}
-                value={fontSize}
-              />
-
-              <Select
-                label='Toggle Size'
-                options={SizeOptions}
-                onChange={handleSizeChange}
-                value={size}
-              /> */}
-
-              {/* <Select
-                label='Toggle Color'
-                options={colorOptions}
-                onChange={handleToggleColorChange}
-                value={toggleColor}
-              /> */}
             </div>
             <div className='mt-8 flex justify-center'>
               <Button type='submit' className='px-24'>

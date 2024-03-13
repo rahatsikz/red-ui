@@ -5,7 +5,7 @@ export const ComponentsArr = [
     },
     {
       name: "Accordion",
-      path: "",
+      path: "/components/accordion",
     },
     {
       name: "Input",

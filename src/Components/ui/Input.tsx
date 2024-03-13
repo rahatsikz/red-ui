@@ -29,7 +29,7 @@ const Input = ({
         defaultValue={defaultValue}
         placeholder={placeholder}
         value={value}
-        className='peer relative h-10 lg:w-full w-full   rounded border border-slate-200 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-500 focus:outline-none '
+        className='peer relative h-10 lg:w-full w-full   rounded border border-slate-200 px-4 text-sm text-gray-700 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-500 focus:outline-none '
         onChange={(e) => handleChange(e.target.value)}
       />
       <label

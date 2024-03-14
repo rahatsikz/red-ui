@@ -19,7 +19,7 @@ const Navbar = () => {
     },
     {
       name: "FAQ",
-      path: "/",
+      path: "/faq",
     },
     {
       name: "Sign in",
@@ -33,7 +33,7 @@ const Navbar = () => {
     },
     {
       name: "FAQ",
-      path: "/",
+      path: "/faq",
     },
     {
       name: "Community",

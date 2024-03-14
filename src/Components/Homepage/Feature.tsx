@@ -28,7 +28,7 @@ const Feature = () => {
           elevate your development experience
         </p>
       </div>
-      <div className='grid gap-8 px-4 xl:px-0'>
+      <div className='grid gap-8 px-4 2xl:px-0'>
         {featureData.map((feature, index) => (
           <div
             key={index}

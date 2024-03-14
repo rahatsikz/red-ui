@@ -11,7 +11,7 @@ const List = () => {
         Numerous different component provides all round abilty to build your UI
         from scratch
       </p>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 px-4 lg:px-0'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 px-4 2xl:px-0'>
         {ComponentsArr.sort((a, b) => a.name.localeCompare(b.name)).map(
           (component) => (
             <div

@@ -261,7 +261,7 @@ const AccordionContent = () => {
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
-          <div className='bg-white h-80 w-full overflow-y-auto flex justify-center pt-12 mx-auto pl-6 pr-4'>
+          <div className='bg-white h-80 w-full overflow-y-auto flex justify-center py-6 mx-auto pl-6 pr-4'>
             {/*  */}
             <details className='p-4 group w-full' open={isOpen.value}>
               <summary

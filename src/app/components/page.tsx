@@ -10,7 +10,7 @@ const ComponentPage = () => {
         <p className='text-2xl text-center border-b-2 w-fit mx-auto px-8 pb-1 border-primary'>
           Components List
         </p>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 px-4 lg:px-0'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8 px-4 2xl:px-0'>
           {ComponentsArr.sort((a, b) => a.name.localeCompare(b.name)).map(
             (component) => (
               <Link

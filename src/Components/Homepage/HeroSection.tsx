@@ -15,7 +15,7 @@ const HeroSection = () => {
   return (
     <div className='bg-red-50'>
       <div className='flex justify-between  flex-col lg:flex-row container lg:mx-auto py-8'>
-        <div className='lg:mt-24 text-center lg:text-left px-4 xl:px-0'>
+        <div className='lg:mt-24 text-center lg:text-left px-4 2xl:px-0'>
           <h1 className='text-2xl font-semibold text-primary'>
             Unleash Your Coding Power
           </h1>

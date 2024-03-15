@@ -23,11 +23,11 @@ const TestPage = () => {
                 fill='none'
                 viewBox='0 0 24 24'
                 stroke='currentColor'
-                stroke-width='2'
+                strokeWidth='2'
               >
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                   d='M12 4v16m8-8H4'
                 />
               </svg>
@@ -49,9 +49,9 @@ const TestPage = () => {
                 className='w-4 h-4 group-open:rotate-180 transition-transform duration-300'
               >
                 <path
-                  fill-rule='evenodd'
+                  fillRule='evenodd'
                   d='M10 13.707l-6.646-6.647a1 1 0 00-1.414 1.414l7.354 7.353a1 1 0 001.414 0l7.354-7.353a1 1 0 00-1.414-1.414L10 13.707z'
-                  clip-rule='evenodd'
+                  clipRule='evenodd'
                 />
               </svg>
             </summary>

@@ -18,8 +18,8 @@ const Feature = () => {
     },
   ];
   return (
-    <div className='container mx-auto my-12'>
-      <div className='mb-8' data-aos='fade-up'>
+    <section className='container mx-auto my-12'>
+      <div className='mb-8'>
         <h1 className='text-3xl font-bold text-center text-primary'>
           Our Features
         </h1>
@@ -32,9 +32,6 @@ const Feature = () => {
         {featureData.map((feature, index) => (
           <div
             key={index}
-            data-aos={index % 2 !== 0 ? "fade-right" : "fade-left"}
-            data-aos-duration='2000'
-            data-aos-delay='300'
             className={`xl:px-12 xl:py-6 px-4 py-8  rounded-xl ${
               index % 2 !== 0 ? "bg-gradient-to-l " : " bg-gradient-to-r"
             }  from-red-100 to-red-50 `}
@@ -50,16 +47,16 @@ const Feature = () => {
                   index % 2 !== 0 ? "xl:text-right" : "xl:text-left"
                 } xl:w-1/2 `}
               >
-                <h1 className='text-2xl font-bold text-black'>
+                <h1 className='text-2xl font-bold text-[#1e293b]'>
                   {feature.title}
                 </h1>
-                <p className=''>{feature.description}</p>
+                <p className='text-secondary'>{feature.description}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

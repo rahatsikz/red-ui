@@ -8,21 +8,45 @@ import CheckboxContent from "./CheckboxContent";
 import ToggleContent from "./ToggleContent";
 import CardContent from "./CardContent";
 import AccordionContent from "./AccordionContent";
+import NotFoundPage from "@/app/not-found";
 
 const AllComponentPage = ({ params }: { params: { name: string } }) => {
-  return (
-    <>
-      {params.name === "button" && <ButtonContent />}
-      {params.name === "input" && <InputContent />}
-      {params.name === "textarea" && <TextareaContent />}
-      {params.name === "select" && <SelectContent />}
-      {params.name === "radio" && <RadioContent />}
-      {params.name === "checkbox" && <CheckboxContent />}
-      {params.name === "toggle" && <ToggleContent />}
-      {params.name === "card" && <CardContent />}
-      {params.name === "accordion" && <AccordionContent />}
-    </>
-  );
+  let component;
+
+  switch (params.name) {
+    case "button":
+      component = <ButtonContent />;
+      break;
+    case "input":
+      component = <InputContent />;
+      break;
+    case "textarea":
+      component = <TextareaContent />;
+      break;
+    case "select":
+      component = <SelectContent />;
+      break;
+    case "radio":
+      component = <RadioContent />;
+      break;
+    case "checkbox":
+      component = <CheckboxContent />;
+      break;
+    case "toggle":
+      component = <ToggleContent />;
+      break;
+    case "card":
+      component = <CardContent />;
+      break;
+    case "accordion":
+      component = <AccordionContent />;
+      break;
+    default:
+      component = <NotFoundPage />;
+      break;
+  }
+
+  return <>{component}</>;
 };
 
 export default AllComponentPage;

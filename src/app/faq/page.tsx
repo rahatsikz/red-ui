@@ -26,9 +26,15 @@ const FAQPage = () => {
 
   return (
     <section className='container mx-auto my-8 px-4 xl:px-0'>
-      <p className='text-2xl text-center border-b-2 w-fit mx-auto px-8 pb-1 border-primary'>
+      {/* <p className='text-2xl text-center border-b-2 w-fit mx-auto px-8 pb-1 border-primary'>
         Frequently Asked Questions
-      </p>
+      </p> */}
+      <h1 className='text-2xl font-medium mx-auto text-center px-8 leading-tight mb-2 pb-2 relative w-fit'>
+        <span className='bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-600 tracking-wider'>
+          Frequently Asked Questions
+        </span>
+        <span className='absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-orange-600 to-primary rounded-full'></span>
+      </h1>
       <div className='xl:w-9/12 mx-auto divide-y'>
         {FAQdata.map((data, index) => (
           <details
@@ -44,11 +50,11 @@ const FAQPage = () => {
                 fill='none'
                 viewBox='0 0 24 24'
                 stroke='currentColor'
-                stroke-width='2'
+                strokeWidth='2'
               >
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                   d='M12 4v16m8-8H4'
                 />
               </svg>

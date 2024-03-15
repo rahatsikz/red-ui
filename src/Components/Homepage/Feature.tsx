@@ -47,10 +47,10 @@ const Feature = () => {
                   index % 2 !== 0 ? "xl:text-right" : "xl:text-left"
                 } xl:w-1/2 `}
               >
-                <h1 className='text-2xl font-bold text-black'>
+                <h1 className='text-2xl font-bold text-[#1e293b]'>
                   {feature.title}
                 </h1>
-                <p className=''>{feature.description}</p>
+                <p className='text-secondary'>{feature.description}</p>
               </div>
             </div>
           </div>

@@ -224,7 +224,11 @@ const ButtonContent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    let data = `${width.class} ${fontSize.class} ${letterSpacing.class} ${radius.class} px-[${xPadding}px] py-[${yPadding}px]`;
+    let data = `${width.class} ${fontSize.class} ${letterSpacing.class} ${
+      radius.class
+    } ${xPadding % 4 === 0 ? `px-${xPadding / 4}` : `px-[${xPadding}px]`} ${
+      yPadding % 4 === 0 ? `py-${yPadding / 4}` : `py-[${yPadding}px]`
+    }`;
 
     if (selectedOption.value === "solid") {
       data += ` ${color.bg} text-white border-2 border-transparent hover:${hoverColor.bg} transition-colors duration-300`;
@@ -370,9 +374,7 @@ const ButtonContent = () => {
               classNames.length > 0 ? "" : "hidden"
             }`}
           >
-            <div className='bg-red-50 pl-4'>
-              <CopyToClipboardButton text={classNames} />
-            </div>
+            <CopyToClipboardButton text={classNames} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>

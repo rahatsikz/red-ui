@@ -201,30 +201,31 @@ const InputContent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(`<div className= "flex ${
+    setClassNames(`
+    <div className= "flex ${
       label.value === "top" || label.value === "bottom" ? label.class : ""
     } gap-1 relative">
-    <input
-    type="${inputType.value}"
-    name="${labelText}"
-    id="${labelText}"
-    placeholder="${placeholderText}"
-    className="${width.class} ${borderType.class} ${borderColor.border} focus:${
-      focusBorderColor.border
-    } px-[${xPadding}px] py-[${yPadding}px] ${
+      <input
+      type="${inputType.value}"
+      name="${labelText}"
+      id="${labelText}"
+      placeholder="${placeholderText}"
+      className="${width.class} ${borderType.class} ${
+      borderColor.border
+    } focus:${focusBorderColor.border} ${
+      xPadding % 4 === 0 ? `px-${xPadding / 4}` : `px-[${xPadding}px]`
+    } ${yPadding % 4 === 0 ? `py-${yPadding / 4}` : `py-[${yPadding}px]`} ${
       radius.class
     } bg-transparent focus:outline-none placeholder:text-sm"
-    required={${required.label === "Yes" ? true : false}}
-  />
-  <label
-  htmlFor="${labelText}"
-  className="${labelColor.text} ${fontSize.class} ${
+      required={${required.label === "Yes" ? true : false}}/>
+      <label
+      htmlFor="${labelText}"
+      className="${labelColor.text} ${fontSize.class} ${
       label.value === "none" ? label.class : ""
-    } block ${label.value === "absolute" ? label.class : "pl-2"}"
-  >
-    ${labelText}
-  </label>
-  </div>`);
+    } block ${label.value === "absolute" ? label.class : "pl-2"}">
+        ${labelText}
+      </label>
+    </div>`);
   };
 
   return (
@@ -342,9 +343,7 @@ const InputContent = () => {
               classNames.length > 0 ? "" : "hidden"
             }`}
           >
-            <div className='bg-red-50 pl-4'>
-              <CopyToClipboardButton text={classNames} />
-            </div>
+            <CopyToClipboardButton text={classNames} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>

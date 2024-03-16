@@ -384,9 +384,7 @@ const TextareaContent = () => {
               classNames.length > 0 ? "" : "hidden"
             }`}
           >
-            <div className='bg-red-50 pl-4'>
-              <CopyToClipboardButton text={classNames} />
-            </div>
+            <CopyToClipboardButton text={classNames} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>

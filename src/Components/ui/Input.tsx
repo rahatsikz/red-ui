@@ -7,7 +7,7 @@ type InputProps = {
   label: string;
   type: string;
   placeholder?: string;
-  value?: string;
+  value?: string | number;
   defaultValue?: string;
 };
 
@@ -26,6 +26,8 @@ const Input = ({
         id={name}
         type={type}
         name={name}
+        min={type === "number" ? 0 : undefined}
+        max={type === "number" ? 100 : undefined}
         // defaultValue={defaultValue}
         placeholder={placeholder}
         value={value}

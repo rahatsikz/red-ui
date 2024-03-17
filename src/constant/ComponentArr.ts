@@ -36,4 +36,8 @@ export const ComponentsArr = [
         name: "Toggle",
         path: "/components/toggle",
     },
+    {
+        name: "Progress Bar",
+        path: "/components/progress",
+    },
   ];

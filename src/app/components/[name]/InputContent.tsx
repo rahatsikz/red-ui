@@ -343,7 +343,7 @@ const InputContent = () => {
               classNames.length > 0 ? "" : "hidden"
             }`}
           >
-            <CopyToClipboardButton text={classNames} />
+            <CopyToClipboardButton text={classNames} height={"200"} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>

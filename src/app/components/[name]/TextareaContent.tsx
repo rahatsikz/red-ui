@@ -384,7 +384,7 @@ const TextareaContent = () => {
               classNames.length > 0 ? "" : "hidden"
             }`}
           >
-            <CopyToClipboardButton text={classNames} />
+            <CopyToClipboardButton text={classNames} height={130} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
@@ -399,8 +399,9 @@ const TextareaContent = () => {
                 name={labelText}
                 id={labelText}
                 placeholder={placeholderText}
-                className={`${borderType.class} ${width.class} ${resize.class} border-black bg-transparent focus:outline-none placeholder:text-sm`}
+                className={`${borderType.class} ${resize.class} border-black bg-transparent focus:outline-none placeholder:text-sm`}
                 style={{
+                  width: `${width.value}`,
                   padding: `${yPadding}px ${xPadding}px`,
                   borderRadius: `${radius.value}`,
                   borderColor: isFocused

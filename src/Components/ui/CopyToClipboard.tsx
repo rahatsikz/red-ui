@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDarkReasonable } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-const CopyToClipboardButton = ({ text }: any) => {
+const CopyToClipboardButton = ({ text, height = 300 }: any) => {
   // const copyToClipboard = () => {
   //   navigator.clipboard
   //     .writeText(text)
@@ -58,7 +58,7 @@ const CopyToClipboardButton = ({ text }: any) => {
             padding: "16px 20px",
             overflowX: "hidden",
             overflowY: "auto",
-            maxHeight: "130px",
+            maxHeight: height + "px",
           }}
           wrapLongLines={true}
         >

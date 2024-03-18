@@ -40,4 +40,8 @@ export const ComponentsArr = [
         name: "Progress Bar",
         path: "/components/progress",
     },
+    {
+      name: "Loader",
+      path: "/components/loader",
+  },
   ];

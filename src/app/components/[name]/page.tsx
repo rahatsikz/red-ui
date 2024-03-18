@@ -10,6 +10,7 @@ import CardContent from "./CardContent";
 import AccordionContent from "./AccordionContent";
 import NotFoundPage from "@/app/not-found";
 import ProgressContent from "./ProgressContent";
+import LoaderContent from "./LoaderContent";
 
 const AllComponentPage = ({ params }: { params: { name: string } }) => {
   let component;
@@ -44,6 +45,9 @@ const AllComponentPage = ({ params }: { params: { name: string } }) => {
       break;
     case "progress":
       component = <ProgressContent />;
+      break;
+    case "loader":
+      component = <LoaderContent />;
       break;
     default:
       component = <NotFoundPage />;

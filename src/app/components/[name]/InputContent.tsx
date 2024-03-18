@@ -214,7 +214,7 @@ const InputContent = () => {
       yPadding % 4 === 0 ? `py-${yPadding / 4}` : `py-[${yPadding}px]`
     } ${radius.class} bg-transparent focus:outline-none placeholder:text-sm"
   required={${required.label === "Yes" ? true : false}}/>
-<label htmlFor="${labelText}"
+  <label htmlFor="${labelText}"
   className="${labelColor.text} ${fontSize.class} ${
       label.value === "none" ? label.class : ""
     } block ${label.value === "absolute" ? label.class : "pl-2"}">

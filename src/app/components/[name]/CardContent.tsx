@@ -164,56 +164,51 @@ const CardContent = () => {
 
     if (cardType.value === "textwithimage") {
       setClassNames(`
-      <div className="overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
-        <div className="p-6">
-          <div className="grid gap-6 ${imageDirectionValue.class}">
-            <img
-                src="${imgUpload}"
-                alt="card image"
-                className="aspect-video w-full h-full object-cover ${borderRadiusValue.class}"
-            />
-            
-            <div className="w-full">
-              <h2 className="text-xl text-slate-800 font-semibold">
-                ${title}
-              </h2>
-              <p className="text-slate-500 text-xs tracking-wider mt-1">
-                ${subTitle}
-              </p>
-              <p className="text-slate-500 mt-4 text-sm line-clamp-5">
-                ${desc}
-              </p>
-            </div>
-          </div>
-        
-        </div>
+<div className="overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
+  <div className="p-6">
+    <div className="grid gap-6 ${imageDirectionValue.class}">
+      <img src="${imgUpload}" alt="card image" 
+      className="aspect-video w-full h-full object-cover ${borderRadiusValue.class}"/>
+      <div className="w-full">
+        <h2 className="text-xl text-slate-800 font-semibold">
+          ${title}
+        </h2>
+        <p className="text-slate-500 text-xs tracking-wider mt-1">
+          ${subTitle}
+        </p>
+        <p className="text-slate-500 mt-4 text-sm line-clamp-5">
+          ${desc}
+        </p>
       </div>
+    </div>
+  </div>
+</div>
       `);
     } else if (cardType.value === "empty") {
       setClassNames(`
-      <div className="overflow-hidden min-w-80 min-h-52 bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
-        <div className="p-6"></div>
-      </div>
+<div className="overflow-hidden min-w-80 min-h-52 bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
+  <div className="p-6"></div>
+</div>
       `);
     } else if (cardType.value === "textonly") {
       setClassNames(`
-      <div className="overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
-          <div className="p-6">
-            <div className="grid gap-6">
-              <div className="w-full">
-                <h2 className="text-xl text-slate-800 font-semibold">
-                  ${title}
-                </h2>
-                <p className="text-slate-500 text-xs tracking-wider mt-1">
-                  ${subTitle}
-                </p>
-                <p className="text-slate-500 mt-4 text-sm line-clamp-5">
-                  ${desc}
-                </p>
-              </div>
-            </div>
-          </div>
+<div className="overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
+    <div className="p-6">
+      <div className="grid gap-6">
+        <div className="w-full">
+          <h2 className="text-xl text-slate-800 font-semibold">
+            ${title}
+          </h2>
+          <p className="text-slate-500 text-xs tracking-wider mt-1">
+            ${subTitle}
+          </p>
+          <p className="text-slate-500 mt-4 text-sm line-clamp-5">
+            ${desc}
+          </p>
+        </div>
       </div>
+    </div>
+</div>
       `);
     }
   };

@@ -202,30 +202,25 @@ const InputContent = () => {
     e.preventDefault();
 
     setClassNames(`
-    <div className= "flex ${
+<div className= "flex ${
       label.value === "top" || label.value === "bottom" ? label.class : ""
     } gap-1 relative">
-      <input
-      type="${inputType.value}"
-      name="${labelText}"
-      id="${labelText}"
-      placeholder="${placeholderText}"
-      className="${width.class} ${borderType.class} ${
-      borderColor.border
-    } focus:${focusBorderColor.border} ${
-      xPadding % 4 === 0 ? `px-${xPadding / 4}` : `px-[${xPadding}px]`
-    } ${yPadding % 4 === 0 ? `py-${yPadding / 4}` : `py-[${yPadding}px]`} ${
-      radius.class
-    } bg-transparent focus:outline-none placeholder:text-sm"
-      required={${required.label === "Yes" ? true : false}}/>
-      <label
-      htmlFor="${labelText}"
-      className="${labelColor.text} ${fontSize.class} ${
+  <input type="${
+    inputType.value
+  }" name="${labelText}" id="${labelText}" placeholder="${placeholderText}"
+  className="${width.class} ${borderType.class} ${borderColor.border} focus:${
+      focusBorderColor.border
+    } ${xPadding % 4 === 0 ? `px-${xPadding / 4}` : `px-[${xPadding}px]`} ${
+      yPadding % 4 === 0 ? `py-${yPadding / 4}` : `py-[${yPadding}px]`
+    } ${radius.class} bg-transparent focus:outline-none placeholder:text-sm"
+  required={${required.label === "Yes" ? true : false}}/>
+<label htmlFor="${labelText}"
+  className="${labelColor.text} ${fontSize.class} ${
       label.value === "none" ? label.class : ""
     } block ${label.value === "absolute" ? label.class : "pl-2"}">
-        ${labelText}
-      </label>
-    </div>`);
+    ${labelText}
+  </label>
+</div>`);
   };
 
   return (

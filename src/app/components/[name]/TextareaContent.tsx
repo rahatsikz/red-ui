@@ -233,32 +233,26 @@ const TextareaContent = () => {
     e.preventDefault();
 
     setClassNames(`
-    <div className= "flex ${
+<div className= "flex ${
       label.value === "top" || label.value === "bottom" ? label.class : ""
     } gap-1 relative">
-      <textarea
-      name="${labelText}"
-      id="${labelText}"
-      placeholder="${placeholderText}"
-      className="${width.class} ${borderType.class} ${
-      borderColor.border
-    } focus:${focusBorderColor.border} ${
-      radius.class
-    } px-[${xPadding}px] py-[${yPadding}px] ${
+  <textarea name="${labelText}" id="${labelText}"
+  placeholder="${placeholderText}"
+  className="${width.class} ${borderType.class} ${borderColor.border} focus:${
+      focusBorderColor.border
+    } ${radius.class} px-[${xPadding}px] py-[${yPadding}px] ${
       resize.class
     } bg-transparent focus:outline-none placeholder:text-sm"
-      rows={${rows}}
-      required={${required.value}}
-      ></textarea>
-      <label
-      htmlFor="${labelText}"
-      className="${labelColor.text} ${fontSize.class} ${
+  rows={${rows}}
+  required={${required.value}}
+  ></textarea>
+  <label htmlFor="${labelText}"
+  className="${labelColor.text} ${fontSize.class} ${
       label.value === "none" ? label.class : ""
-    } block ${label.value === "absolute" ? label.class : "pl-2"}"
-      >
-      ${labelText}
-      </label>
-    </div>`);
+    } block ${label.value === "absolute" ? label.class : "pl-2"}" >
+  ${labelText}
+  </label>
+</div>`);
   };
   return (
     <section>

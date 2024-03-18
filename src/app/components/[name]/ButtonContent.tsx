@@ -246,7 +246,9 @@ const ButtonContent = () => {
       data += ` bg-[radial-gradient(circle,${startColor.colorCode}_0%,${endColor.colorCode}_100%)] text-white`;
     }
 
-    setClassNames(`<button className="${data.trim()}">${buttonText}</button>`);
+    setClassNames(`
+<button className="${data.trim()}">${buttonText}</button>
+    `);
   };
 
   return (

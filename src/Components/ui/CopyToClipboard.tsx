@@ -55,7 +55,7 @@ const CopyToClipboardButton = ({ text, height = 300 }: any) => {
           language='javascript'
           style={atomOneDarkReasonable}
           customStyle={{
-            padding: "16px 20px",
+            padding: "0px 20px 16px",
             overflowX: "hidden",
             overflowY: "auto",
             maxHeight: height + "px",

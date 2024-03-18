@@ -68,53 +68,53 @@ const ProgressContent = () => {
 
     if (progressType.value === "linear") {
       setClassNames(`
-        <div className='space-y-1'>
-            <div className='flex items-center justify-between font-medium'>
-              <span>${labelText}</span>
-              <span>${percentage}%</span>
-            </div>
-            <div
-              className='w-full h-4 rounded-full ${bgColor.bg} overflow-hidden'>
-                <div
-                className='h-full rounded-full w-[${percentage}%] ${progressColor.bg}'>
-                </div>
-            </div>
+<div className='space-y-1'>
+    <div className='flex items-center justify-between font-medium'>
+      <span>${labelText}</span>
+      <span>${percentage}%</span>
+    </div>
+    <div
+      className='w-full h-4 rounded-full ${bgColor.bg} overflow-hidden'>
+        <div
+        className='h-full rounded-full w-[${percentage}%] ${progressColor.bg}'>
         </div>
+    </div>
+</div>
         `);
     } else {
       setClassNames(`
-        <div className='flex items-center justify-center'>
-            <svg className='transform -rotate-90 w-72 h-72'>
-                <circle
-                  cx='50%'
-                  cy='50%'
-                  r='120'
-                  stroke='currentColor'
-                  strokeWidth='18'
-                  fill='transparent'
-                  className='${bgColor.text}'
-                  strokeLinecap='round'
-                />
-                <circle
-                  cx='50%'
-                  cy='50%'
-                  r='120'
-                  stroke='currentColor'
-                  strokeWidth='20'
-                  fill='transparent'
-                  strokeDasharray={2 * Math.PI * 120}
-                  strokeDashoffset={
-                    2 * Math.PI * 120 - (${percentage} / 100) * 2 * Math.PI * 120
-                  }
-                  className='${progressColor.text}'
-                  strokeLinecap='round'
-                  />
-            </svg>
-            <div className='absolute flex flex-col items-center'>
-              <span className='text-3xl'>${percentage}%</span>
-              <span className='text-lg'>${labelText} </span>
-            </div>
-        </div>
+<div className='flex items-center justify-center'>
+  <svg className='transform -rotate-90 w-72 h-72'>
+    <circle
+      cx='50%'
+      cy='50%'
+      r='120'
+      stroke='currentColor'
+      strokeWidth='18'
+      fill='transparent'
+      className='${bgColor.text}'
+      strokeLinecap='round'
+    />
+    <circle
+      cx='50%'
+      cy='50%'
+      r='120'
+      stroke='currentColor'
+      strokeWidth='20'
+      fill='transparent'
+      strokeDasharray={2 * Math.PI * 120}
+      strokeDashoffset={
+        2 * Math.PI * 120 - (${percentage} / 100) * 2 * Math.PI * 120
+      }
+      className='${progressColor.text}'
+      strokeLinecap='round'
+      />
+  </svg>
+  <div className='absolute flex flex-col items-center'>
+    <span className='text-3xl'>${percentage}%</span>
+    <span className='text-lg'>${labelText} </span>
+  </div>
+</div>
         `);
     }
   };

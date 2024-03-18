@@ -154,43 +154,35 @@ const SelectContent = () => {
     e.preventDefault();
 
     setClassNames(`
-    <div className='relative ${width.class}'>
-        <label
-        htmlFor="${labelText.toLowerCase()}"
-        className="pointer-events-none ${label.class} ${fontSize.class} ${
+<div className='relative ${width.class}'>
+  <label
+  htmlFor="${labelText.toLowerCase()}"
+  className="pointer-events-none ${label.class} ${fontSize.class} ${
       labelColor.text
-    } block" 
-        >
-        ${labelText}
-        </label>
-        <svg
-        xmlns='http://www.w3.org/2000/svg'
-        className='pointer-events-none absolute top-3 right-2 h-5 w-5 fill-slate-400 '
-        viewBox='0 0 20 20'
-        fill='currentColor'
-        >
-        <path
-            fillRule='evenodd'
-            d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-            clipRule='evenodd'
-        />
-        </svg>
-
-        <select
-        id="${labelText.toLowerCase()}"
-        name="${labelText.toLowerCase()}"
-        className="h-11 w-full appearance-none ${borderType.class} ${
+    } block">${labelText}</label>
+  <svg
+  xmlns='http://www.w3.org/2000/svg'
+  className='pointer-events-none absolute top-3 right-2 h-5 w-5 fill-slate-400'
+  viewBox='0 0 20 20'
+  fill='currentColor'>
+  <path
+      fillRule='evenodd'
+      d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+      clipRule='evenodd'/>
+    </svg>
+  <select
+  id="${labelText.toLowerCase()}"
+  name="${labelText.toLowerCase()}"
+  className="h-11 w-full appearance-none ${borderType.class} ${
       borderColor.border
     } focus:${focusBorderColor.border} ${
       radius.class
-    } bg-white px-4 text-sm text-slate-500 outline-none"
-        
-        >
-            <option value='1'>Option 1</option>
-            <option value='2'>Option 2</option>
-            <option value='3'>Option 3</option>
-        </select>
-    </div>
+    } bg-white px-4 text-sm text-slate-500 outline-none" >
+    <option value='1'>Option 1</option>
+    <option value='2'>Option 2</option>
+    <option value='3'>Option 3</option>
+  </select>
+</div>
     
     `);
   };

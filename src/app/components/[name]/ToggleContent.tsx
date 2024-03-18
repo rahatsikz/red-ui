@@ -108,20 +108,13 @@ const ToggleContent = () => {
     e.preventDefault();
 
     setClassNames(`
-    <div className='relative flex gap-4 items-center'>
-      <label className="${fontSize.class} ${labelColor.text}" htmlFor='toggle'>
-      ${label}
-      </label>
-      <input
-      type='checkbox'
-      id='toggle'
-      className='absolute w-full h-full peer appearance-none rounded-md cursor-pointer'
-      />
-      <span
-      className="flex items-center rounded-full duration-300 ease-in-out ${size.class} bg-gray-300 after:bg-white after:rounded-full after:shadow-md after:duration-300
-      peer-checked:${toggleColor.bg} peer-checked:after:translate-x-full"
-      ></span>
-  </div>  
+<div className='relative flex gap-4 items-center'>
+  <label className="${fontSize.class} ${labelColor.text}" htmlFor='toggle'>
+  ${label}
+  </label>
+  <input type='checkbox' id='toggle' className='absolute w-full h-full peer appearance-none rounded-md cursor-pointer'/>
+  <span className="flex items-center rounded-full duration-300 ease-in-out ${size.class} bg-gray-300 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:${toggleColor.bg} peer-checked:after:translate-x-full"></span>
+</div>  
     
     `);
   };

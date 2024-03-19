@@ -11,6 +11,7 @@ import AccordionContent from "./AccordionContent";
 import NotFoundPage from "@/app/not-found";
 import ProgressContent from "./ProgressContent";
 import LoaderContent from "./LoaderContent";
+import TooltipContent from "./TooltipContent";
 
 const AllComponentPage = ({ params }: { params: { name: string } }) => {
   let component;
@@ -48,6 +49,9 @@ const AllComponentPage = ({ params }: { params: { name: string } }) => {
       break;
     case "loader":
       component = <LoaderContent />;
+      break;
+    case "tooltip":
+      component = <TooltipContent />;
       break;
     default:
       component = <NotFoundPage />;

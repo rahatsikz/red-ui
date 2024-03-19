@@ -43,5 +43,9 @@ export const ComponentsArr = [
     {
       name: "Loader",
       path: "/components/loader",
-  },
+    },
+    {
+      name: "Tooltip",
+      path: "/components/tooltip",
+    },
   ];

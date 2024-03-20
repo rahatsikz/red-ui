@@ -26,7 +26,7 @@ const CopyToClipboardButton = ({ text, height = 300 }: any) => {
   const [copied, setCopied] = useState(false);
 
   return (
-    <div className='!text-left lg:flex grid items-end lg:h-fit h-64 overflow-y-auto gap-12 py-8 px-8 lg:px-0 lg:py-0 mb-6'>
+    <div className='!text-left lg:flex grid items-end lg:h-fit h-96 overflow-y-auto gap-12 py-8 px-8 lg:px-0 lg:py-0 mb-6'>
       {/* <div className='lg:ml-12 py-8'>{text}</div> */}
 
       <div className='w-full  bg-[#31404d] rounded-md overflow-hidden'>

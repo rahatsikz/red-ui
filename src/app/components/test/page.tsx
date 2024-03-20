@@ -15,96 +15,48 @@ const TestPage = () => {
 
         <div className='bg-white min-h-80 w-full overflow-y-auto  py-6 mx-auto pl-6 pr-4 flex flex-col items-center justify-center gap-6'>
           {/*  */}
-          <div className='relative group '>
-            <button className='relative overflow-hidden cursor-pointer group hover:overflow-visible focus-visible:outline-none'>
-              Top
-            </button>
-            <span className='absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 z-10 min-w-40 w-fit p-2 text-xs text-white bg-slate-700 rounded opacity-0 transition-opacity duration-200 group-hover:opacity-100'>
-              <div className='relative'>
-                <div className='w-3 h-3 bg-slate-700 absolute top-full left-1/2 transform -translate-x-1/2 translate-y-0.5 -rotate-45'></div>
-                <div className='py-1 px-2 text-center'>
-                  Thanks for hovering! Im a tooltip
-                </div>
-              </div>
-            </span>
-          </div>
-          {/*  */}
+
           <div className='relative group'>
-            <button
-              className='relative overflow-hidden cursor-pointer group hover:overflow-visible focus-visible:outline-none'
-              aria-describedby='tooltip-left'
-            >
-              Left
+            <button className='relative overflow-hidden hover:overflow-visible'>
+              Hover me
             </button>
-            <span
-              className='absolute top-1/2 right-full transform -translate-x-3 -translate-y-1/2 z-10 w-40 p-2 text-xs text-white bg-slate-700 rounded opacity-0 transition-opacity duration-200 group-hover:opacity-100'
-              aria-hidden='true'
-            >
+            <span className='absolute invisible transform bottom-full left-1/2 -translate-x-1/2 -translate-y-2 z-10 min-w-48 w-fit p-2 text-sm text-white bg-blue-900 rounded opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100'>
               <div className='relative'>
-                <div className='w-3 h-3 bg-slate-700 absolute top-1/2 left-full transform -translate-y-1/2 translate-x-0.5 rotate-45'></div>
+                <div className='w-3 h-3 bg-blue-900 absolute transform top-full left-1/2 -translate-x-1/2 translate-y-0.5 -rotate-45'></div>
                 <div className='py-1 px-2 text-center'>
-                  Thanks for hovering! Im a tooltip
-                </div>
-              </div>
-            </span>
-          </div>
-          <div className='relative group'>
-            <button
-              className='relative overflow-hidden cursor-pointer group hover:overflow-visible focus-visible:outline-none'
-              aria-describedby='tooltip-right'
-            >
-              Right
-            </button>
-            <span
-              className='absolute top-1/2 left-full transform translate-x-3 -translate-y-1/2 z-10 w-40 p-2 text-xs text-white bg-slate-700 rounded opacity-0 transition-opacity duration-200 group-hover:opacity-100'
-              aria-hidden='true'
-            >
-              <div className='relative'>
-                <div className='w-3 h-3 bg-slate-700 absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-0.5 rotate-45'></div>
-                <div className='py-1 px-2 text-center'>
-                  Thanks for hovering! Im a tooltip
+                  Hey... Thanks for hovering
                 </div>
               </div>
             </span>
           </div>
 
-          {/*  */}
-          {/* <div className='relative group'>
-            <button
-              className='relative overflow-hidden cursor-pointer group hover:overflow-visible focus-visible:outline-none'
-              aria-describedby='tooltip-top'
-            >
-              Top
+          <div className='relative group'>
+            <button className='relative overflow-hidden hover:overflow-visible'>
+              Hover me
             </button>
-            <span
-              className='absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 z-10 min-w-40 w-fit p-2 text-xs text-white bg-slate-700 rounded opacity-0 transition-opacity duration-200 group-hover:opacity-100'
-              aria-hidden='true'
-            >
-              <div className='w-4 h-4 bg-slate-700 absolute top-full left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45'></div>
-              Thanks for hovering! Im a tooltip
-            </span>
-          </div> */}
-          {/*  */}
-          <div className='relative group '>
-            <button
-              className='relative overflow-hidden cursor-pointer group hover:overflow-visible focus-visible:outline-none'
-              aria-describedby='tooltip-bottom'
-            >
-              Bottom
-            </button>
-            <span
-              className='absolute top-full left-1/2 transform -translate-x-1/2 translate-y-2 z-10 min-w-40 w-fit p-2 text-xs text-white bg-slate-700 rounded opacity-0 transition-opacity duration-200 group-hover:opacity-100'
-              aria-hidden='true'
-            >
+            <span className='absolute invisible transform top-1/2 left-full translate-x-3 -translate-y-1/2 z-10 min-w-48 w-fit p-2 text-sm text-white bg-blue-900 rounded opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100'>
               <div className='relative'>
-                <div className='w-3 h-3 bg-slate-700 absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-0.5 -rotate-45'></div>
+                <div className='w-3 h-3 bg-blue-900 absolute transform top-1/2 right-full -translate-y-1/2 -translate-x-0.5 rotate-45'></div>
                 <div className='py-1 px-2 text-center'>
-                  Thanks for hovering! Im a tooltip
+                  Hey... Thanks for hovering
                 </div>
               </div>
             </span>
           </div>
-          {/*  */}
+
+          <div className='relative group'>
+            <button className='relative overflow-hidden hover:overflow-visible'>
+              Hover me
+            </button>
+            <span className='absolute invisible transform top-full left-1/2 -translate-x-1/2 translate-y-2 z-10 min-w-48 w-fit p-2 text-sm text-white bg-indigo-500 rounded opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100'>
+              <div className='relative'>
+                <div className='w-3 h-3 bg-indigo-500 absolute transform bottom-full left-1/2 -translate-x-1/2 -translate-y-0.5 -rotate-45'></div>
+                <div className='py-1 px-2 text-center'>
+                  Hey... Thanks for hovering
+                </div>
+              </div>
+            </span>
+          </div>
         </div>
 
         {/*  */}

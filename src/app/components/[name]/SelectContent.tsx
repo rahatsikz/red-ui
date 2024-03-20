@@ -8,16 +8,12 @@ import { BorderOptions } from "@/constant/Border";
 import { BorderRadiusOptions } from "@/constant/BorderRadius";
 import { colorOptions } from "@/constant/ColorData";
 import { WidthOptions } from "@/constant/Width";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const SelectContent = () => {
   const [classNames, setClassNames] = useState<any>("");
 
-  const [radius, setRadius] = useState({
-    label: "None",
-    value: "0",
-    class: "rounded-none",
-  });
+  const [radius, setRadius] = useState(BorderRadiusOptions[1]);
 
   const handleRadiusChange = (option: any) => {
     setRadius(option);
@@ -51,7 +47,7 @@ const SelectContent = () => {
     setFontSize(option);
   };
 
-  const [labelText, setLabelText] = useState("Select Option");
+  const [labelText, setLabelText] = useState("Select Food");
 
   const handleLabelTextChange = (value: any) => {
     setLabelText(value);
@@ -72,13 +68,9 @@ const SelectContent = () => {
     {
       label: "Label at Top",
       value: "top",
-      class: "absolute -top-7 pl-2",
+      class: "absolute -top-6",
     },
-    {
-      label: "Label at Bottom",
-      value: "bottom",
-      class: "absolute top-12 pl-2",
-    },
+
     {
       label: "Absolute",
       value: "absolute",
@@ -114,30 +106,29 @@ const SelectContent = () => {
   };
 
   const [borderColor, setBorderColor] = useState({
-    value: "red-400",
-    colorCode: "#f87171",
-    label: "red-400",
-    bg: "bg-red-400",
-    text: "text-red-400",
-    border: "border-red-400",
+    value: "slate-200",
+    colorCode: "#e2e8f0",
+    label: "Slate 200",
+    bg: "bg-slate-200",
+    text: "text-slate-200",
+    border: "border-slate-200",
   });
 
   const handleBorderColorChange = (option: any) => {
     setBorderColor(option);
   };
-  const [isFocused, setIsFocused] = useState(false);
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
+  const [onHoverOptionsColor, setOnHoverOptionsColor] = useState({
+    value: "slate-50",
+    colorCode: "#f8fafc",
+    label: "Slate 50",
+    bg: "bg-slate-50",
+    text: "text-slate-50",
+    border: "border-slate-50",
+  });
 
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-  const [focusBorderColor, setFocusBorderColor] = useState(borderColor);
-
-  const handleFocusBorderColorChange = (option: any) => {
-    setFocusBorderColor(option);
+  const handleOnHoverOptionsColorChange = (option: any) => {
+    setOnHoverOptionsColor(option);
   };
 
   const [width, setWidth] = useState({
@@ -150,38 +141,395 @@ const SelectContent = () => {
     setWidth(option);
   };
 
+  const searchableOptions = [
+    {
+      label: "Yes",
+      value: true,
+    },
+    {
+      label: "No",
+      value: false,
+    },
+  ];
+
+  const [isSearchable, setIsSearchable] = useState(searchableOptions[0]);
+
+  const handleIsSearchableChange = (option: any) => {
+    setIsSearchable(option);
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedOption, setSelectedOption] = useState<any>("");
+  const [isArrowRotated, setIsArrowRotated] = useState(false);
+  const inputRef = useRef<any>(null);
+  const selectRef = useRef<any>(null);
+  const handleSelect = (option: any) => {
+    console.log("Selected option:", option);
+    setSelectedOption(option);
+    setIsOpen(false);
+    setIsArrowRotated(false);
+  };
+
+  const handleOpen = (e: any) => {
+    e.preventDefault();
+    setIsOpen(!isOpen);
+    setIsArrowRotated(!isArrowRotated);
+  };
+  useEffect(() => {
+    // Focus on the input field when the dropdown is opened
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+        setIsArrowRotated(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const options = [
+    {
+      value: "pizza",
+      label: "Pizza",
+    },
+    {
+      value: "burger",
+      label: "Burger",
+    },
+    {
+      value: "pasta",
+      label: "Pasta",
+    },
+    {
+      value: "fries",
+      label: "Fries",
+    },
+  ];
+
+  const filteredOptions = options.filter((option: any) =>
+    option.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(`
-<div className='relative ${width.class}'>
-  <label htmlFor="${labelText.toLowerCase()}" className="pointer-events-none ${
-      label.class
-    } ${fontSize.class} ${labelColor.text} block">${labelText}</label>
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    className='pointer-events-none absolute top-3 right-2 h-5 w-5 fill-slate-400'
-    viewBox='0 0 20 20'
-    fill='currentColor'>
-  <path
-    fillRule='evenodd'
-    d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-    clipRule='evenodd'/>
-  </svg>
-  <select
-  id="${labelText.toLowerCase()}"
-  name="${labelText.toLowerCase()}"
-  className="h-11 w-full appearance-none ${borderType.class} ${
-      borderColor.border
-    } focus:${focusBorderColor.border} ${
-      radius.class
-    } bg-white px-4 text-sm text-slate-500 outline-none" >
-    <option value='1'>Option 1</option>
-    <option value='2'>Option 2</option>
-    <option value='3'>Option 3</option>
-  </select>
-</div>
+    if (isSearchable.value) {
+      setClassNames(`
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+
+const SelectComponent = ({onChange, value, options, labelText}:any) => {
+  
+  //options = {value, label}, onChange, value, labelText -> can be parameter
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedOption, setSelectedOption] = useState<any>("");
+  const [isArrowRotated, setIsArrowRotated] = useState(false);
+  const inputRef = useRef<any>(null);
+  const selectRef = useRef<any>(null);
+  const handleSelect = (option: any) => {
+    console.log("Selected option:", option);
+    onChange(option);
+    setSelectedOption(option);
+    setIsOpen(false);
+    setIsArrowRotated(false);
+  };
+
+  const handleOpen = (e: any) => {
+    e.preventDefault();
+    setIsOpen(!isOpen);
+    setIsArrowRotated(!isArrowRotated);
+  };
+  useEffect(() => {
+    // Focus on the input field when the dropdown is opened
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+        setIsArrowRotated(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+
+  const filteredOptions = options.filter((option: any) =>
+  option.label.toLowerCase().includes(searchQuery.toLowerCase()));
+
+  
+  
+return (
+  <div className='relative ${width.class}' ref={selectRef}>
+    <label className="block ${label.class} ${fontSize.class}bg-white ${
+        labelColor.text
+      }">
+      {labelText}
+    </label>
+    <button 
+      onClick={handleOpen}
+      className="text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 ${
+        borderType.class
+      } ${borderColor.border} ${radius.class}">
+      {selectedOption.label || options[0].label}
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        className="h-3 w-3  transition-transform ${
+          isArrowRotated ? "transform rotate-180" : ""
+        }"
+        viewBox='0 0 20 20'
+        fill='none'
+        stroke='#B3B8C2'
+      >
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+        d='M19 9l-7 7-7-7'
+      />
+      </svg>
+    </button>
+  {
+    isOpen && (
+      <div className='absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg'>
+      
+        <input
+          type='text'
+          placeholder='Search...'
+          value={searchQuery}
+          ref={inputRef}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className='block w-full border-b border-gray-300 py-2 px-3 focus:outline-none'
+        />
+          
+      
+        <div className='max-h-60 h-fit overflow-y-auto'>
+          {
+            filteredOptions.map((option: any) => (
+              <div
+                key={option.value}
+                onClick={() => handleSelect(option)}
+                className='px-4 py-2 flex items-center gap-2 cursor-pointer hover:${
+                  onHoverOptionsColor.bg
+                }'
+              >
+                {option.label}
+              </div>
+            ))}
+        </div>
+      </div>
+    )
+  }
+  </div>
+    
+  );
+};
+  
+export default SelectComponent;
+// Follow below code use it as dynamic component
+/* const HowToUseSelect = () => {
+  const [value, setValue] = useState("");
+
+  const handleChange = (option: any) => {
+    setValue(option);
+  };
+
+  const foodOptions = [
+    {
+      value: "pizza",
+      label: "Pizza",
+    },
+    {
+      value: "burger",
+      label: "Burger",
+    },
+    {
+      value: "pasta",
+      label: "Pasta",
+    },
+    {
+      value: "fries",
+      label: "Fries",
+    },
+  ];
+
+  const labelText = "${labelText}";
+
+  return (
+    <div>
+      <SelectComponent onChange={handleChange} value={value} options={foodOptions} labelText={labelText} />
+    </div>
+  );
+};
+
+export default HowToUseSelect; */
     `);
+    } else {
+      setClassNames(`
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+
+const SelectComponent = ({onChange, value, options, labelText}:any) => {
+  
+  //options = {value, label}, onChange, value, labelText -> can be parameter
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<any>("");
+  const [isArrowRotated, setIsArrowRotated] = useState(false);
+  const inputRef = useRef<any>(null);
+  const selectRef = useRef<any>(null);
+  const handleSelect = (option: any) => {
+    console.log("Selected option:", option);
+    onChange(option);
+    setSelectedOption(option);
+    setIsOpen(false);
+    setIsArrowRotated(false);
+  };
+
+  const handleOpen = (e: any) => {
+    e.preventDefault();
+    setIsOpen(!isOpen);
+    setIsArrowRotated(!isArrowRotated);
+  };
+  useEffect(() => {
+    // Focus on the input field when the dropdown is opened
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+        setIsArrowRotated(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+
+   
+return (
+  <div className='relative ${width.class}' ref={selectRef}>
+    <label className="block ${label.class} ${fontSize.class}bg-white ${
+        labelColor.text
+      }">
+      {labelText}
+    </label>
+    <button 
+      onClick={handleOpen}
+      className="text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 ${
+        borderType.class
+      } ${borderColor.border} ${radius.class}">
+      {selectedOption.label || options[0].label}
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        className="h-3 w-3  transition-transform ${
+          isArrowRotated ? "transform rotate-180" : ""
+        }"
+        viewBox='0 0 20 20'
+        fill='none'
+        stroke='#B3B8C2'
+      >
+      <path
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth='2'
+        d='M19 9l-7 7-7-7'
+      />
+      </svg>
+    </button>
+  {
+    isOpen && (
+      <div className='absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg'>
+        <div className='max-h-60 h-fit overflow-y-auto'>
+          {
+            options.map((option: any) => (
+              <div
+                key={option.value}
+                onClick={() => handleSelect(option)}
+                className='px-4 py-2 flex items-center gap-2 cursor-pointer hover:${
+                  onHoverOptionsColor.bg
+                }'
+              >
+                {option.label}
+              </div>
+            ))}
+        </div>
+      </div>
+    )
+  }
+  </div>
+    
+  );
+};
+  
+export default SelectComponent
+// Follow below code use it as dynamic component
+
+/* const HowToUseSelect = () => {
+  const [value, setValue] = useState("");
+
+  const handleChange = (option: any) => {
+    setValue(option);
+  };
+
+  const foodOptions = [
+    {
+      value: "pizza",
+      label: "Pizza",
+    },
+    {
+      value: "burger",
+      label: "Burger",
+    },
+    {
+      value: "pasta",
+      label: "Pasta",
+    },
+    {
+      value: "fries",
+      label: "Fries",
+    },
+  ];
+
+  const labelText = "${labelText}";
+
+  return (
+    <div>
+      <SelectComponent onChange={handleChange} value={value} options={foodOptions} labelText={labelText} />
+    </div>
+  );
+};
+
+export default HowToUseSelect; */
+    `);
+    }
   };
 
   return (
@@ -242,16 +590,22 @@ const SelectContent = () => {
                 value={borderColor}
               />
               <Select
-                label='Border on Focus'
+                label='Hover on Options'
                 options={colorOptions}
-                onChange={handleFocusBorderColorChange}
-                value={focusBorderColor}
+                onChange={handleOnHoverOptionsColorChange}
+                value={onHoverOptionsColor}
               />
               <Select
                 label='Select Width'
                 options={WidthOptions}
                 onChange={handleWidthChange}
                 value={width}
+              />
+              <Select
+                label='Options Searchable'
+                options={searchableOptions}
+                onChange={handleIsSearchableChange}
+                value={isSearchable}
               />
             </div>
             <div className='mt-8 flex justify-center'>
@@ -269,47 +623,97 @@ const SelectContent = () => {
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
-          <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'>
-            <div className='relative' style={{ width: width.value }}>
+          <div className='bg-white h-96 pt-16 flex justify-center w-full mx-auto px-6'>
+            {/*  */}
+            <div
+              className='relative'
+              ref={selectRef}
+              style={{ width: width.value }}
+            >
               <label
-                htmlFor={labelText.toLowerCase()}
-                className={`pointer-events-none ${label.class} ${fontSize.class} block`}
+                className={`block ${label.class} ${fontSize.class} bg-white`}
                 style={{
                   color: labelColor.colorCode,
                 }}
               >
                 {labelText}
               </label>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='pointer-events-none absolute top-3 right-2 h-5 w-5 fill-slate-400 '
-                viewBox='0 0 20 20'
-                fill='currentColor'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                  clipRule='evenodd'
-                />
-              </svg>
-
-              <select
-                id={labelText.toLowerCase()}
-                name={labelText.toLowerCase()}
-                className={`h-11 w-full appearance-none ${borderType.class}  ${radius.class} bg-white px-4 text-sm text-slate-500 outline-none `}
+              <button
+                onClick={handleOpen}
+                className={`text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 ${borderType.class}  ${radius.class} `}
                 style={{
-                  borderColor: isFocused
-                    ? focusBorderColor.colorCode
-                    : borderColor.colorCode,
+                  borderColor: borderColor.colorCode,
                 }}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
               >
-                <option value='1'>Option 1</option>
-                <option value='2'>Option 2</option>
-                <option value='3'>Option 3</option>
-              </select>
+                {selectedOption.label || options[0].label}
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  className={`h-3 w-3  transition-transform ${
+                    isArrowRotated ? "transform rotate-180" : ""
+                  }`}
+                  viewBox='0 0 20 20'
+                  fill='none'
+                  stroke='#B3B8C2'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M19 9l-7 7-7-7'
+                  />
+                </svg>
+              </button>
+              {isOpen && (
+                <div className='absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg '>
+                  {isSearchable.value && (
+                    <input
+                      type='text'
+                      placeholder='Search...'
+                      value={searchQuery}
+                      ref={inputRef}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className='block w-full border-b border-gray-300 py-2 px-3 focus:outline-none'
+                    />
+                  )}
+                  <div className='max-h-60 h-fit overflow-y-auto'>
+                    {isSearchable.value
+                      ? filteredOptions.map((option: any) => (
+                          <div
+                            key={option.value}
+                            onClick={() => handleSelect(option)}
+                            onMouseEnter={(e: any) =>
+                              (e.target.style.backgroundColor =
+                                onHoverOptionsColor.colorCode)
+                            }
+                            onMouseLeave={(e: any) =>
+                              (e.target.style.backgroundColor = "transparent")
+                            }
+                            className='px-4 py-2 flex items-center gap-2 cursor-pointer'
+                          >
+                            {option.label}
+                          </div>
+                        ))
+                      : options.map((option: any) => (
+                          <div
+                            key={option.value}
+                            onClick={() => handleSelect(option)}
+                            onMouseEnter={(e: any) =>
+                              (e.target.style.backgroundColor =
+                                onHoverOptionsColor.colorCode)
+                            }
+                            onMouseLeave={(e: any) =>
+                              (e.target.style.backgroundColor = "transparent")
+                            }
+                            className='px-4 py-2 flex items-center gap-2 cursor-pointer'
+                          >
+                            {option.label}
+                          </div>
+                        ))}
+                  </div>
+                </div>
+              )}
             </div>
+            {/*  */}
           </div>
         </div>
       </div>

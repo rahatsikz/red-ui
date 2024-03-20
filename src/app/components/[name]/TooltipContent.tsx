@@ -10,10 +10,10 @@ import React, { useState } from "react";
 const TooltipContent = () => {
   const [classNames, setClassNames] = useState<any>("");
 
-  const [labelText, setLabelText] = useState("Hey... Thanks for hovering");
+  const [hoverText, setHoverText] = useState("Hey... Thanks for hovering");
 
-  const handleLabelTextChange = (value: any) => {
-    setLabelText(value);
+  const handleHoverTextChange = (value: any) => {
+    setHoverText(value);
   };
   const [percentage, setPercentage] = useState<number>(70);
 
@@ -58,33 +58,70 @@ const TooltipContent = () => {
     setTooltipType(option);
   };
 
-  //   const [progressColor, setProgressColor] = useState({
-  //     value: "blue-400",
-  //     colorCode: "#60a5fa",
-  //     label: "blue-400",
-  //     bg: "bg-blue-400",
-  //     text: "text-blue-400",
-  //     border: "border-blue-400",
-  //   });
+  const toolTipColorOptions = [
+    {
+      value: "white",
+      colorCode: "#ffffff",
+      label: "White",
+      bg: "bg-white",
+      text: "text-white",
+      border: "border-white",
+    },
+    {
+      value: "black",
+      colorCode: "#000000",
+      label: "Black",
+      bg: "bg-black",
+      text: "text-black",
+      border: "border-black",
+    },
+    ...colorOptions,
+  ];
 
-  //   const handleProgressColorChange = (option: any) => {
-  //     setProgressColor(option);
-  //   };
-  //   const [bgColor, setBgColor] = useState({
-  //     value: "slate-200",
-  //     colorCode: "#e2e8f0",
-  //     label: "Slate 200",
-  //     bg: "bg-slate-200",
-  //     text: "text-slate-200",
-  //     border: "border-slate-200",
-  //   });
+  const [bgColor, setBgColor] = useState({
+    value: "blue-900",
+    colorCode: "#1e3a8a",
+    label: "blue-900",
+    bg: "bg-blue-900",
+    text: "text-blue-900",
+    border: "border-blue-900",
+  });
 
-  //   const handleBgColorChange = (option: any) => {
-  //     setBgColor(option);
-  //   };
+  const handleBgColorChange = (option: any) => {
+    setBgColor(option);
+  };
+  const [textColor, setTextColor] = useState({
+    value: "white",
+    colorCode: "#ffffff",
+    label: "White",
+    bg: "bg-white",
+    text: "text-white",
+    border: "border-white",
+  });
+
+  const handleTextColorChange = (option: any) => {
+    setTextColor(option);
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+
+    setClassNames(
+      `
+<div className='relative group'>
+  <button className='relative overflow-hidden hover:overflow-visible'>
+    Hover me
+  </button>
+  <span className="absolute invisible transform ${tooltipType.bgClass} z-10 min-w-48 w-fit p-2 text-sm ${textColor.text} ${bgColor.bg} rounded opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100">
+    <div className='relative'>
+      <div className="w-3 h-3 ${bgColor.bg} absolute transform ${tooltipType.arrowClass}">
+      </div>
+      <div className='py-1 px-2 text-center'>${hoverText}</div>
+    </div>
+  </span>
+</div>
+      `
+    );
   };
   return (
     <section>
@@ -102,33 +139,25 @@ const TooltipContent = () => {
                 value={tooltipType}
               />
               <Input
-                name='LabelText'
-                label='Label Text'
-                value={labelText}
+                name='hoverText'
+                label='Hover Text'
+                value={hoverText}
                 type='text'
-                handleChange={handleLabelTextChange}
-                defaultValue=''
-              />
-              {/* <Input
-                name='percentage'
-                label='Percentage'
-                value={percentage}
-                type='number'
-                handleChange={handlePercentageChange}
+                handleChange={handleHoverTextChange}
                 defaultValue=''
               />
               <Select
-                label='Progress Color'
-                options={colorOptions}
-                onChange={handleProgressColorChange}
-                value={progressColor}
-              />
-              <Select
-                label='Background Color'
-                options={colorOptions}
+                label='Hover Background Color'
+                options={toolTipColorOptions}
                 onChange={handleBgColorChange}
                 value={bgColor}
-              /> */}
+              />
+              <Select
+                label='Text Color'
+                options={toolTipColorOptions}
+                onChange={handleTextColorChange}
+                value={textColor}
+              />
             </div>
             <div className='mt-8 flex justify-center'>
               <Button type='submit' className='px-24'>
@@ -145,20 +174,27 @@ const TooltipContent = () => {
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
-          <div className='bg-white py-32 w-full mx-auto pl-6 pr-4 flex items-center justify-center'>
+          <div className='bg-white py-32 w-full mx-auto px-6 flex items-center justify-center'>
             {/*  */}
             <div className='relative group'>
-              <button className='relative overflow-hidden cursor-pointer hover:overflow-visible focus-visible:outline-none'>
+              <button className='relative overflow-hidden hover:overflow-visible'>
                 Hover me
               </button>
               <span
-                className={`absolute invisible transform ${tooltipType.bgClass} z-10 min-w-40 w-fit p-2 text-xs text-white bg-slate-700 rounded opacity-0 transition-opacity duration-200 group-hover:visible  group-hover:opacity-100`}
+                className={`absolute invisible transform ${tooltipType.bgClass} z-10 min-w-48 w-fit p-2 text-sm rounded opacity-0 transition-opacity duration-200 group-hover:visible  group-hover:opacity-100`}
+                style={{
+                  backgroundColor: bgColor.colorCode,
+                  color: textColor.colorCode,
+                }}
               >
                 <div className='relative'>
                   <div
-                    className={`w-3 h-3 bg-slate-700 absolute transform ${tooltipType.arrowClass}`}
+                    className={`w-3 h-3 absolute transform ${tooltipType.arrowClass}`}
+                    style={{
+                      backgroundColor: bgColor.colorCode,
+                    }}
                   ></div>
-                  <div className='py-1 px-2 text-center'>{labelText}</div>
+                  <div className='py-1 px-2 text-center'>{hoverText}</div>
                 </div>
               </span>
             </div>

@@ -12,7 +12,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 const SelectContent = () => {
   const [code, setCode] = useState<any>("");
-  const [componnentCode, setComponentCode] = useState<any>("");
+  const [componentCode, setComponentCode] = useState<any>("");
 
   const [radius, setRadius] = useState(BorderRadiusOptions[1]);
 
@@ -601,11 +601,11 @@ export default HowToUseSelect;
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 transition-opacity duration-200 ${
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-700 ${
               code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={code} component={componnentCode} />
+            <CopyToClipboardButton text={code} component={componentCode} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>

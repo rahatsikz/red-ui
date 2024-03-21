@@ -68,7 +68,7 @@ const SelectComponent = ({
       </label>
       <button
         onClick={handleOpen}
-        className='text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 border-2 border-sky-400 rounded'
+        className='text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 border-2 border-cyan-500 rounded'
       >
         {value?.label || options[0].label}
         <svg
@@ -102,7 +102,7 @@ const SelectComponent = ({
               <div
                 key={option.value}
                 onClick={() => handleSelect(option)}
-                className='px-4 py-2 flex items-center gap-2 cursor-pointer hover:bg-sky-50'
+                className='px-4 py-2 flex items-center gap-2 cursor-pointer hover:bg-cyan-50'
               >
                 {option.label}
               </div>

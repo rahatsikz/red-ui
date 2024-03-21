@@ -70,7 +70,7 @@ const CopyToClipboardButton = ({ text, height = 300, component = "" }: any) => {
             <button
               className='py-2 inline-flex items-center gap-1 flex-row-reverse'
               onClick={() => {
-                navigator.clipboard.writeText(text);
+                navigator.clipboard.writeText(checked ? component : text);
                 setCopied(true);
                 setTimeout(() => setCopied(false), 3000);
               }}

@@ -1,18 +1,32 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 
-const SelectComponent = ({ onChange, value, options, labelText }: any) => {
-  //options = {value, label}, onChange, value, labelText -> can be parameter
+type Option = {
+  value: string;
+  label: string;
+};
 
+type SelectComponentProps = {
+  onChange: (value: Option) => void;
+  value: Option;
+  options: Option[];
+  labelText: string;
+};
+
+const SelectComponent = ({
+  onChange,
+  value,
+  options,
+  labelText,
+}: SelectComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<any>("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [isArrowRotated, setIsArrowRotated] = useState(false);
   const inputRef = useRef<any>(null);
   const selectRef = useRef<any>(null);
   const handleSelect = (option: any) => {
     console.log("Selected option:", option);
     onChange(option);
-    setSelectedOption(option);
     setIsOpen(false);
     setIsArrowRotated(false);
   };
@@ -43,16 +57,20 @@ const SelectComponent = ({ onChange, value, options, labelText }: any) => {
     };
   }, [isOpen]);
 
+  const filteredOptions = options.filter((option: any) =>
+    option.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className='relative w-[80%]' ref={selectRef}>
-      <label className='block absolute -top-7 pl-2 text-smbg-white text-gray-400'>
+    <div className='relative w-[60%]' ref={selectRef}>
+      <label className='block absolute -top-6 text-smbg-white text-gray-400'>
         {labelText}
       </label>
       <button
         onClick={handleOpen}
-        className='text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 border-2 border-red-400 rounded'
+        className='text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 border-2 border-sky-400 rounded'
       >
-        {selectedOption.label || options[0].label}
+        {value?.label || options[0].label}
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-3 w-3  transition-transform '
@@ -70,12 +88,21 @@ const SelectComponent = ({ onChange, value, options, labelText }: any) => {
       </button>
       {isOpen && (
         <div className='absolute z-10 mt-2 w-full bg-white border border-gray-300 rounded shadow-lg'>
+          <input
+            type='text'
+            placeholder='Search...'
+            value={searchQuery}
+            ref={inputRef}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className='block w-full border-b border-gray-300 py-2 px-3 focus:outline-none'
+          />
+
           <div className='max-h-60 h-fit overflow-y-auto'>
-            {options.map((option: any) => (
+            {filteredOptions.map((option: any) => (
               <div
                 key={option.value}
                 onClick={() => handleSelect(option)}
-                className='px-4 py-2 flex items-center gap-2 cursor-pointer hover:bg-red-50'
+                className='px-4 py-2 flex items-center gap-2 cursor-pointer hover:bg-sky-50'
               >
                 {option.label}
               </div>
@@ -88,41 +115,3 @@ const SelectComponent = ({ onChange, value, options, labelText }: any) => {
 };
 
 export default SelectComponent;
-// Follow below code use it as dynamic component
-
-/* const HowToUseSelect = () => {
-  const [value, setValue] = useState("");
-
-  const handleChange = (option: any) => {
-    setValue(option);
-  };
-
-  const foodOptions = [
-    {
-      value: "pizza",
-      label: "Pizza",
-    },
-    {
-      value: "burger",
-      label: "Burger",
-    },
-    {
-      value: "pasta",
-      label: "Pasta",
-    },
-    {
-      value: "fries",
-      label: "Fries",
-    },
-  ];
-
-  const labelText = "Select Food";
-
-  return (
-    <div>
-      <SelectComponent onChange={handleChange} value={value} options={foodOptions} labelText={labelText} />
-    </div>
-  );
-};
-
-export default HowToUseSelect; */

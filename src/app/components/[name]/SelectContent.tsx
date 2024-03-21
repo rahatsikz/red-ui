@@ -11,7 +11,8 @@ import { WidthOptions } from "@/constant/Width";
 import React, { useEffect, useRef, useState } from "react";
 
 const SelectContent = () => {
-  const [classNames, setClassNames] = useState<any>("");
+  const [code, setCode] = useState<any>("");
+  const [componnentCode, setComponentCode] = useState<any>("");
 
   const [radius, setRadius] = useState(BorderRadiusOptions[1]);
 
@@ -53,12 +54,6 @@ const SelectContent = () => {
     setLabelText(value);
   };
 
-  const [label, setLabel] = useState({
-    label: "Label at Top",
-    value: "top",
-    class: "absolute -top-7 pl-2",
-  });
-
   const LabelOptions = [
     {
       label: "No Label",
@@ -77,6 +72,8 @@ const SelectContent = () => {
       class: "absolute -top-2.5 bg-white left-4 px-2",
     },
   ];
+
+  const [label, setLabel] = useState(LabelOptions[1]);
 
   const handleOptionChange = (option: any) => {
     setLabel(option);
@@ -225,24 +222,31 @@ const SelectContent = () => {
     e.preventDefault();
 
     if (isSearchable.value) {
-      setClassNames(`
+      setCode(`
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 
-const SelectComponent = ({onChange, value, options, labelText}:any) => {
-  
-  //options = {value, label}, onChange, value, labelText -> can be parameter
+type Option = {
+  value: string;
+  label: string;
+};
 
+type SelectComponentProps = {
+  onChange: (value: Option) => void;
+  value: Option;
+  options: Option[];
+  labelText: string;
+}
+
+const SelectComponent = ({ onChange, value, options, labelText }: SelectComponentProps ) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedOption, setSelectedOption] = useState<any>("");
   const [isArrowRotated, setIsArrowRotated] = useState(false);
   const inputRef = useRef<any>(null);
   const selectRef = useRef<any>(null);
   const handleSelect = (option: any) => {
     console.log("Selected option:", option);
     onChange(option);
-    setSelectedOption(option);
     setIsOpen(false);
     setIsArrowRotated(false);
   };
@@ -291,7 +295,7 @@ return (
       className="text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 ${
         borderType.class
       } ${borderColor.border} ${radius.class}">
-      {selectedOption.label || options[0].label}
+      {value?.label || options[0].label}
       <svg
         xmlns='http://www.w3.org/2000/svg'
         className="h-3 w-3  transition-transform ${
@@ -346,62 +350,31 @@ return (
 };
   
 export default SelectComponent;
-// Follow below code use it as dynamic component
-/* const HowToUseSelect = () => {
-  const [value, setValue] = useState("");
-
-  const handleChange = (option: any) => {
-    setValue(option);
-  };
-
-  const foodOptions = [
-    {
-      value: "pizza",
-      label: "Pizza",
-    },
-    {
-      value: "burger",
-      label: "Burger",
-    },
-    {
-      value: "pasta",
-      label: "Pasta",
-    },
-    {
-      value: "fries",
-      label: "Fries",
-    },
-  ];
-
-  const labelText = "${labelText}";
-
-  return (
-    <div>
-      <SelectComponent onChange={handleChange} value={value} options={foodOptions} labelText={labelText} />
-    </div>
-  );
-};
-
-export default HowToUseSelect; */
-    `);
+`);
     } else {
-      setClassNames(`
+      setCode(`
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 
-const SelectComponent = ({onChange, value, options, labelText}:any) => {
-  
-  //options = {value, label}, onChange, value, labelText -> can be parameter
+type Option = {
+  value: string;
+  label: string;
+};
 
+type SelectComponentProps = {
+  onChange: (value: Option) => void;
+  value: Option;
+  options: Option[];
+  labelText: string;
+}
+
+const SelectComponent = ({ onChange, value, options, labelText }: SelectComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<any>("");
   const [isArrowRotated, setIsArrowRotated] = useState(false);
-  const inputRef = useRef<any>(null);
   const selectRef = useRef<any>(null);
   const handleSelect = (option: any) => {
     console.log("Selected option:", option);
     onChange(option);
-    setSelectedOption(option);
     setIsOpen(false);
     setIsArrowRotated(false);
   };
@@ -412,11 +385,6 @@ const SelectComponent = ({onChange, value, options, labelText}:any) => {
     setIsArrowRotated(!isArrowRotated);
   };
   useEffect(() => {
-    // Focus on the input field when the dropdown is opened
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-
     const handleClickOutside = (event: MouseEvent) => {
       if (
         selectRef.current &&
@@ -446,7 +414,7 @@ return (
       className="text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 ${
         borderType.class
       } ${borderColor.border} ${radius.class}">
-      {selectedOption.label || options[0].label}
+      {value?.label || options[0].label}
       <svg
         xmlns='http://www.w3.org/2000/svg'
         className="h-3 w-3  transition-transform ${
@@ -490,10 +458,13 @@ return (
 };
   
 export default SelectComponent
-// Follow below code use it as dynamic component
+`);
+    }
 
-/* const HowToUseSelect = () => {
-  const [value, setValue] = useState("");
+    setComponentCode(
+      `
+const HowToUseSelect = () => {
+  const [value, setValue] = useState<any>("");
 
   const handleChange = (option: any) => {
     setValue(option);
@@ -527,10 +498,25 @@ export default SelectComponent
   );
 };
 
-export default HowToUseSelect; */
-    `);
-    }
+export default HowToUseSelect;
+      `
+    );
   };
+
+  useEffect(() => {
+    setCode("");
+  }, [
+    label,
+    labelColor,
+    labelText,
+    fontSize,
+    radius,
+    borderType,
+    isSearchable,
+    width,
+    onHoverOptionsColor,
+    borderColor,
+  ]);
 
   return (
     <section>
@@ -615,15 +601,15 @@ export default HowToUseSelect; */
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 ${
-              classNames.length > 0 ? "" : "hidden"
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-200 ${
+              code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={classNames} />
+            <CopyToClipboardButton text={code} component={componnentCode} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
-          <div className='bg-white h-96 pt-16 flex justify-center w-full mx-auto px-6'>
+          <div className='bg-white h-96 pt-16 flex  w-full mx-auto px-6'>
             {/*  */}
             <div
               className='relative'

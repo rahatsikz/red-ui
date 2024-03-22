@@ -499,9 +499,7 @@ const HowToUseSelect = () => {
     </div>
   );
 };
-
-export default HowToUseSelect;
-      `
+`
     );
   };
 

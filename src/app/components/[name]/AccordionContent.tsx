@@ -239,9 +239,7 @@ const HowToUseAccordion = () => {
     </div>
   );
 };
-
-export default HowToUseAccordion;
-    `);
+ `);
   };
 
   useEffect(() => {

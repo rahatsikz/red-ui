@@ -8,9 +8,12 @@ import { BorderRadiusOptions } from "@/constant/BorderRadius";
 import { colorOptions } from "@/constant/ColorData";
 import { FontSizeOption } from "@/constant/FontSize";
 import { LetterSpacingOption } from "@/constant/LetterSpacing";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ButtonContent = () => {
+  const [code, setCode] = useState<any>("");
+  const [componentCode, setComponentCode] = useState<any>("");
+
   const [buttonText, setButtonText] = useState("Button");
 
   // console.log(buttonText);
@@ -109,7 +112,7 @@ const ButtonContent = () => {
     {
       value: "to top right",
       label: "to top right",
-      class: "bg-gradient-to-tr	",
+      class: "bg-gradient-to-tr",
     },
     { value: "to top left", label: "to top left", class: "bg-gradient-to-tl" },
     {
@@ -134,11 +137,11 @@ const ButtonContent = () => {
     setLinear(option);
   };
 
-  const radialOptions = [{ value: "circle", label: "circle" }];
+  const radialOptions = [{ value: "circle", label: "Circle" }];
 
   const [radial, setRadial] = useState({
     value: "circle",
-    label: "circle",
+    label: "Circle",
   });
 
   const handleRadialChange = (option: any) => {
@@ -208,6 +211,27 @@ const ButtonContent = () => {
     setLetterSpacing(option);
   };
 
+  const buttonTypeOptions = [
+    {
+      label: "Submit",
+      value: "submit",
+    },
+    {
+      label: "Reset",
+      value: "reset",
+    },
+    {
+      label: "Button",
+      value: "button",
+    },
+  ];
+
+  const [buttonType, setButtonType] = useState(buttonTypeOptions[2]);
+
+  const handleButtonTypeChange = (option: any) => {
+    setButtonType(option);
+  };
+
   const [hover, setHover] = useState(false);
 
   const handleMouseEnter = () => {
@@ -218,8 +242,6 @@ const ButtonContent = () => {
   const handleMouseLeave = () => {
     setHover(false);
   };
-
-  const [classNames, setClassNames] = useState("");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -246,14 +268,65 @@ const ButtonContent = () => {
       data += ` bg-[radial-gradient(circle,${startColor.colorCode}_0%,${endColor.colorCode}_100%)] text-white`;
     }
 
-    setClassNames(`
-<button className="${data.trim()}">${buttonText}</button>
+    setCode(`
+import React, { ReactNode } from "react";
+
+type ButtonProps = {
+  children: ReactNode;
+  onClick?: () => void;
+  type?: "submit" | "button" | "reset";
+};
+    
+const ButtonComponent = ({
+  children,
+  onClick,
+  type,
+}: ButtonProps) => {
+  return (
+    <button onClick={onClick} type={type} className='${data.trim()}'>
+      {children}
+    </button>
+  );
+};
+
+export default ButtonComponent;
+    `);
+
+    setComponentCode(`
+const HowToUseButton = () => {
+  return (
+    <ButtonComponent type="${buttonType.value}" onClick={() => console.log("clicked")}>
+      ${buttonText}
+    </ButtonComponent>
+  );
+};
     `);
   };
 
+  useEffect(() => {
+    setCode("");
+  }, [
+    selectedOption,
+    buttonText,
+    color,
+    hoverColor,
+    linear,
+    gradTypes,
+    startColor,
+    endColor,
+    radial,
+    radius,
+    xPadding,
+    yPadding,
+    width,
+    fontSize,
+    letterSpacing,
+    buttonType,
+  ]);
+
   return (
     <section>
-      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[calc(100vh-5.6rem)] h-full'>
         <div className='xl:col-span-8 '>
           <form className='w-11/12 mx-auto px-4 mt-8' onSubmit={handleSubmit}>
             <div className='grid lg:grid-cols-2 gap-8'>
@@ -266,7 +339,7 @@ const ButtonContent = () => {
                 defaultValue='Button'
               />
               <Select
-                label='Button Type'
+                label='Button Color Type'
                 options={options}
                 onChange={handleSelectChange}
                 value={selectedOption}
@@ -345,6 +418,13 @@ const ButtonContent = () => {
               />
 
               <Select
+                label='Button Type'
+                options={buttonTypeOptions}
+                onChange={handleButtonTypeChange}
+                value={buttonType}
+              />
+
+              <Select
                 label='Button Width'
                 options={widthOptions}
                 onChange={handleWidthChange}
@@ -372,11 +452,11 @@ const ButtonContent = () => {
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 ${
-              classNames.length > 0 ? "" : "hidden"
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-700 ${
+              code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={classNames} />
+            <CopyToClipboardButton text={code} component={componentCode} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>

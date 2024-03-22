@@ -6,8 +6,32 @@ import React, { useEffect, useState } from "react";
 // import SelectComponent from "./select";
 import AccordionComponent from "./accordion";
 import SelectComponent from "./select";
+import ButtonComponent from "./button";
 
-const TestPage = () => {
+const HowToUseButton = () => {
+  return (
+    <ButtonComponent type='button' onClick={() => console.log("clicked")}>
+      Submit Form
+    </ButtonComponent>
+  );
+};
+
+const HowToUseAccordion = () => {
+  const header = "What do you need to know?";
+  const description =
+    "Introducing our versatile Accordion component, designed to elevate your user interface. Crafted for seamless integration into any project, our accordions offer unparalleled flexibility and style.";
+  return (
+    <div>
+      <AccordionComponent
+        header={header}
+        description={description}
+        isOpen={true}
+      />
+    </div>
+  );
+};
+
+const HowToUseSelect = () => {
   const [value, setValue] = useState<any>("");
 
   const handleChange = (option: any) => {
@@ -33,25 +57,37 @@ const TestPage = () => {
     },
   ];
 
-  const labelText = "Select Foods";
+  const labelText = "Select Food";
 
   useEffect(() => {
     console.log(value);
   }, [value]);
 
   return (
-    <div className='h-[90vh] flex items-center justify-center bg-red-50 '>
-      <div className='w-7/12 bg-red-100 mx-auto min-h-96 py-8 px-12 '>
+    <div>
+      <SelectComponent
+        onSelectChange={handleChange}
+        value={value}
+        options={foodOptions}
+        labelText={labelText}
+      />
+    </div>
+  );
+};
+
+const TestPage = () => {
+  return (
+    <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
+      <div className='w-7/12 bg-red-100 h-full mx-auto py-8 px-12 '>
         {/* test */}
 
-        <div className='bg-white w-full min-h-80  py-10 mx-auto pl-6 pr-4'>
+        <div className='bg-white w-full h-full space-y-4 py-10 mx-auto pl-6 pr-4'>
           {/*  */}
-          <SelectComponent
-            onSelectChange={handleChange}
-            value={value}
-            options={foodOptions}
-            labelText={labelText}
-          />
+          {/* <HowToUseAccordion /> */}
+
+          {/* <HowToUseSelect /> */}
+          {/* <HowToUseButton /> */}
+
           {/*  */}
         </div>
 

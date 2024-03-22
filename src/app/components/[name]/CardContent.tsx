@@ -6,8 +6,6 @@ import CopyToClipboardButton from "@/Components/ui/CopyToClipboard";
 import ImageInput from "@/Components/ui/ImageInput";
 import Input from "@/Components/ui/Input";
 import Select from "@/Components/ui/Select";
-import { colorOptions } from "@/constant/ColorData";
-import { WidthOptions } from "@/constant/Width";
 import React, { useEffect, useState } from "react";
 
 const CardContent = () => {

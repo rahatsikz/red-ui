@@ -1,22 +1,22 @@
 "use client";
-
-/* eslint-disable @next/next/no-img-element */
+import Input from "@/Components/ui/Input";
 
 import React, { useEffect, useState } from "react";
 // import SelectComponent from "./select";
 import AccordionComponent from "./accordion";
 import SelectComponent from "./select";
 import ButtonComponent from "./button";
+import CardComponent from "./card";
 
-const HowToUseButton = () => {
+/* const HowToUseButton = () => {
   return (
     <ButtonComponent type='button' onClick={() => console.log("clicked")}>
       Submit Form
     </ButtonComponent>
   );
-};
+}; */
 
-const HowToUseAccordion = () => {
+/* const HowToUseAccordion = () => {
   const header = "What do you need to know?";
   const description =
     "Introducing our versatile Accordion component, designed to elevate your user interface. Crafted for seamless integration into any project, our accordions offer unparalleled flexibility and style.";
@@ -29,9 +29,9 @@ const HowToUseAccordion = () => {
       />
     </div>
   );
-};
+}; */
 
-const HowToUseSelect = () => {
+/* const HowToUseSelect = () => {
   const [value, setValue] = useState<any>("");
 
   const handleChange = (option: any) => {
@@ -73,21 +73,43 @@ const HowToUseSelect = () => {
       />
     </div>
   );
+}; */
+
+const HowToUseCard = () => {
+  const title = "This is Title";
+  const subTitle = "Sub-title";
+  const description =
+    "Introducing our sleek and versatile card component, designed to elevate your user interface with minimal effort. Crafted for seamless integration into any project, our cards offer unparalleled flexibility and style.";
+  const image =
+    "https://i.ibb.co/Jkct5BL/430610643-822176203269811-5837933321810083409-n.jpg";
+
+  return (
+    <div>
+      <CardComponent
+        title={title}
+        subTitle={subTitle}
+        description={description}
+        image={image}
+      />
+    </div>
+  );
 };
 
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
-      <div className='w-7/12 bg-red-100 h-full mx-auto py-8 px-12 '>
+      <div className='w-7/12 bg-red-100 h-full mx-auto py-8 px-8 '>
         {/* test */}
 
-        <div className='bg-white w-full h-full space-y-4 py-10 mx-auto pl-6 pr-4'>
+        <div className='bg-white w-full h-fit  py-10 mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-8'>
           {/*  */}
           {/* <HowToUseAccordion /> */}
 
           {/* <HowToUseSelect /> */}
           {/* <HowToUseButton /> */}
-
+          <HowToUseCard></HowToUseCard>
+          <HowToUseCard></HowToUseCard>
+          <HowToUseCard></HowToUseCard>
           {/*  */}
         </div>
 

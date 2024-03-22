@@ -6,10 +6,13 @@ import CopyToClipboardButton from "@/Components/ui/CopyToClipboard";
 import ImageInput from "@/Components/ui/ImageInput";
 import Input from "@/Components/ui/Input";
 import Select from "@/Components/ui/Select";
-import React, { useState } from "react";
+import { colorOptions } from "@/constant/ColorData";
+import { WidthOptions } from "@/constant/Width";
+import React, { useEffect, useState } from "react";
 
 const CardContent = () => {
-  const [classNames, setClassNames] = useState<any>("");
+  const [code, setCode] = useState<any>("");
+  const [componentCode, setComponentCode] = useState<any>("");
 
   const [imgUpload, setImgUpload] = useState<any>(
     "https://i.ibb.co/Jkct5BL/430610643-822176203269811-5837933321810083409-n.jpg"
@@ -163,58 +166,158 @@ const CardContent = () => {
     e.preventDefault();
 
     if (cardType.value === "textwithimage") {
-      setClassNames(`
-<div className="overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
-  <div className="p-6">
-    <div className="grid gap-6 ${imageDirectionValue.class}">
-      <img src="${imgUpload}" alt="card image" 
-      className="aspect-video w-full h-full object-cover ${borderRadiusValue.class}"/>
-      <div className="w-full">
-        <h2 className="text-xl text-slate-800 font-semibold">
-          ${title}
-        </h2>
-        <p className="text-slate-500 text-xs tracking-wider mt-1">
-          ${subTitle}
-        </p>
-        <p className="text-slate-500 mt-4 text-sm line-clamp-5">
-          ${desc}
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-      `);
-    } else if (cardType.value === "empty") {
-      setClassNames(`
-<div className="overflow-hidden min-w-80 min-h-52 bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
-  <div className="p-6"></div>
-</div>
-      `);
-    } else if (cardType.value === "textonly") {
-      setClassNames(`
-<div className="overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}">
-    <div className="p-6">
-      <div className="grid gap-6">
-        <div className="w-full">
-          <h2 className="text-xl text-slate-800 font-semibold">
-            ${title}
-          </h2>
-          <p className="text-slate-500 text-xs tracking-wider mt-1">
-            ${subTitle}
-          </p>
-          <p className="text-slate-500 mt-4 text-sm line-clamp-5">
-            ${desc}
-          </p>
+      setCode(`
+import React from "react";
+
+type CardProps = {
+  title: string;
+  subTitle?: string;
+  description: string;
+  image: string;
+};
+const CardComponent = ({ title, subTitle, description, image }: CardProps) => {
+  return (
+    <div className='overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}'>
+      <div className='p-6'>
+        <div className='grid gap-6 ${imageDirectionValue.class}'>
+          <img
+            src={image}
+            alt='card image'
+            className='aspect-video w-full h-full object-cover ${borderRadiusValue.class}'
+          />
+          <div className='w-full'>
+            <h2 className='text-xl text-slate-800 font-semibold'>{title}</h2>
+            <p className='text-slate-500 text-xs tracking-wider mt-1'>
+              {subTitle}
+            </p>
+            <p className='text-slate-500 mt-4 text-sm line-clamp-5'>
+              {description}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-</div>
+  );
+};
+
+export default CardComponent;
+      
+      `);
+
+      setComponentCode(`
+const HowToUseCard = () => {
+  const title = "${title}";
+  const subTitle = "${subTitle}";
+  const description = "${desc}";
+  const image = "${imgUpload}" ;
+
+  return (
+    <div>
+      <CardComponent
+        title={title}
+        subTitle={subTitle}
+        description={description}
+        image={image}
+      />
+    </div>
+  );
+};
+            
+      `);
+    } else if (cardType.value === "empty") {
+      setCode(`
+import React, { ReactNode } from "react";
+
+type CardProps = {
+  children?: ReactNode;
+};
+const CardComponent = ({ children }: CardProps) => {
+  return (
+    <div className='overflow-hidden min-w-80 min-h-52 bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}'>
+      <div className='p-6'>{children}</div>
+    </div>
+  );
+};
+
+export default CardComponent;
+      `);
+      setComponentCode(`
+const HowToUseCard = () => {
+  return (
+    <div>
+      <CardComponent>{/* enter your content here */}</CardComponent>
+    </div>
+  );
+};
+`);
+    } else if (cardType.value === "textonly") {
+      setCode(`
+import React from "react";
+
+type CardProps = {
+  title: string;
+  subTitle?: string;
+  description: string;
+};
+const CardComponent = ({ title, subTitle, description }: CardProps) => {
+  return (
+    <div className='overflow-hidden min-w-80 h-fit bg-white shadow-md ${borderRadiusValue.class} ${maxWidthValue.class}'>
+      <div className='p-6'>
+        <div className='grid gap-6'>
+          <div className='w-full'>
+            <h2 className='text-xl text-slate-800 font-semibold'>{title}</h2>
+            <p className='text-slate-500 text-xs tracking-wider mt-1'>
+              {subTitle}
+            </p>
+            <p className='text-slate-500 mt-4 text-sm line-clamp-5'>
+              {description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CardComponent;
+      
+`);
+      setComponentCode(`
+const HowToUseCard = () => {
+  const title = "${title}";
+  const subTitle = "${subTitle}";
+  const description = "${desc}";
+
+  return (
+    <div>
+      <CardComponent
+        title={title}
+        subTitle={subTitle}
+        description={description}
+      />
+    </div>
+  );
+};
       `);
     }
   };
+
+  useEffect(() => {
+    setCode("");
+  }, [
+    cardType,
+    borderRadiusValue,
+    maxWidthValue,
+    title,
+    subTitle,
+    desc,
+    imgUpload,
+    imageDirectionValue,
+  ]);
+
   return (
     <section>
-      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[calc(100vh-5.6rem)] h-full'>
         <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto px-4 mt-8'
@@ -291,11 +394,11 @@ const CardContent = () => {
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 ${
-              classNames.length > 0 ? "" : "hidden"
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-700 ${
+              code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={classNames} />
+            <CopyToClipboardButton text={code} component={componentCode} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>

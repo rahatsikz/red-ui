@@ -7,14 +7,14 @@ type Option = {
 };
 
 type SelectComponentProps = {
-  onChange: (value: Option) => void;
+  onSelectChange: (value: Option) => void;
   value: Option;
   options: Option[];
   labelText: string;
 };
 
 const SelectComponent = ({
-  onChange,
+  onSelectChange,
   value,
   options,
   labelText,
@@ -24,9 +24,9 @@ const SelectComponent = ({
   const [isArrowRotated, setIsArrowRotated] = useState(false);
   const inputRef = useRef<any>(null);
   const selectRef = useRef<any>(null);
-  const handleSelect = (option: any) => {
-    console.log("Selected option:", option);
-    onChange(option);
+  const handleSelect = (option: Option) => {
+    // console.log("Selected option:", option);
+    onSelectChange(option);
     setIsOpen(false);
     setIsArrowRotated(false);
   };
@@ -35,6 +35,7 @@ const SelectComponent = ({
     e.preventDefault();
     setIsOpen(!isOpen);
     setIsArrowRotated(!isArrowRotated);
+    setSearchQuery("");
   };
   useEffect(() => {
     // Focus on the input field when the dropdown is opened
@@ -63,12 +64,12 @@ const SelectComponent = ({
 
   return (
     <div className='relative w-[60%]' ref={selectRef}>
-      <label className='block absolute -top-6 text-smbg-white text-gray-400'>
+      <label className='block absolute -top-6 text-smbg-white text-emerald-500'>
         {labelText}
       </label>
       <button
         onClick={handleOpen}
-        className='text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 border-2 border-cyan-500 rounded'
+        className='text-left outline-none w-full flex justify-between items-center  px-4 py-[9px] text-sm bg-white text-gray-700 border-2 border-emerald-400 rounded'
       >
         {value?.label || options[0].label}
         <svg
@@ -102,7 +103,7 @@ const SelectComponent = ({
               <div
                 key={option.value}
                 onClick={() => handleSelect(option)}
-                className='px-4 py-2 flex items-center gap-2 cursor-pointer hover:bg-cyan-50'
+                className='px-4 py-2 flex items-center gap-2 cursor-pointer hover:bg-emerald-50'
               >
                 {option.label}
               </div>

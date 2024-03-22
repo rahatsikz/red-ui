@@ -172,6 +172,7 @@ const SelectContent = () => {
     e.preventDefault();
     setIsOpen(!isOpen);
     setIsArrowRotated(!isArrowRotated);
+    setSearchQuery("");
   };
   useEffect(() => {
     // Focus on the input field when the dropdown is opened
@@ -232,21 +233,21 @@ type Option = {
 };
 
 type SelectComponentProps = {
-  onChange: (value: Option) => void;
+  onSelectChange: (value: Option) => void;
   value: Option;
   options: Option[];
   labelText: string;
 }
 
-const SelectComponent = ({ onChange, value, options, labelText }: SelectComponentProps ) => {
+const SelectComponent = ({ onSelectChange, value, options, labelText }: SelectComponentProps ) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isArrowRotated, setIsArrowRotated] = useState(false);
   const inputRef = useRef<any>(null);
   const selectRef = useRef<any>(null);
-  const handleSelect = (option: any) => {
-    console.log("Selected option:", option);
-    onChange(option);
+  const handleSelect = (option: Option) => {
+    // console.log("Selected option:", option);
+    onSelectChange(option);
     setIsOpen(false);
     setIsArrowRotated(false);
   };
@@ -255,6 +256,7 @@ const SelectComponent = ({ onChange, value, options, labelText }: SelectComponen
     e.preventDefault();
     setIsOpen(!isOpen);
     setIsArrowRotated(!isArrowRotated);
+    setSearchQuery("");
   };
   useEffect(() => {
     // Focus on the input field when the dropdown is opened
@@ -362,19 +364,19 @@ type Option = {
 };
 
 type SelectComponentProps = {
-  onChange: (value: Option) => void;
+  onSelectChange: (value: Option) => void;
   value: Option;
   options: Option[];
   labelText: string;
 }
 
-const SelectComponent = ({ onChange, value, options, labelText }: SelectComponentProps) => {
+const SelectComponent = ({ onSelectChange, value, options, labelText }: SelectComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isArrowRotated, setIsArrowRotated] = useState(false);
   const selectRef = useRef<any>(null);
-  const handleSelect = (option: any) => {
-    console.log("Selected option:", option);
-    onChange(option);
+  const handleSelect = (option: Option) => {
+    // console.log("Selected option:", option);
+    onSelectChange(option);
     setIsOpen(false);
     setIsArrowRotated(false);
   };
@@ -493,7 +495,7 @@ const HowToUseSelect = () => {
 
   return (
     <div>
-      <SelectComponent onChange={handleChange} value={value} options={foodOptions} labelText={labelText} />
+      <SelectComponent onSelectChange={handleChange} value={value} options={foodOptions} labelText={labelText} />
     </div>
   );
 };
@@ -520,7 +522,7 @@ export default HowToUseSelect;
 
   return (
     <section>
-      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[calc(100vh-5.6rem)] h-full'>
         <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto px-4 mt-8'

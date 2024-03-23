@@ -8,9 +8,10 @@ import Slider from "@/Components/ui/Slide";
 import { colorOptions } from "@/constant/ColorData";
 import React, { useEffect, useState } from "react";
 const CheckboxContent = () => {
-  const [classNames, setClassNames] = useState<any>("");
+  const [code, setCode] = useState<any>("");
+  const [componentCode, setComponentCode] = useState<any>("");
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const [checkColor, setCheckColor] = useState({
     value: "red-400",
@@ -29,7 +30,7 @@ const CheckboxContent = () => {
     {
       label: "Primary",
       value: "primary",
-      class: ` checked:${checkColor.border} checked:${checkColor.bg} `,
+      class: `checked:${checkColor.border} checked:${checkColor.bg} `,
       svg: `fill-white stroke-white`,
     },
     {
@@ -50,13 +51,13 @@ const CheckboxContent = () => {
       {
         label: "Primary",
         value: "primary",
-        class: ` checked:${checkColor.border} checked:${checkColor.bg} `,
+        class: `checked:${checkColor.border} checked:${checkColor.bg}`,
         svg: `fill-white stroke-white`,
       },
       {
         label: "Outline",
         value: "outline",
-        class: ` checked:${checkColor.border} checked:bg-white`,
+        class: `checked:${checkColor.border} checked:bg-white`,
         svg: `fill-${checkColor.value} stroke-${checkColor.value}`,
       },
     ];
@@ -124,12 +125,12 @@ const CheckboxContent = () => {
     {
       label: "Yes",
       value: true,
-      class: "transition-all duration-300",
+      class: "transition-all duration-300 -rotate-90 peer-checked:rotate-0",
     },
     {
       label: "No",
       value: false,
-      class: "",
+      class: "-rotate-90 peer-checked:rotate-0",
     },
   ];
 
@@ -142,38 +143,86 @@ const CheckboxContent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(`
-<div className='relative flex flex-wrap items-center'>
-  <input className='w-${size} h-${size} cursor-pointer appearance-none rounded border-2 peer focus:outline-none transition-colors border-gray-300 bg-white ${
+    setCode(`
+import React, { ChangeEvent } from "react";
+
+type CheckboxProps = {
+  checked: boolean;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+};
+    
+const CheckboxComponent = ({ checked, onChange, label }: CheckboxProps) => {
+  return (
+    <div className='flex items-center'>
+      <div className='relative flex items-center'>
+        <input
+          className='cursor-pointer size-${size} appearance-none rounded border-2 border-gray-300 peer focus:outline-none transition-colors bg-white ${
       checkboxTypes.class
     }'
-  type='checkbox' id='one'/>
-  <label className="cursor-pointer ${fontSize.class} ${labelColor.text} pl-2"
-  htmlFor='one'>${label}</label>
-  <svg
-  className="pointer-events-none w-${size} h-${size} absolute ${
-      size === 4 ? (fontSize.label === "Small" ? "2px" : "4px") : "0px"
-    } left-0 -rotate-90 ${animation.class} ${
+          type='checkbox'
+          checked={checked}
+          onChange={onChange}
+          id='${label.replace(/\s/g, "")}'
+        />
+        <svg
+          className='pointer-events-none size-${size} ${
+      size === 4 ? "top-0.5" : size === 6 ? "top-1" : "top-1.5"
+    } ${size === 4 ? "px-[1px]" : "p-0"} absolute m-auto ${animation.class} ${
       checkboxTypes.svg
-    } opacity-0  peer-checked:rotate-0 peer-checked:opacity-100"
-    viewBox='0 0 16 16'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-    aria-hidden='true'
-    role='graphics-symbol' >
-  <path
-    fillRule='evenodd'
-    clipRule='evenodd'
-    d='M12.8116 5.17568C12.9322 5.2882 13 5.44079 13 5.5999C13 5.759 12.9322 5.91159 12.8116 6.02412L7.66416 10.8243C7.5435 10.9368 7.37987 11 7.20925 11C7.03864 11 6.87501 10.9368 6.75435 10.8243L4.18062 8.42422C4.06341 8.31105 3.99856 8.15948 4.00002 8.00216C4.00149 7.84483 4.06916 7.69434 4.18846 7.58309C4.30775 7.47184 4.46913 7.40874 4.63784 7.40737C4.80655 7.406 4.96908 7.46648 5.09043 7.57578L7.20925 9.55167L11.9018 5.17568C12.0225 5.06319 12.1861 5 12.3567 5C12.5273 5 12.691 5.06319 12.8116 5.17568Z'/>
-  </svg>
-</div>
+    } opacity-0 stroke-0 peer-checked:opacity-100'
+          viewBox='0 0 16 16'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+          aria-hidden='true'
+          role='graphics-symbol'
+        >
+          <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M12.6716 3.5786C13.0631 3.18711 13.0631 2.55437 12.6716 2.16288C12.2801 1.7714 11.6474 1.7714 11.2559 2.16288L7.49996 5.91883L5.74486 4.16373C5.35337 3.77224 4.72063 3.77224 4.32914 4.16373C3.93766 4.55521 3.93766 5.18795 4.32914 5.57944L6.91557 8.16587C7.10035 8.35065 7.34545 8.44604 7.59055 8.44604C7.83566 8.44604 8.08076 8.35065 8.26554 8.16587L12.6716 3.75983C13.0631 3.36835 13.0631 3.02715 12.6716 3.5786Z'
+          />
+        </svg>
+      </div>
+      <label
+        className='cursor-pointer ${fontSize.class} ${labelColor.text} pl-2'
+        htmlFor='${label.replace(/\s/g, "")}'
+      >
+        {label}
+      </label>
+    </div>
+  );
+};
+
+export default CheckboxComponent;
     
+    
+    `);
+
+    setComponentCode(`
+const HowToUseCheckbox = () => {
+  const [isChecked, setIsChecked] = useState(true);
+  const label = "${label}"
+  return (
+    <div>
+      <CheckboxComponent
+        checked={isChecked}
+        onChange={() => setIsChecked(!isChecked)}
+        label={label}
+      />
+    </div>
+  );
+};
     `);
   };
 
+  useEffect(() => {
+    setCode("");
+  }, [label, labelColor, size, animation, checkboxTypes, fontSize, checkColor]);
+
   return (
     <section>
-      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[calc(100vh-5.6rem)] h-full'>
         <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto px-4 mt-8'
@@ -238,35 +287,66 @@ const CheckboxContent = () => {
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 ${
-              classNames.length > 0 ? "" : "hidden"
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-700 ${
+              code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={classNames} />
+            <CopyToClipboardButton text={code} component={componentCode} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
           <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'>
             {/*  */}
-            <div className='relative flex flex-wrap items-center'>
-              <input
-                className='cursor-pointer appearance-none rounded border-2 peer focus:outline-none transition-colors 
-                border-gray-300 bg-white'
-                type='checkbox'
-                checked={checked}
-                onChange={() => setChecked(!checked)}
-                id='one'
-                style={{
-                  width: size * 4 + "px",
-                  height: size * 4 + "px",
-                  borderColor: checked ? checkColor.colorCode : "#d1d5db",
-                  backgroundColor:
-                    (checked &&
-                      checkboxTypes.value === "primary" &&
-                      checkColor.colorCode) ||
-                    "#fff",
-                }}
-              />
+
+            <div className='flex items-center'>
+              <div className='relative flex items-center'>
+                <input
+                  className='cursor-pointer appearance-none rounded border-2 border-gray-300 peer focus:outline-none transition-colors 
+                bg-white'
+                  type='checkbox'
+                  checked={checked}
+                  onChange={() => setChecked(!checked)}
+                  id='one'
+                  style={{
+                    width: size * 4 + "px",
+                    height: size * 4 + "px",
+                    borderColor: checked ? checkColor.colorCode : "#d1d5db",
+                    backgroundColor: checked
+                      ? (checkboxTypes.value === "primary" &&
+                          checkColor.colorCode) ||
+                        "#fff"
+                      : "#fff",
+                  }}
+                />
+                <svg
+                  className={`pointer-events-none absolute m-auto -rotate-90 ${animation.class} opacity-0 stroke-0 peer-checked:rotate-0 peer-checked:opacity-100`}
+                  viewBox='0 0 16 16'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                  aria-hidden='true'
+                  role='graphics-symbol'
+                  style={{
+                    width: `${size * 4}px`,
+                    height: `${size * 4}px`,
+                    top: size === 4 ? "2px" : size === 6 ? "4px" : "6px",
+                    padding: size === 4 ? "0 1px" : "0px",
+                    fill: checked
+                      ? (checkboxTypes.value === "primary" && "#fff") ||
+                        checkColor.colorCode
+                      : "",
+                    stroke: checked
+                      ? (checkboxTypes.value === "primary" && "#fff") ||
+                        checkColor.colorCode
+                      : "",
+                  }}
+                >
+                  <path
+                    fillRule='evenodd'
+                    clipRule='evenodd'
+                    d='M12.6716 3.5786C13.0631 3.18711 13.0631 2.55437 12.6716 2.16288C12.2801 1.7714 11.6474 1.7714 11.2559 2.16288L7.49996 5.91883L5.74486 4.16373C5.35337 3.77224 4.72063 3.77224 4.32914 4.16373C3.93766 4.55521 3.93766 5.18795 4.32914 5.57944L6.91557 8.16587C7.10035 8.35065 7.34545 8.44604 7.59055 8.44604C7.83566 8.44604 8.08076 8.35065 8.26554 8.16587L12.6716 3.75983C13.0631 3.36835 13.0631 3.02715 12.6716 3.5786Z'
+                  />
+                </svg>
+              </div>
               <label
                 className={`cursor-pointer ${fontSize.class} pl-2`}
                 htmlFor='one'
@@ -276,42 +356,6 @@ const CheckboxContent = () => {
               >
                 {label}
               </label>
-              <svg
-                className={`pointer-events-none absolute left-0 -rotate-90 ${animation.class} opacity-0  peer-checked:rotate-0 peer-checked:opacity-100`}
-                viewBox='0 0 16 16'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-                aria-hidden='true'
-                role='graphics-symbol'
-                style={{
-                  width: size * 4 + "px",
-                  height: size * 4 + "px",
-                  top:
-                    size === 4
-                      ? fontSize.label === "Small"
-                        ? "2px"
-                        : "4px"
-                      : "0px",
-                  fill:
-                    (checked && checkboxTypes.value === "primary" && "#fff") ||
-                    (checked &&
-                      checkboxTypes.value === "outline" &&
-                      checkColor.colorCode) ||
-                    "",
-                  stroke:
-                    (checked && checkboxTypes.value === "primary" && "#fff") ||
-                    (checked &&
-                      checkboxTypes.value === "outline" &&
-                      checkColor.colorCode) ||
-                    "",
-                }}
-              >
-                <path
-                  fillRule='evenodd'
-                  clipRule='evenodd'
-                  d='M12.8116 5.17568C12.9322 5.2882 13 5.44079 13 5.5999C13 5.759 12.9322 5.91159 12.8116 6.02412L7.66416 10.8243C7.5435 10.9368 7.37987 11 7.20925 11C7.03864 11 6.87501 10.9368 6.75435 10.8243L4.18062 8.42422C4.06341 8.31105 3.99856 8.15948 4.00002 8.00216C4.00149 7.84483 4.06916 7.69434 4.18846 7.58309C4.30775 7.47184 4.46913 7.40874 4.63784 7.40737C4.80655 7.406 4.96908 7.46648 5.09043 7.57578L7.20925 9.55167L11.9018 5.17568C12.0225 5.06319 12.1861 5 12.3567 5C12.5273 5 12.691 5.06319 12.8116 5.17568Z'
-                />
-              </svg>
             </div>
             {/*  */}
           </div>

@@ -7,6 +7,7 @@ import AccordionComponent from "./accordion";
 import SelectComponent from "./select";
 import ButtonComponent from "./button";
 import CardComponent from "./card";
+import CheckboxComponent from "./checkbox";
 
 /* const HowToUseButton = () => {
   return (
@@ -95,21 +96,36 @@ const HowToUseCard = () => {
   );
 };
 
+const HowToUseCheckbox = () => {
+  const [isChecked, setIsChecked] = useState(true);
+  const label = "Accept Company Terms and condition";
+  return (
+    <div>
+      <CheckboxComponent
+        checked={isChecked}
+        onChange={() => setIsChecked(!isChecked)}
+        label={label}
+      />
+    </div>
+  );
+};
+
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
       <div className='w-7/12 bg-red-100 h-full mx-auto py-8 px-8 '>
         {/* test */}
 
-        <div className='bg-white w-full h-fit  py-10 mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-8'>
+        <div className='bg-white w-full h-fit  py-10 mx-auto px-8 '>
           {/*  */}
           {/* <HowToUseAccordion /> */}
 
           {/* <HowToUseSelect /> */}
           {/* <HowToUseButton /> */}
+          {/* <HowToUseCard></HowToUseCard>
           <HowToUseCard></HowToUseCard>
-          <HowToUseCard></HowToUseCard>
-          <HowToUseCard></HowToUseCard>
+          <HowToUseCard></HowToUseCard> */}
+          <HowToUseCheckbox />
           {/*  */}
         </div>
 

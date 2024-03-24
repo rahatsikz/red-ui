@@ -8,6 +8,7 @@ import SelectComponent from "./select";
 import ButtonComponent from "./button";
 import CardComponent from "./card";
 import CheckboxComponent from "./checkbox";
+import RadioComponent from "./radio";
 
 /* const HowToUseButton = () => {
   return (
@@ -110,6 +111,38 @@ const HowToUseCheckbox = () => {
   );
 };
 
+const HowToUseRadio = () => {
+  const radioData = [
+    {
+      label: "Option One",
+      value: "radio1",
+    },
+    {
+      label: "Option Two",
+      value: "radio2",
+    },
+  ];
+
+  const name = "radioFoorti";
+
+  const [selectedOption, setSelectedOption] = useState(radioData[0].value);
+
+  return (
+    <div className='flex gap-4 flex-row items-center'>
+      {radioData.map((data, index) => (
+        <RadioComponent
+          key={index}
+          label={data.label}
+          name={name}
+          value={data.value}
+          onChange={() => setSelectedOption(data.value)}
+          checked={selectedOption === data.value}
+        />
+      ))}
+    </div>
+  );
+};
+
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
@@ -125,7 +158,8 @@ const TestPage = () => {
           {/* <HowToUseCard></HowToUseCard>
           <HowToUseCard></HowToUseCard>
           <HowToUseCard></HowToUseCard> */}
-          <HowToUseCheckbox />
+          {/* <HowToUseCheckbox /> */}
+          <HowToUseRadio />
           {/*  */}
         </div>
 

@@ -10,9 +10,10 @@ import { FontSizeOption } from "@/constant/FontSize";
 import React, { useEffect, useState } from "react";
 
 const RadioContent = () => {
-  const [classNames, setClassNames] = useState<any>("");
+  const [code, setCode] = useState<any>("");
+  const [componentCode, setComponentCode] = useState<any>("");
 
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("radio1");
 
   const onValueChange = (e: any) => {
     setSelectedOption(e.target.value);
@@ -137,49 +138,102 @@ const RadioContent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(`
-<div className="flex gap-4 ${direction.class}">
-  <div className='relative flex items-center'>
-    <input className= "w-${size} h-${size} ${radioTypes.class} transition-colors bg-white border-2 rounded-full appearance-none cursor-pointe peer border-slate-500 focus:outline-none"
-      type='radio'
-      value='one'
-      id='one'
-      name='${nameText}'/>
-    <label className="pl-2 ${labelColor.text} ${fontSize.class} cursor-pointer" htmlFor='one'>
-      Option One
-    </label>
-    <svg className="absolute w-${size} h-${size} ${radioTypes.svg} left-0 scale-50 opacity-0 pointer-events-none peer-checked:scale-100 peer-checked:opacity-100 peer-disabled:cursor-not-allowed"
-      viewBox='0 0 16 16'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-      role='graphics-symbol'>
-      <circle cx='8' cy='8' r='4' />
-    </svg>
-  </div>
-  <div className='relative flex items-center'>
-    <input className="w-${size} h-${size} ${radioTypes.class} bg-white transition-colors  border-2 rounded-full appearance-none cursor-pointer focus-visible:outline-none peer border-slate-500 focus:outline-none"
-      type='radio'
-      value='two'
-      id='two'
-      name='${nameText}'/>
-    <label className="pl-2 ${labelColor.text} ${fontSize.class} cursor-pointer" htmlFor='two'>
-      Option Two
-    </label>
-    <svg className="absolute w-${size} h-${size} ${radioTypes.svg} left-0 scale-50 opacity-0 pointer-events-none peer-checked:scale-100 peer-checked:opacity-100   peer-disabled:cursor-not-allowed"
-      viewBox='0 0 16 16'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-      role='graphics-symbol'>
-      <circle cx='8' cy='8' r='4' />
-    </svg>
-  </div>
-</div>
+    setCode(`
+import React from "react";
+
+type RadioProps = {
+  name: string;
+  label: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  checked?: boolean;
+};
+    
+const RadioComponent = ({
+  name,
+  label,
+  onChange,
+  value,
+  checked,
+}: RadioProps) => {
+
+
+  return (
+    <div className='relative flex items-center'>
+      <input
+        className='size-${size} ${radioTypes.class} transition-colors bg-white border-2 rounded-full appearance-none cursor-pointer peer border-slate-500 focus:outline-none'
+        type='radio'
+        value={value}
+        id={value.replace(/\\s/g, "")}
+        name={name}
+        onChange={onChange}
+        checked={checked}
+      />
+      <label
+        className='pl-2 ${labelColor.text} ${fontSize.class} cursor-pointer'
+        htmlFor={value.replace(/\\s/g, "")}
+      >
+        {label}
+      </label>
+      <svg
+        className='absolute size-${size} ${radioTypes.svg} left-0 scale-50 opacity-0 pointer-events-none peer-checked:scale-100 peer-checked:opacity-100'
+        viewBox='0 0 16 16'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+        role='graphics-symbol'
+      >
+        <circle cx='8' cy='8' r='4' />
+      </svg>
+    </div>
+  );
+};
+
+export default RadioComponent;
+    
+    `);
+
+    setComponentCode(`
+const HowToUseRadio = () => {
+  const radioData = [
+    {
+      label: "Option One",
+      value: "radio1",
+    },
+    {
+      label: "Option Two",
+      value: "radio2",
+    },
+  ];
+
+  const name = "${nameText}"; ;
+
+  const [selectedOption, setSelectedOption] = useState(radioData[0].value);
+
+  return (
+    <div className='flex gap-4 ${direction.class}'>
+      {radioData.map((data, index) => (
+        <RadioComponent
+          key={index}
+          label={data.label}
+          name={name}
+          value={data.value}
+          onChange={() => setSelectedOption(data.value)}
+          checked={selectedOption === data.value}
+        />
+      ))}
+    </div>
+  );
+};
     `);
   };
 
+  useEffect(() => {
+    setCode("");
+  }, [radioColor, labelColor, fontSize, radioTypes, size, nameText, direction]);
+
   return (
     <section>
-      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[calc(100vh-5.6rem)] h-full'>
         <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto px-4 mt-8'
@@ -244,11 +298,11 @@ const RadioContent = () => {
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 ${
-              classNames.length > 0 ? "" : "hidden"
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-700 ${
+              code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={classNames} />
+            <CopyToClipboardButton text={code} component={componentCode} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
@@ -264,34 +318,35 @@ const RadioContent = () => {
                     width: size * 4 + "px",
                     height: size * 4 + "px",
                     borderColor:
-                      selectedOption === "one"
+                      selectedOption === "radio1"
                         ? radioTypes.value === "inset"
                           ? radioColor.colorCode
                           : radioColor.colorCode
                         : "",
                     backgroundColor:
-                      selectedOption === "one"
+                      selectedOption === "radio1"
                         ? radioTypes.value === "inset"
                           ? "#fff"
                           : radioColor.colorCode
                         : "",
                   }}
                   type='radio'
-                  value='one'
-                  id='one'
+                  value='radio1'
+                  id='radio1'
                   name={nameText}
+                  checked={selectedOption === "radio1"}
                 />
                 <label
                   className={`pl-2 ${fontSize.class} cursor-pointer `}
                   style={{
                     color: labelColor.colorCode,
                   }}
-                  htmlFor='one'
+                  htmlFor='radio1'
                 >
                   Option One
                 </label>
                 <svg
-                  className={`absolute left-0   scale-50 opacity-0 pointer-events-none peer-checked:scale-100 peer-checked:opacity-100 peer-disabled:cursor-not-allowed`}
+                  className={`absolute left-0 scale-50 opacity-0 pointer-events-none peer-checked:scale-100 peer-checked:opacity-100 `}
                   viewBox='0 0 16 16'
                   fill='none'
                   xmlns='http://www.w3.org/2000/svg'
@@ -300,7 +355,7 @@ const RadioContent = () => {
                     width: size * 4 + "px",
                     height: size * 4 + "px",
                     fill:
-                      selectedOption === "one"
+                      selectedOption === "radio1"
                         ? radioTypes.value === "inset"
                           ? radioColor.colorCode
                           : "#fff"
@@ -315,21 +370,21 @@ const RadioContent = () => {
                 <input
                   className={` transition-colors  border-2 rounded-full appearance-none cursor-pointer focus-visible:outline-none peer border-slate-500 focus:outline-none`}
                   type='radio'
-                  value='two'
-                  id='two'
+                  value='radio2'
+                  id='radio2'
                   name={nameText}
                   onChange={onValueChange}
                   style={{
                     width: size * 4 + "px",
                     height: size * 4 + "px",
                     borderColor:
-                      selectedOption === "two"
+                      selectedOption === "radio2"
                         ? radioTypes.value === "inset"
                           ? radioColor.colorCode
                           : radioColor.colorCode
                         : "",
                     backgroundColor:
-                      selectedOption === "two"
+                      selectedOption === "radio2"
                         ? radioTypes.value === "inset"
                           ? "#fff"
                           : radioColor.colorCode
@@ -341,7 +396,7 @@ const RadioContent = () => {
                   style={{
                     color: labelColor.colorCode,
                   }}
-                  htmlFor='two'
+                  htmlFor='radio2'
                 >
                   Option Two
                 </label>
@@ -355,7 +410,7 @@ const RadioContent = () => {
                     width: size * 4 + "px",
                     height: size * 4 + "px",
                     fill:
-                      selectedOption === "two"
+                      selectedOption === "radio2"
                         ? radioTypes.value === "inset"
                           ? radioColor.colorCode
                           : "#fff"

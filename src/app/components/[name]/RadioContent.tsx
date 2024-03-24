@@ -139,12 +139,12 @@ const RadioContent = () => {
     e.preventDefault();
 
     setCode(`
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 type RadioProps = {
   name: string;
   label: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
   checked?: boolean;
 };

@@ -5,10 +5,11 @@ import CopyToClipboardButton from "@/Components/ui/CopyToClipboard";
 import Input from "@/Components/ui/Input";
 import Select from "@/Components/ui/Select";
 import { colorOptions } from "@/constant/ColorData";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ToggleContent = () => {
-  const [classNames, setClassNames] = useState<any>("");
+  const [code, setCode] = useState<any>("");
+  const [componentCode, setComponentCode] = useState<any>("");
 
   const [checked, setChecked] = useState(false);
 
@@ -24,19 +25,6 @@ const ToggleContent = () => {
   const handleToggleColorChange = (option: any) => {
     setToggleColor(option);
   };
-
-  // const [containerColor, setContainerColor] = useState({
-  //   value: "red-200",
-  //   colorCode: "#fecaca",
-  //   label: "red-200",
-  //   bg: "bg-red-200",
-  //   text: "text-red-200",
-  //   border: "border-red-200",
-  // });
-
-  // const handleContainerColorChange = (option: any) => {
-  //   setContainerColor(option);
-  // };
 
   const SizeOptions = [
     {
@@ -107,21 +95,60 @@ const ToggleContent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(`
-<div className='relative flex gap-4 items-center'>
-  <label className="${fontSize.class} ${labelColor.text}" htmlFor='toggle'>
-  ${label}
-  </label>
-  <input type='checkbox' id='toggle' className='absolute w-full h-full peer appearance-none rounded-md cursor-pointer'/>
-  <span className="flex items-center rounded-full duration-300 ease-in-out ${size.class} bg-gray-300 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:${toggleColor.bg} peer-checked:after:translate-x-full"></span>
-</div>  
+    setCode(`
+import React, { ChangeEvent } from "react";
+
+type ToggleProps = {
+  label: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  checked?: boolean;
+};
     
-    `);
+const ToggleComponent = ({ label, onChange, checked }: ToggleProps) => {
+  return (
+    <div className='relative flex gap-4 items-center w-fit'>
+      <label className='${fontSize.class} ${labelColor.text}' htmlFor='toggle'>
+        {label}
+      </label>
+      <input
+        type='checkbox'
+        id='toggle'
+        checked={checked}
+        onChange={onChange}
+        className='absolute w-full h-full peer appearance-none cursor-pointer'
+      />
+      <span className='flex items-center rounded-full duration-300 ease-in-out ${size.class} bg-gray-300 after:bg-white after:rounded-full after:shadow after:duration-300 peer-checked:${toggleColor.bg} peer-checked:after:translate-x-[calc(100%+.05rem)]'></span>
+    </div>
+  );
+};
+
+export default ToggleComponent;
+`);
+
+    setComponentCode(`
+const HowToUseToggle = () => {
+  const [isChecked, setIsChecked] = useState(${checked});
+  const label = "${label}";
+  return (
+    <div>
+      <ToggleComponent
+        checked={isChecked}
+        onChange={() => setIsChecked(!isChecked)}
+        label={label}
+      />
+    </div>
+  );
+};
+`);
   };
+
+  useEffect(() => {
+    setCode("");
+  }, [labelColor, size, toggleColor, fontSize, label, checked]);
 
   return (
     <section>
-      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[calc(100vh-5.6rem)] h-full'>
         <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto px-4 mt-8'
@@ -156,12 +183,6 @@ const ToggleContent = () => {
                 onChange={handleSizeChange}
                 value={size}
               />
-              {/* <Select
-                label='Container Color'
-                options={colorOptions}
-                onChange={handleContainerColorChange}
-                value={containerColor}
-              /> */}
 
               <Select
                 label='Toggle Color'
@@ -177,18 +198,18 @@ const ToggleContent = () => {
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 ${
-              classNames.length > 0 ? "" : "hidden"
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-700 ${
+              code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={classNames} />
+            <CopyToClipboardButton text={code} component={componentCode} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
           <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'>
             {/*  */}
 
-            <div className='relative flex gap-4 items-center'>
+            <div className='relative flex gap-4 items-center w-fit'>
               <label
                 style={{
                   color: labelColor.colorCode,
@@ -201,11 +222,11 @@ const ToggleContent = () => {
               <input
                 type='checkbox'
                 id='toggle'
-                className='absolute w-full h-full peer appearance-none rounded-md cursor-pointer'
+                className='absolute w-full h-full peer appearance-none cursor-pointer'
                 onChange={() => setChecked(!checked)}
               />
               <span
-                className={`flex items-center rounded-full duration-300 ease-in-out ${size.class} after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-full `}
+                className={`flex items-center rounded-full duration-300 ease-in-out ${size.class} after:bg-white after:rounded-full after:shadow after:duration-300 peer-checked:after:translate-x-[calc(100%+.05rem)] `}
                 style={{
                   backgroundColor: checked ? toggleColor.colorCode : "#d1d5db",
                 }}

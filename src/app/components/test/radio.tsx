@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 type RadioProps = {
   name: string;
   label: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
   checked?: boolean;
 };
@@ -18,7 +18,7 @@ const RadioComponent = ({
   return (
     <div className='relative flex items-center'>
       <input
-        className='size-8 checked:border-blue-400 checked:bg-blue-400 transition-colors bg-white border-2 rounded-full appearance-none cursor-pointer peer border-slate-500 focus:outline-none'
+        className='size-6 checked:border-red-400 transition-colors bg-white border-2 rounded-full appearance-none cursor-pointer peer border-slate-500 focus:outline-none'
         type='radio'
         value={value}
         id={value.replace(/\s/g, "")}
@@ -27,13 +27,13 @@ const RadioComponent = ({
         checked={checked}
       />
       <label
-        className='pl-2 text-slate-700 text-base cursor-pointer'
+        className='pl-2 text-gray-400 text-sm cursor-pointer'
         htmlFor={value.replace(/\s/g, "")}
       >
         {label}
       </label>
       <svg
-        className='absolute size-8 fill-white left-0 scale-50 opacity-0 pointer-events-none peer-checked:scale-100 peer-checked:opacity-100'
+        className='absolute size-6 fill-red-400 left-0 scale-50 opacity-0 pointer-events-none peer-checked:scale-100 peer-checked:opacity-100'
         viewBox='0 0 16 16'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'

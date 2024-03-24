@@ -9,6 +9,7 @@ import ButtonComponent from "./button";
 import CardComponent from "./card";
 import CheckboxComponent from "./checkbox";
 import RadioComponent from "./radio";
+import ToggleComponent from "./toggle";
 
 /* const HowToUseButton = () => {
   return (
@@ -143,6 +144,20 @@ const HowToUseRadio = () => {
   );
 };
 
+const HowToUseToggle = () => {
+  const [isChecked, setIsChecked] = useState(true);
+  const label = "Toggle me";
+  return (
+    <div>
+      <ToggleComponent
+        checked={isChecked}
+        onChange={() => setIsChecked(!isChecked)}
+        label={label}
+      />
+    </div>
+  );
+};
+
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
@@ -159,7 +174,8 @@ const TestPage = () => {
           <HowToUseCard></HowToUseCard>
           <HowToUseCard></HowToUseCard> */}
           {/* <HowToUseCheckbox /> */}
-          <HowToUseRadio />
+          {/* <HowToUseRadio /> */}
+          <HowToUseToggle />
           {/*  */}
         </div>
 

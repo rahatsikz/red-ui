@@ -10,6 +10,7 @@ import CardComponent from "./card";
 import CheckboxComponent from "./checkbox";
 import RadioComponent from "./radio";
 import ToggleComponent from "./toggle";
+import LoaderComponent from "./loader";
 
 /* const HowToUseButton = () => {
   return (
@@ -158,6 +159,14 @@ const HowToUseToggle = () => {
   );
 };
 
+const HowToUseLoader = () => {
+  return (
+    <div>
+      <LoaderComponent />
+    </div>
+  );
+};
+
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
@@ -176,6 +185,7 @@ const TestPage = () => {
           {/* <HowToUseCheckbox /> */}
           {/* <HowToUseRadio /> */}
           <HowToUseToggle />
+          <HowToUseLoader />
           {/*  */}
         </div>
 

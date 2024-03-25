@@ -247,7 +247,7 @@ const HowToUseLoader = () => {
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
-          <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'>
+          <div className='bg-white py-32 w-full mx-auto px-6'>
             {/*  */}
             {loaderType.value === "one" && (
               <div className='flex justify-center items-center'>

@@ -44,7 +44,7 @@ const AllComponentPage = ({ params }: { params: { name: string } }) => {
     case "accordion":
       component = <AccordionContent />;
       break;
-    case "progress":
+    case "progressbar":
       component = <ProgressContent />;
       break;
     case "loader":

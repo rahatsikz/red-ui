@@ -11,6 +11,7 @@ import CheckboxComponent from "./checkbox";
 import RadioComponent from "./radio";
 import ToggleComponent from "./toggle";
 import LoaderComponent from "./loader";
+import ProgressBarComponent from "./progress";
 
 /* const HowToUseButton = () => {
   return (
@@ -167,6 +168,20 @@ const HowToUseLoader = () => {
   );
 };
 
+const HowToUseProgressBar = () => {
+  const label = "HTML";
+  const percentage = 70;
+  const label1 = "JavaScript";
+  const percentage1 = 60;
+
+  return (
+    <div className='space-y-6'>
+      <ProgressBarComponent label={label} percentage={percentage} />
+      <ProgressBarComponent label={label1} percentage={percentage1} />
+    </div>
+  );
+};
+
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
@@ -184,8 +199,9 @@ const TestPage = () => {
           <HowToUseCard></HowToUseCard> */}
           {/* <HowToUseCheckbox /> */}
           {/* <HowToUseRadio /> */}
-          <HowToUseToggle />
-          <HowToUseLoader />
+          {/* <HowToUseToggle /> */}
+          {/* <HowToUseLoader /> */}
+          <HowToUseProgressBar />
           {/*  */}
         </div>
 

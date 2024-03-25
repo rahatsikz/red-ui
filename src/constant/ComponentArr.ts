@@ -38,7 +38,7 @@ export const ComponentsArr = [
     },
     {
         name: "Progress Bar",
-        path: "/components/progress",
+        path: "/components/progressbar",
     },
     {
       name: "Loader",

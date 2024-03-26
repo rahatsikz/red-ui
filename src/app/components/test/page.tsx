@@ -12,6 +12,7 @@ import RadioComponent from "./radio";
 import ToggleComponent from "./toggle";
 import LoaderComponent from "./loader";
 import ProgressBarComponent from "./progress";
+import TooltipComponent from "./tooltip";
 
 /* const HowToUseButton = () => {
   return (
@@ -182,6 +183,19 @@ const HowToUseProgressBar = () => {
   );
 };
 
+const HowToUseTooltip = () => {
+  const tooltipText = "Hey... Thanks for hovering me";
+  const hoverableText = "Hover me";
+  return (
+    <div>
+      <TooltipComponent
+        tooltipText={tooltipText}
+        hoverableText={hoverableText}
+      />
+    </div>
+  );
+};
+
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
@@ -201,7 +215,8 @@ const TestPage = () => {
           {/* <HowToUseRadio /> */}
           {/* <HowToUseToggle /> */}
           {/* <HowToUseLoader /> */}
-          <HowToUseProgressBar />
+          {/* <HowToUseProgressBar /> */}
+          <HowToUseTooltip />
           {/*  */}
         </div>
 

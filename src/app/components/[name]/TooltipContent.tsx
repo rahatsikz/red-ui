@@ -5,10 +5,11 @@ import CopyToClipboardButton from "@/Components/ui/CopyToClipboard";
 import Input from "@/Components/ui/Input";
 import Select from "@/Components/ui/Select";
 import { colorOptions } from "@/constant/ColorData";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const TooltipContent = () => {
-  const [classNames, setClassNames] = useState<any>("");
+  const [code, setCode] = useState<any>("");
+  const [componentCode, setComponentCode] = useState<any>("");
 
   const [hoverText, setHoverText] = useState("Hey... Thanks for hovering");
 
@@ -106,26 +107,59 @@ const TooltipContent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(
+    setCode(
       `
-<div className='relative group'>
-  <button className='relative overflow-hidden hover:overflow-visible'>
-    Hover me
-  </button>
-  <span className="absolute invisible transform ${tooltipType.bgClass} z-10 min-w-48 w-fit p-2 text-sm ${textColor.text} ${bgColor.bg} rounded opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100">
-    <div className='relative'>
-      <div className="w-3 h-3 ${bgColor.bg} absolute transform ${tooltipType.arrowClass}">
+import React from "react";
+
+type TooltipProps = {
+  tooltipText: string;
+  hoverableText: string;
+};
+      
+const TooltipComponent = ({ tooltipText, hoverableText }: TooltipProps) => {
+  return (
+    <div className='relative group w-fit'>
+      <div className='relative overflow-hidden cursor-pointer hover:overflow-visible'>
+        {hoverableText}
       </div>
-      <div className='py-1 px-2 text-center'>${hoverText}</div>
+      <span className='absolute invisible transform ${tooltipType.bgClass} z-20 min-w-48 w-fit p-2 text-sm ${textColor.text} ${bgColor.bg} rounded opacity-0 transition-opacity duration-200 group-hover:visible group-hover:opacity-100'>
+        <div className='relative'>
+          <div className='w-3 h-3 ${bgColor.bg} absolute transform ${tooltipType.arrowClass}'></div>
+          <div className='py-1 px-2 text-center'>{tooltipText}</div>
+        </div>
+      </span>
     </div>
-  </span>
-</div>
+  );
+};
+
+export default TooltipComponent;
+      
       `
     );
+
+    setComponentCode(`
+const HowToUseTooltip = () => {
+  const tooltipText = "${hoverText}";
+  const hoverableText = "Hover me";
+  return (
+    <div>
+      <TooltipComponent
+        tooltipText={tooltipText}
+        hoverableText={hoverableText}
+      />
+    </div>
+  );
+};
+    `);
   };
+
+  useEffect(() => {
+    setCode("");
+  }, [tooltipType, hoverText, bgColor, textColor]);
+
   return (
     <section>
-      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[calc(100vh-5.6rem)] h-full'>
         <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto px-4 mt-8'
@@ -166,22 +200,31 @@ const TooltipContent = () => {
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 ${
-              classNames.length > 0 ? "" : "hidden"
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-700 ${
+              code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={classNames} />
+            <CopyToClipboardButton text={code} component={componentCode} />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
-          <div className='bg-white py-32 w-full mx-auto px-6 flex items-center justify-center'>
+          <div
+            className={`bg-white py-32 w-full mx-auto px-6 flex items-center ${
+              tooltipType.value === "right" && "justify-start xl:justify-start"
+            } ${
+              tooltipType.value === "left" && "justify-end xl:justify-end "
+            } ${
+              (tooltipType.value === "top" || tooltipType.value === "bottom") &&
+              "justify-center"
+            } md:justify-center 2xl:justify-center`}
+          >
             {/*  */}
-            <div className='relative group'>
-              <button className='relative overflow-hidden hover:overflow-visible'>
+            <div className='relative group w-fit'>
+              <div className='relative overflow-hidden cursor-pointer hover:overflow-visible'>
                 Hover me
-              </button>
+              </div>
               <span
-                className={`absolute invisible transform ${tooltipType.bgClass} z-10 min-w-48 w-fit p-2 text-sm rounded opacity-0 transition-opacity duration-200 group-hover:visible  group-hover:opacity-100`}
+                className={`absolute invisible transform ${tooltipType.bgClass} z-20 min-w-48 w-fit p-2 text-sm rounded opacity-0 transition-opacity duration-200 group-hover:visible  group-hover:opacity-100`}
                 style={{
                   backgroundColor: bgColor.colorCode,
                   color: textColor.colorCode,

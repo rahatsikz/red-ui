@@ -10,10 +10,11 @@ import { BorderRadiusOptions } from "@/constant/BorderRadius";
 import { colorOptions } from "@/constant/ColorData";
 import { FontSizeOption } from "@/constant/FontSize";
 import { WidthOptions } from "@/constant/Width";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const InputContent = () => {
-  const [classNames, setClassNames] = useState<any>("");
+  const [code, setCode] = useState<any>("");
+  const [componentCode, setComponentCode] = useState<any>("");
 
   const [xPadding, setXPadding] = useState(10);
   const [yPadding, setYPadding] = useState(4);
@@ -201,31 +202,103 @@ const InputContent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(`
-<div className= "flex ${
+    setCode(`
+import React from "react";
+
+type InputProps = {
+  label: string;
+  placeholder: string;
+  value: string | number;
+  onchange: (value: string | number) => void;
+  inputType: "text" | "number" | "email" | "password";
+};
+
+const InputComponent = ({
+  label,
+  placeholder,
+  value,
+  onchange,
+  inputType
+}: InputProps) => {
+  return (
+    <div className= "flex gap-1 relative ${
       label.value === "top" || label.value === "bottom" ? label.class : ""
-    } gap-1 relative">
-  <input type="${
-    inputType.value
-  }" name="${labelText}" id="${labelText}" placeholder="${placeholderText}"
-  className="${width.class} ${borderType.class} ${borderColor.border} focus:${
-      focusBorderColor.border
-    } ${xPadding % 4 === 0 ? `px-${xPadding / 4}` : `px-[${xPadding}px]`} ${
-      yPadding % 4 === 0 ? `py-${yPadding / 4}` : `py-[${yPadding}px]`
-    } ${radius.class} bg-transparent focus:outline-none placeholder:text-sm"
-  required={${required.label === "Yes" ? true : false}}/>
-  <label htmlFor="${labelText}"
-  className="${labelColor.text} ${fontSize.class} ${
-      label.value === "none" ? label.class : ""
-    } block ${label.value === "absolute" ? label.class : "pl-2"}">
-    ${labelText}
-  </label>
-</div>`);
+    }">
+      <input type={inputType} name={label} id={label} placeholder={placeholder}
+      className="${width.class} ${borderType.class} ${
+      borderColor.border
+    } focus:${focusBorderColor.border} ${
+      xPadding % 4 === 0 ? `px-${xPadding / 4}` : `px-[${xPadding}px]`
+    } ${yPadding % 4 === 0 ? `py-${yPadding / 4}` : `py-[${yPadding}px]`} ${
+      radius.class
+    } bg-transparent focus:outline-none placeholder:text-sm"
+      value={value}
+      onChange={(e: any) => onchange(e.target.value)}
+      required={${required.label === "Yes" ? true : false}}/>
+      <label htmlFor={label}
+      className="${labelColor.text} ${fontSize.class} ${
+      label.value === "absolute" ? label.class : "pl-2"
+    } space-x-2 ${label.value === "none" ? label.class : "block"}">
+        <span>{label}</span>
+        <span className="${
+          label.value !== "none" && required.value ? "visible" : "hidden"
+        }">*</span>
+      </label>
+    </div>
+  )
+};
+
+export default InputComponent;
+    `);
+
+    setComponentCode(`
+const HowToUseInput = () => {
+  const label = "${labelText}";
+  const placeholder = "${placeholderText}";
+
+  const [value, setValue] = useState<any>("");
+
+  const handleChange = (value: any) => {
+    setValue(value);
   };
 
   return (
+    <div>
+      <InputComponent
+        inputType="${inputType.value}"
+        label={label}
+        placeholder={placeholder}
+        value={value}
+        onchange={handleChange}
+      />
+    </div>
+  );
+};
+    `);
+  };
+
+  useEffect(() => {
+    setCode("");
+  }, [
+    label,
+    labelText,
+    labelColor,
+    fontSize,
+    width,
+    borderType,
+    borderColor,
+    focusBorderColor,
+    xPadding,
+    yPadding,
+    radius,
+    required,
+    inputType,
+    placeholderText,
+  ]);
+
+  return (
     <section>
-      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[calc(100vh-5.6rem)] h-full'>
         <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto px-4 mt-8'
@@ -334,11 +407,15 @@ const InputContent = () => {
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 ${
-              classNames.length > 0 ? "" : "hidden"
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-700 ${
+              code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={classNames} height={"200"} />
+            <CopyToClipboardButton
+              text={code}
+              component={componentCode}
+              height={200}
+            />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
@@ -374,10 +451,19 @@ const InputContent = () => {
                   fontSize: fontSize.value,
                 }}
                 className={`text-sm ${
-                  label.value === "none" ? label.class : ""
-                } block ${label.value === "absolute" ? label.class : "pl-2"} `}
+                  label.value === "absolute" ? label.class : "pl-2"
+                } space-x-2 ${label.value === "none" ? label.class : "block"}`}
               >
-                {labelText}
+                <span> {labelText}</span>
+                <span
+                  className={
+                    label.value !== "none" && required.value
+                      ? "visible"
+                      : "hidden"
+                  }
+                >
+                  *
+                </span>
               </label>
             </div>
           </div>

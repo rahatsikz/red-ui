@@ -13,6 +13,7 @@ import ToggleComponent from "./toggle";
 import LoaderComponent from "./loader";
 import ProgressBarComponent from "./progress";
 import TooltipComponent from "./tooltip";
+import InputComponent from "./input";
 
 /* const HowToUseButton = () => {
   return (
@@ -196,6 +197,48 @@ const HowToUseTooltip = () => {
   );
 };
 
+const HowToUseInput = () => {
+  const label = "First Name";
+  const placeholder = "Enter your name";
+
+  const [value, setValue] = useState<any>("");
+
+  const handleChange = (value: any) => {
+    setValue(value);
+  };
+  const label2 = "Email";
+  const placeholder2 = "Enter your email";
+
+  const [value2, setValue2] = useState<any>("");
+
+  const handleChange2 = (value: any) => {
+    setValue2(value);
+  };
+
+  return (
+    <div className='grid lg:grid-cols-2 gap-x-4'>
+      <InputComponent
+        inputType='text'
+        label={label}
+        placeholder={placeholder}
+        value={value}
+        onchange={handleChange}
+      />
+      <InputComponent
+        inputType='email'
+        label={label2}
+        placeholder={placeholder2}
+        value={value2}
+        onchange={handleChange2}
+      />
+    </div>
+  );
+};
+
+// useEffect(() => {
+//   console.log(value);
+// }, [value]);
+
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
@@ -216,7 +259,8 @@ const TestPage = () => {
           {/* <HowToUseToggle /> */}
           {/* <HowToUseLoader /> */}
           {/* <HowToUseProgressBar /> */}
-          <HowToUseTooltip />
+          {/* <HowToUseTooltip /> */}
+          <HowToUseInput />
           {/*  */}
         </div>
 

@@ -454,7 +454,7 @@ const HowToUseInput = () => {
                   label.value === "absolute" ? label.class : "pl-2"
                 } space-x-2 ${label.value === "none" ? label.class : "block"}`}
               >
-                <span> {labelText}</span>
+                <span>{labelText}</span>
                 <span
                   className={
                     label.value !== "none" && required.value

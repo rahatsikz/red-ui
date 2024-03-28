@@ -8,7 +8,7 @@ import { BorderOptions } from "@/constant/Border";
 import { colorOptions } from "@/constant/ColorData";
 import { FontSizeOption } from "@/constant/FontSize";
 import { WidthOptions } from "@/constant/Width";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const BorderRadiusOptions = [
   {
@@ -34,7 +34,8 @@ const BorderRadiusOptions = [
 ];
 
 const TextareaContent = () => {
-  const [classNames, setClassNames] = useState<any>("");
+  const [code, setCode] = useState<any>("");
+  const [componentCode, setComponentCode] = useState<any>("");
 
   const [xPadding, setXPadding] = useState(10);
   const [yPadding, setYPadding] = useState(4);
@@ -232,31 +233,99 @@ const TextareaContent = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    setClassNames(`
-<div className= "flex ${
+    setCode(`
+import React from 'react';
+
+type TextareaProps = {
+  label: string;
+  placeholder: string;
+  value: string;
+  onchange: (value: string) => void;
+};
+    
+    
+const TextareaComponent = ({label, placeholder, value, onchange}: TextareaProps) => {
+  return (
+    <div className= "flex gap-1 relative ${
       label.value === "top" || label.value === "bottom" ? label.class : ""
-    } gap-1 relative">
-  <textarea name="${labelText}" id="${labelText}"
-  placeholder="${placeholderText}"
-  className="${width.class} ${borderType.class} ${borderColor.border} focus:${
-      focusBorderColor.border
-    } ${radius.class} px-[${xPadding}px] py-[${yPadding}px] ${
+    }">
+      <textarea name={label} id={label} placeholder={placeholder}
+      className="${width.class} ${borderType.class} ${
+      borderColor.border
+    } focus:${focusBorderColor.border} ${
+      radius.class
+    } px-[${xPadding}px] py-[${yPadding}px] ${
       resize.class
     } bg-transparent focus:outline-none placeholder:text-sm"
-  rows={${rows}}
-  required={${required.value}}
-  ></textarea>
-  <label htmlFor="${labelText}"
-  className="${labelColor.text} ${fontSize.class} ${
-      label.value === "none" ? label.class : ""
-    } block ${label.value === "absolute" ? label.class : "pl-2"}" >
-  ${labelText}
-  </label>
-</div>`);
+      value={value}
+      onChange={(e) => onchange(e.target.value)}
+      rows={${rows}}
+      required={${required.value}}
+      ></textarea>
+      <label htmlFor={label}
+      className="${labelColor.text} ${fontSize.class} ${
+      label.value === "none" ? label.class : "block"
+    } ${label.value === "absolute" ? label.class : "pl-2"} space-x-2">
+        <span>{label}</span>
+        <span className="${
+          label.value !== "none" && required.value ? "visible" : "hidden"
+        }">*</span>
+      </label>
+    </div>
+  );
+};
+
+export default TextareaComponent;
+`);
+
+    setComponentCode(`
+const HowToUseTextarea = () => {
+  const label = "${labelText}";
+  const placeholder = "${placeholderText}";
+
+  const [value, setValue] = useState<any>("");
+
+  const handleChange = (value: any) => {
+    setValue(value);
   };
+
+  return (
+    <div>
+      <TextareaComponent
+        label={label}
+        placeholder={placeholder}
+        value={value}
+        onchange={handleChange}
+      />
+    </div>
+  );
+};
+`);
+  };
+
+  useEffect(() => {
+    setCode("");
+  }, [
+    label,
+    labelText,
+    labelColor,
+    fontSize,
+    borderType,
+    borderColor,
+    focusBorderColor,
+    radius,
+    xPadding,
+    yPadding,
+    rows,
+    resize,
+    required,
+    width,
+    placeholderText,
+  ]);
+
   return (
     <section>
-      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[90.6vh] h-full'>
+      <div className='xl:grid grid-cols-12 flex flex-col gap-16 lg:h-[calc(100vh-5.6rem)] h-full'>
         <div className='xl:col-span-8 '>
           <form
             className='xl:w-11/12 mx-auto  px-4 mt-8'
@@ -374,15 +443,19 @@ const TextareaContent = () => {
             </div>
           </form>
           <div
-            className={`w-11/12 mx-auto mt-8 ${
-              classNames.length > 0 ? "" : "hidden"
+            className={`w-11/12 mx-auto mt-8 transition-opacity duration-700 ${
+              code.length > 0 ? "" : "opacity-0 hidden lg:block"
             }`}
           >
-            <CopyToClipboardButton text={classNames} height={130} />
+            <CopyToClipboardButton
+              text={code}
+              component={componentCode}
+              height={130}
+            />
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
-          <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'>
+          <div className='bg-white py-32 w-full mx-auto px-6'>
             <div
               className={`flex ${
                 (label.value === "top" || label.value === "bottom") &&
@@ -414,10 +487,21 @@ const TextareaContent = () => {
                   fontSize: fontSize.value,
                 }}
                 className={`text-sm ${
-                  label.value === "none" ? label.class : ""
-                } block ${label.value === "absolute" ? label.class : "pl-2"} `}
+                  label.value === "none" ? label.class : "block"
+                } ${
+                  label.value === "absolute" ? label.class : "pl-2"
+                }  space-x-2`}
               >
-                {labelText}
+                <span>{labelText}</span>
+                <span
+                  className={
+                    label.value !== "none" && required.value
+                      ? "visible"
+                      : "hidden"
+                  }
+                >
+                  *
+                </span>
               </label>
             </div>
           </div>

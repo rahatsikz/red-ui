@@ -14,6 +14,7 @@ import LoaderComponent from "./loader";
 import ProgressBarComponent from "./progress";
 import TooltipComponent from "./tooltip";
 import InputComponent from "./input";
+import TextareaComponent from "./textarea";
 
 /* const HowToUseButton = () => {
   return (
@@ -239,13 +240,35 @@ const HowToUseInput = () => {
 //   console.log(value);
 // }, [value]);
 
+const HowToUseTextarea = () => {
+  const label = "Address";
+  const placeholder = "Enter your address";
+
+  const [value, setValue] = useState<any>("");
+
+  const handleChange = (value: any) => {
+    setValue(value);
+  };
+
+  return (
+    <div>
+      <TextareaComponent
+        label={label}
+        placeholder={placeholder}
+        value={value}
+        onchange={handleChange}
+      />
+    </div>
+  );
+};
+
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
       <div className='w-7/12 bg-red-100 h-full mx-auto py-8 px-8 '>
         {/* test */}
 
-        <div className='bg-white w-full h-fit  py-10 mx-auto px-8 '>
+        <div className='bg-white w-full h-fit  py-10 mx-auto px-8 space-y-6'>
           {/*  */}
           {/* <HowToUseAccordion /> */}
 
@@ -261,6 +284,7 @@ const TestPage = () => {
           {/* <HowToUseProgressBar /> */}
           {/* <HowToUseTooltip /> */}
           <HowToUseInput />
+          <HowToUseTextarea />
           {/*  */}
         </div>
 

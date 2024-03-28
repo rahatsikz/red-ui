@@ -419,7 +419,7 @@ const HowToUseInput = () => {
           </div>
         </div>
         <div className='bg-red-50 xl:col-span-4 md:w-full w-11/12 mx-auto py-12 flex items-center justify-center px-12'>
-          <div className='bg-white py-32 w-full mx-auto pl-6 pr-4'>
+          <div className='bg-white py-32 w-full mx-auto px-6'>
             <div
               className={`flex ${
                 (label.value === "top" || label.value === "bottom") &&
@@ -454,7 +454,7 @@ const HowToUseInput = () => {
                   label.value === "absolute" ? label.class : "pl-2"
                 } space-x-2 ${label.value === "none" ? label.class : "block"}`}
               >
-                <span> {labelText}</span>
+                <span>{labelText}</span>
                 <span
                   className={
                     label.value !== "none" && required.value

@@ -265,7 +265,7 @@ const TextareaComponent = ({label, placeholder, value, onchange}: TextareaProps)
       <label htmlFor={label}
       className="${labelColor.text} ${fontSize.class} ${
       label.value === "none" ? label.class : "block"
-    } ${label.value === "absolute" ? label.class : "pl-2"} space-x-2" >
+    } ${label.value === "absolute" ? label.class : "pl-2"} space-x-2">
         <span>{label}</span>
         <span className="${
           label.value !== "none" && required.value ? "visible" : "hidden"

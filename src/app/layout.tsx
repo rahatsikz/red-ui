@@ -4,7 +4,12 @@ import "./globals.css";
 import Navbar from "@/Components/ui/Navbar";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./Providers";
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Red UI",
@@ -15,7 +20,7 @@ export default function RootLayout({ children }: { children: any }) {
   return (
     <html lang='en'>
       <Providers>
-        <body className={`${poppins.className}`}>
+        <body className={poppins.className}>
           <Navbar />
           <Toaster />
           {children}

@@ -15,6 +15,7 @@ import ProgressBarComponent from "./progress";
 import TooltipComponent from "./tooltip";
 import InputComponent from "./input";
 import TextareaComponent from "./textarea";
+import ToastComponent from "./toast";
 
 /* const HowToUseButton = () => {
   return (
@@ -263,6 +264,90 @@ const HowToUseTextarea = () => {
 };
 
 const TestPage = () => {
+  // const [toastMessage, setToastMessage] = useState("");
+
+  // const [toastMessage, setToastMessage] = useState("");
+  // const [toastType, setToastType] = useState("success");
+  // const [showToast, setShowToast] = useState(false);
+
+  // const handleCloseToast = () => {
+  //   setShowToast(false);
+  // };
+
+  // const handleShowToast = (message: any, type = "success") => {
+  //   setToastMessage(message);
+  //   setToastType(type);
+  //   setShowToast(true);
+  // };
+
+  // const handleAdd = () => {
+  //   fetch("https://jsonplaceholder.typicode.com/nonexistent-endpoint", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       title: "foo",
+  //       body: "bar",
+  //       userId: 1,
+  //     }),
+  //     headers: {
+  //       "Content-type": "application/json; charset=UTF-8",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Failed to create post");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       handleShowToast("Success message", "success");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       handleShowToast(
+  //         "Error message is so long that I can eat a mango in it",
+  //         "warning"
+  //       );
+  //     });
+  // };
+
+  const [toastQueue, setToastQueue] = useState<any>([]);
+
+  const handleShowToast = (message: any, type = "success") => {
+    setToastQueue((prevQueue: any) => [...prevQueue, { message, type }]);
+  };
+
+  const handleAdd = () => {
+    fetch("https://jsonplaceholder.typicode.com/nonexistent-endpoint", {
+      method: "POST",
+      body: JSON.stringify({
+        title: "foo",
+        body: "bar",
+        userId: 1,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to create post");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        handleShowToast("Success message", "success");
+      })
+      .catch((err) => {
+        console.log(err);
+        handleShowToast(
+          "Error message is so long that I can eat a mango in it",
+          "warning"
+        );
+      });
+  };
+
   return (
     <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
       <div className='w-7/12 bg-red-100 h-full mx-auto py-8 px-8 '>
@@ -285,8 +370,27 @@ const TestPage = () => {
           {/* <HowToUseTooltip /> */}
           <HowToUseInput />
           <HowToUseTextarea />
+          {/* Render toast */}
+          {toastQueue.length > 0 && (
+            <ToastComponent
+              message={toastQueue[0].message}
+              type={toastQueue[0].type}
+              onDismiss={() =>
+                setToastQueue((prevQueue: any) => prevQueue.slice(1))
+              }
+            />
+          )}
+
+          {/* Example: Show a success toast */}
+          <button onClick={handleAdd}>Show Success Toast</button>
+          {/* Example: Show an error toast */}
+          <button onClick={() => handleShowToast("Error message", "error")}>
+            Show Error Toast
+          </button>
+
           {/*  */}
         </div>
+        {/* <ToastComponent message={toastMessage} /> */}
 
         {/*  */}
       </div>

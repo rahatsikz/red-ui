@@ -12,6 +12,7 @@ import NotFoundPage from "@/app/not-found";
 import ProgressContent from "./ProgressContent";
 import LoaderContent from "./LoaderContent";
 import TooltipContent from "./TooltipContent";
+import ToastContent from "./ToastContent";
 
 const AllComponentPage = ({ params }: { params: { name: string } }) => {
   let component;
@@ -52,6 +53,9 @@ const AllComponentPage = ({ params }: { params: { name: string } }) => {
       break;
     case "tooltip":
       component = <TooltipContent />;
+      break;
+    case "toast":
+      component = <ToastContent />;
       break;
     default:
       component = <NotFoundPage />;

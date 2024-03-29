@@ -48,4 +48,8 @@ export const ComponentsArr = [
       name: "Tooltip",
       path: "/components/tooltip",
     },
+    {
+      name: "Toast",
+      path: "/components/toast",
+    },
   ];

@@ -16,6 +16,7 @@ import TooltipComponent from "./tooltip";
 import InputComponent from "./input";
 import TextareaComponent from "./textarea";
 import ToastComponent from "./toast";
+import SliderComponent from "./slider";
 
 /* const HowToUseButton = () => {
   return (
@@ -320,36 +321,55 @@ const HowToUseToast = () => {
   );
 };
 
+const HowToUseSlider = () => {
+  const image1 = "https://i.ibb.co/FVrFLBm/1.jpg";
+  const image2 = "https://i.ibb.co/09WJJS6/2.jpg";
+  const image3 = "https://i.ibb.co/jZb1k8s/3.jpg";
+  const image4 = "https://i.ibb.co/Q8vPqGv/4.jpg";
+  const image5 = "https://i.ibb.co/6g0nTNW/5.jpg";
+  const image6 = "https://i.ibb.co/vBz0nJt/6.png";
+
+  const allImageUrls = [image1, image2, image3, image4, image5, image6];
+
+  return (
+    <div className='container mx-auto w-full aspect-[10/4]'>
+      <SliderComponent images={allImageUrls} />
+    </div>
+  );
+};
+
 const TestPage = () => {
   return (
-    <div className='h-[calc(100vh-5.6rem)] flex items-center justify-center bg-red-50 '>
-      <div className='w-7/12 bg-red-100 h-full mx-auto py-8 px-8 '>
-        {/* test */}
+    <div className='h-[calc(100vh-5.6rem)] bg-red-50 '>
+      <HowToUseSlider />
 
-        <div className='bg-white w-full h-fit mx-auto px-8 py-8'>
-          {/*  */}
-          {/* <HowToUseAccordion /> */}
+      {/* <div className=' bg-red-100 h-full mx-auto py-8 px-8 '> */}
+      {/* test */}
 
-          {/* <HowToUseSelect /> */}
-          {/* <HowToUseButton /> */}
-          {/* <HowToUseCard></HowToUseCard>
+      {/* <div className='bg-white w-full h-full mx-auto px-8 py-8'> */}
+      {/*  */}
+      {/* <HowToUseAccordion /> */}
+
+      {/* <HowToUseSelect /> */}
+      {/* <HowToUseButton /> */}
+      {/* <HowToUseCard></HowToUseCard>
           <HowToUseCard></HowToUseCard>
           <HowToUseCard></HowToUseCard> */}
-          {/* <HowToUseCheckbox /> */}
-          {/* <HowToUseRadio /> */}
-          {/* <HowToUseToggle /> */}
-          {/* <HowToUseLoader /> */}
-          {/* <HowToUseProgressBar /> */}
-          {/* <HowToUseTooltip /> */}
-          {/* <HowToUseInput /> */}
-          {/* <HowToUseTextarea /> */}
-          <HowToUseToast />
+      {/* <HowToUseCheckbox /> */}
+      {/* <HowToUseRadio /> */}
+      {/* <HowToUseToggle /> */}
+      {/* <HowToUseLoader /> */}
+      {/* <HowToUseProgressBar /> */}
+      {/* <HowToUseTooltip /> */}
+      {/* <HowToUseInput /> */}
+      {/* <HowToUseTextarea /> */}
+      {/* <HowToUseToast /> */}
 
-          {/*  */}
-        </div>
+      {/*  */}
+      {/* </div> */}
 
-        {/*  */}
-      </div>
+      {/*  */}
+      {/* </div> */}
     </div>
   );
 };

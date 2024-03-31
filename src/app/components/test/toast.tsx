@@ -29,7 +29,7 @@ const ToastComponent = ({ message, type, onDismiss }: ToastProps) => {
   return visible ? (
     <div
       className={
-        "fixed right-4 lg:right-16 bottom-16 z-30 text-white px-4 py-2 rounded-md " +
+        "fixed bottom-16 left-1/2 -translate-x-1/2 z-30 text-white px-4 py-2 rounded-md " +
         toastStyles[type]
       }
     >

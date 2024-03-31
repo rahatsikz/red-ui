@@ -269,8 +269,9 @@ const HowToUseToast = () => {
   const handleShowToast = (message: string, type = "success") => {
     setToastQueue((prevQueue: any) => [...prevQueue, { message, type }]);
   };
+  const message = "Post has some error";
 
-  const handleAdd = () => {
+  const handleAddToast = () => {
     fetch("https://jsonplaceholder.typicode.com/nonexistent-endpoint", {
       method: "POST",
       body: JSON.stringify({
@@ -290,11 +291,11 @@ const HowToUseToast = () => {
       })
       .then((data) => {
         console.log(data);
-        handleShowToast("Post Got some warning", "success");
+        handleShowToast(message, "success");
       })
       .catch((err) => {
         console.log(err);
-        handleShowToast("Post Got some warning", "warning");
+        handleShowToast(message, "warning");
       });
   };
   return (
@@ -310,7 +311,7 @@ const HowToUseToast = () => {
       )}
 
       <button
-        onClick={handleAdd}
+        onClick={handleAddToast}
         className='rounded-full px-[26px] py-[6px] bg-gray-900 text-white'
       >
         Click to Show Toast

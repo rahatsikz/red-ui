@@ -138,7 +138,7 @@ const ToastContent = () => {
     setToastQueue((prevQueue: any) => [...prevQueue, { message, type }]);
   };
 
-  const handleAdd = () => {
+  const handleAddToast = () => {
     fetch(
       `https://jsonplaceholder.typicode.com/${
         toastType.value === "success" ? "posts" : "nonexistent-endpoint"
@@ -252,7 +252,7 @@ const ToastComponent = ({ message, type, onDismiss }: ToastProps) => {
   ) : null;
 };
     
-    export default ToastComponent;
+export default ToastComponent;
     
     `);
 
@@ -265,7 +265,9 @@ const HowToUseToast = () => {
     setToastQueue((prevQueue: any) => [...prevQueue, { message, type }]);
   };
 
-  const handleAdd = () => {
+  const message = "${message}";
+
+  const handleAddToast = () => {
     fetch(
       "https://jsonplaceholder.typicode.com/${
         toastType.value === "success" ? "posts" : "nonexistent-endpoint"
@@ -288,11 +290,11 @@ const HowToUseToast = () => {
       })
       .then((data) => {
         console.log(data);
-        handleShowToast("${message}", "success");
+        handleShowToast(message, "success");
       })
       .catch((err) => {
         console.log(err);
-          handleShowToast("${message}", "error");
+          handleShowToast(message, "error");
       });
   };
   return (
@@ -308,7 +310,7 @@ const HowToUseToast = () => {
       )}
 
       <button
-        onClick={handleAdd}
+        onClick={handleAddToast}
         className='rounded-full px-[26px] py-[6px] bg-gray-900 text-white'
       >
         Click to Show Toast
@@ -325,8 +327,9 @@ const HowToUseToast = () => {
   const handleShowToast = (message: string, type = "success") => {
     setToastQueue((prevQueue: any) => [...prevQueue, { message, type }]);
   };
+  const message = "${message}";
 
-  const handleAdd = () => {
+  const handleAddToast = () => {
     fetch(
       "https://jsonplaceholder.typicode.com/${
         toastType.value === "success" ? "posts" : "nonexistent-endpoint"
@@ -349,11 +352,11 @@ const HowToUseToast = () => {
       })
       .then((data) => {
         console.log(data);
-        handleShowToast("${message}", "success");
+        handleShowToast(message, "success");
       })
       .catch((err) => {
         console.log(err);
-          handleShowToast("${message}", "warning");
+          handleShowToast(message, "warning");
       });
   };
   return (
@@ -369,7 +372,7 @@ const HowToUseToast = () => {
       )}
 
       <button
-        onClick={handleAdd}
+        onClick={handleAddToast}
         className='rounded-full px-[26px] py-[6px] bg-gray-900 text-white'
       >
         Click to Show Toast
@@ -446,9 +449,9 @@ const HowToUseToast = () => {
               />
             )}
 
-            {/* <button onClick={handleAdd}>Click to Show Toast</button> */}
+            {/* <button onClick={handleAddToast}>Click to Show Toast</button> */}
             <button
-              onClick={handleAdd}
+              onClick={handleAddToast}
               className='rounded-full px-[26px] py-[6px] bg-gray-900 text-white'
             >
               Click to Show Toast

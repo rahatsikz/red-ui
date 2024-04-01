@@ -52,4 +52,9 @@ export const ComponentsArr = [
       name: "Toast",
       path: "/components/toast",
     },
+    {
+      name: "Slider",
+      path: "/components/slider",
+    },
+
   ];

@@ -13,6 +13,7 @@ import ProgressContent from "./ProgressContent";
 import LoaderContent from "./LoaderContent";
 import TooltipContent from "./TooltipContent";
 import ToastContent from "./ToastContent";
+import SliderContent from "./SliderContent";
 
 const AllComponentPage = ({ params }: { params: { name: string } }) => {
   let component;
@@ -56,6 +57,9 @@ const AllComponentPage = ({ params }: { params: { name: string } }) => {
       break;
     case "toast":
       component = <ToastContent />;
+      break;
+    case "slider":
+      component = <SliderContent />;
       break;
     default:
       component = <NotFoundPage />;

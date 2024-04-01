@@ -17,6 +17,7 @@ import InputComponent from "./input";
 import TextareaComponent from "./textarea";
 import ToastComponent from "./toast";
 import SliderComponent from "./slider";
+import CarouselComponent from "./carousel";
 
 /* const HowToUseButton = () => {
   return (
@@ -321,6 +322,44 @@ const HowToUseToast = () => {
   );
 };
 
+// const HowToUseSlider = () => {
+//   const image1 = "https://i.ibb.co/FVrFLBm/1.jpg";
+//   const image2 = "https://i.ibb.co/09WJJS6/2.jpg";
+//   const image3 = "https://i.ibb.co/jZb1k8s/3.jpg";
+//   const image4 = "https://i.ibb.co/Q8vPqGv/4.jpg";
+//   const image5 = "https://i.ibb.co/6g0nTNW/5.jpg";
+//   const image6 = "https://i.ibb.co/vBz0nJt/6.png";
+
+//   const allImageUrls = [image1, image2, image3, image4, image5, image6];
+
+//   const carouselData = [
+//     {
+//       image: image1,
+//       header: "Fly like a bird",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec varius lorem. Etiam at varius nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+//     },
+//     {
+//       image: image3,
+//       header: "Rise like a sun",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec varius lorem. Etiam at varius nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+//     },
+//     {
+//       image: image4,
+//       header: "Grow like a tree",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec varius lorem. Etiam at varius nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+//     },
+//   ];
+
+//   return (
+//     <div className='container mx-auto w-full aspect-[10/4]'>
+//       <SliderComponent images={allImageUrls} />
+//     </div>
+//   );
+// };
+
 const HowToUseSlider = () => {
   const image1 = "https://i.ibb.co/FVrFLBm/1.jpg";
   const image2 = "https://i.ibb.co/09WJJS6/2.jpg";
@@ -332,8 +371,41 @@ const HowToUseSlider = () => {
   const allImageUrls = [image1, image2, image3, image4, image5, image6];
 
   return (
-    <div className='container mx-auto w-full aspect-[10/4]'>
+    <div className='w-full aspect-[10/3]'>
       <SliderComponent images={allImageUrls} />
+    </div>
+  );
+};
+
+const HowToUseCarousel = () => {
+  const image1 = "https://i.ibb.co/FVrFLBm/1.jpg";
+  const image2 = "https://i.ibb.co/jZb1k8s/3.jpg";
+  const image3 = "https://i.ibb.co/Q8vPqGv/4.jpg";
+
+  const carouselData = [
+    {
+      image: image1,
+      header: "Fly like a bird",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec varius lorem. Etiam at varius nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+    },
+    {
+      image: image2,
+      header: "Rise like a sun",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec varius lorem. Etiam at varius nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+    },
+    {
+      image: image3,
+      header: "Grow like a tree",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec varius lorem. Etiam at varius nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+    },
+  ];
+
+  return (
+    <div className='w-full aspect-[10/3]'>
+      <CarouselComponent data={carouselData} />
     </div>
   );
 };
@@ -342,6 +414,7 @@ const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] bg-red-50 '>
       <HowToUseSlider />
+      {/* <HowToUseCarousel /> */}
 
       {/* <div className=' bg-red-100 h-full mx-auto py-8 px-8 '> */}
       {/* test */}

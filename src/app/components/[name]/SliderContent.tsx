@@ -1314,21 +1314,6 @@ const HowToUseCarousel = () => {
                 onChange={handleAspectRatioChange}
                 value={aspectRatio}
               />
-
-              {/* <Input
-            name='toastMessage'
-            label='Toast Messsage'
-            value={message}
-            type='text'
-            handleChange={handleMessageChange}
-            defaultValue=''
-          />
-          <Select
-            label='Toast Placement'
-            options={toastPlacementOptions}
-            onChange={handleToastPlacementChange}
-            value={toastPlacement}
-          /> */}
             </div>
             <div className='mt-8 flex justify-center'>
               <Button type='submit' className='px-24'>

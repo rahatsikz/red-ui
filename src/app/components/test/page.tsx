@@ -18,6 +18,7 @@ import TextareaComponent from "./textarea";
 import ToastComponent from "./toast";
 import SliderComponent from "./slider";
 import CarouselComponent from "./carousel";
+import ModalComponent from "./modal";
 
 /* const HowToUseButton = () => {
   return (
@@ -410,39 +411,59 @@ const HowToUseCarousel = () => {
   );
 };
 
+const HowToUseModal = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <div className='m-8'>
+      <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
+      <ModalComponent
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <p>This is the content of the modal.</p>
+        <p>This is the content of the modal.</p>
+        <p>This is the content of the modal.</p>
+        <p>This is the content of the modal.</p>
+      </ModalComponent>
+    </div>
+  );
+};
+
 const TestPage = () => {
   return (
     <div className='h-[calc(100vh-5.6rem)] bg-red-50 '>
-      <HowToUseSlider />
+      {/* <HowToUseSlider /> */}
       {/* <HowToUseCarousel /> */}
 
-      {/* <div className=' bg-red-100 h-full mx-auto py-8 px-8 '> */}
-      {/* test */}
+      <div className=' bg-red-100 h-full mx-auto py-8 px-8 '>
+        {/* test */}
 
-      {/* <div className='bg-white w-full h-full mx-auto px-8 py-8'> */}
-      {/*  */}
-      {/* <HowToUseAccordion /> */}
+        <div className='bg-white w-full h-full mx-auto px-8 py-8'>
+          {/*  */}
+          {/* <HowToUseAccordion /> */}
 
-      {/* <HowToUseSelect /> */}
-      {/* <HowToUseButton /> */}
-      {/* <HowToUseCard></HowToUseCard>
+          {/* <HowToUseSelect /> */}
+          {/* <HowToUseButton /> */}
+          {/* <HowToUseCard></HowToUseCard>
           <HowToUseCard></HowToUseCard>
           <HowToUseCard></HowToUseCard> */}
-      {/* <HowToUseCheckbox /> */}
-      {/* <HowToUseRadio /> */}
-      {/* <HowToUseToggle /> */}
-      {/* <HowToUseLoader /> */}
-      {/* <HowToUseProgressBar /> */}
-      {/* <HowToUseTooltip /> */}
-      {/* <HowToUseInput /> */}
-      {/* <HowToUseTextarea /> */}
-      {/* <HowToUseToast /> */}
+          {/* <HowToUseCheckbox /> */}
+          {/* <HowToUseRadio /> */}
+          {/* <HowToUseToggle /> */}
+          {/* <HowToUseLoader /> */}
+          {/* <HowToUseProgressBar /> */}
+          {/* <HowToUseTooltip /> */}
+          {/* <HowToUseInput /> */}
+          {/* <HowToUseTextarea /> */}
+          {/* <HowToUseToast /> */}
+          <HowToUseModal />
 
-      {/*  */}
-      {/* </div> */}
+          {/*  */}
+        </div>
 
-      {/*  */}
-      {/* </div> */}
+        {/*  */}
+      </div>
     </div>
   );
 };

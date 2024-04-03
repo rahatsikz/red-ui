@@ -14,6 +14,7 @@ import LoaderContent from "./LoaderContent";
 import TooltipContent from "./TooltipContent";
 import ToastContent from "./ToastContent";
 import SliderContent from "./SliderContent";
+import ModalContent from "./ModalContent";
 
 const AllComponentPage = ({ params }: { params: { name: string } }) => {
   let component;
@@ -60,6 +61,9 @@ const AllComponentPage = ({ params }: { params: { name: string } }) => {
       break;
     case "slider":
       component = <SliderContent />;
+      break;
+    case "modal":
+      component = <ModalContent />;
       break;
     default:
       component = <NotFoundPage />;

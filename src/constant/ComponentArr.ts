@@ -56,5 +56,9 @@ export const ComponentsArr = [
       name: "Slider",
       path: "/components/slider",
     },
+    {
+      name: "Modal",
+      path: "/components/modal",
+    },
 
   ];

@@ -415,16 +415,31 @@ const HowToUseModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className='m-8'>
-      <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
+    <div>
+      <button
+        className='rounded-full px-5 py-1 bg-slate-700 text-white'
+        onClick={() => setIsModalOpen(true)}
+      >
+        Open Modal
+      </button>
       <ModalComponent
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       >
-        <p>This is the content of the modal.</p>
-        <p>This is the content of the modal.</p>
-        <p>This is the content of the modal.</p>
-        <p>This is the content of the modal.</p>
+        {/* Give any type of modal content */}
+        <h2 className='text-xl font-semibold'>
+          This is the Header of the modal
+        </h2>
+        {/* <p>
+          The air is filled with the rich scent of freshly brewed coffee and the
+          soft murmur of conversations. Patrons sit nestled in cozy corners,
+          lost in the pages of books or lost in thought. It is a haven amidst
+          the chaos, a sanctuary for those seeking solace in a fast-paced world
+        </p> */}
+        <div className='space-y-4'>
+          <HowToUseInput />
+          <HowToUseTextarea />
+        </div>
       </ModalComponent>
     </div>
   );

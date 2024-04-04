@@ -35,10 +35,7 @@ const Navbar = () => {
       name: "FAQ",
       path: "/faq",
     },
-    {
-      name: "Community",
-      path: "/",
-    },
+
     {
       name: "Log Out",
       path: "",

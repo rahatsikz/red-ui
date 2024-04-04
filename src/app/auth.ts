@@ -16,28 +16,7 @@ export const authOptions: NextAuthOptions  = {
     ],
   
     secret: process.env.NEXTAUTH_SECRET as string,
-    callbacks: {
-      async redirect({ url, baseUrl }: { url: string, baseUrl: string }) {
-        const isRelativeUrl = url.startsWith("/");
-        if (isRelativeUrl) {
-          return `${baseUrl}${url}`;
-        }
-  
-        const isSameOriginUrl = new URL(url).origin === baseUrl;
-        const alreadyRedirected = url.includes('callbackUrl=')
-        if (isSameOriginUrl && alreadyRedirected) {
-          const originalCallbackUrl = decodeURIComponent(url.split('callbackUrl=')[1]);
-  
-          return originalCallbackUrl;
-        }
-  
-        if (isSameOriginUrl) {
-          return url;
-        }
-  
-        return baseUrl;
-      }
-    },
+   
     pages: {
       signIn: "/signin",
     },

@@ -16,7 +16,7 @@ import ToastContent from "./ToastContent";
 import SliderContent from "./SliderContent";
 import ModalContent from "./ModalContent";
 
-const AllComponentPage = ({ params }: { params: { name: string } }) => {
+const ComponentPage = ({ params }: { params: { name: string } }) => {
   let component;
 
   switch (params.name) {
@@ -73,4 +73,4 @@ const AllComponentPage = ({ params }: { params: { name: string } }) => {
   return <>{component}</>;
 };
 
-export default AllComponentPage;
+export default ComponentPage;

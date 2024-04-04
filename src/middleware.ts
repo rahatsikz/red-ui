@@ -1,0 +1,3 @@
+export { default } from "next-auth/middleware"
+
+export const config = { matcher: [ "/components/accordion",  "/components/button", "/components/input", "/components/textarea","/components/select", "/components/card", "/components/radio", "/components/checkbox", "/components/toggle", "/components/progressbar", "/components/loader", "/components/tooltip", "/components/toast", "/components/slider", "/components/modal"] }

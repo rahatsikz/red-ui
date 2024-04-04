@@ -1,3 +1,4 @@
+import CallToAction from "@/Components/Homepage/CallToAction";
 import Feature from "@/Components/Homepage/Feature";
 import HeroSection from "@/Components/Homepage/HeroSection";
 import List from "@/Components/Homepage/List";
@@ -10,6 +11,7 @@ export default function Home() {
       <HeroSection />
       <Feature />
       <List />
+      <CallToAction />
       <Testimonial />
       <Footer />
     </main>

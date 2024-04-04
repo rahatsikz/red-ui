@@ -50,7 +50,7 @@ const Feature = () => {
                 <h1 className='text-2xl font-bold text-[#1e293b]'>
                   {feature.title}
                 </h1>
-                <p className='text-secondary'>{feature.description}</p>
+                <p className='text-slate-800'>{feature.description}</p>
               </div>
             </div>
           </div>

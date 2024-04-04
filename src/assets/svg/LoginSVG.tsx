@@ -5,8 +5,8 @@ const LoginSVG = () => {
     <svg
       xmlns='http://www.w3.org/2000/svg'
       data-name='Layer 1'
-      width='493.46111'
-      height='480.84822'
+      width='370'
+      height='370'
       viewBox='0 0 493.46111 480.84822'
       //   xmlns:xlink='http://www.w3.org/1999/xlink'
     >

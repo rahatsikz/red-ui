@@ -14,6 +14,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Red UI",
   description: "Tailwind UI Builder",
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({ children }: { children: any }) {
